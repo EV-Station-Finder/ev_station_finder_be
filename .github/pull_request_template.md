@@ -1,31 +1,31 @@
 ## All Submissions:
 
-### New Feature Submissions:
+### 🚨 Problem:
+ <!-- What needed changed? bug? refactor? feature? Please describe the problem you're trying to solve -->
 
+### 💡 Solution:
+<!-- how are you solving this simply and elegantly? Describe if necessary or check corresponding boxes -->
 * [ ] New feature
 * [ ] Bug fix
+* [ ] Refactor
+* [ ] Other
 
-### Check the correct boxes
-
-* [ ] This broke nothing
-* [ ] This broke something
-
-### Testing:
+### 🤔 Testing:
 
 * [ ] Wrote new tests
 * [ ] Successfully ran tests
 * [ ] All new and existing tests passed
-* [ ] Ran `rubocop` and fixed offenses
 
-### Checklist:
+### ✅ Checklist:
 
-* [ ] My code has no unused/commented out code
 * [ ] I have reviewed my code
-* [ ] I have commented my code, particularly in hard-to-understand areas
+* [ ] My code has no unused/commented out code
+* [ ] I have commented my code for hard-to-understand areas
 * [ ] I have fully tested my code
+* [ ] I have made corresponding changes to the documentation
 
 --------------------------------------------------------------------------------
-**Test coverage** (final goal of 100%)
+**🦥 Test Coverage:**
 
 * [ ] < 90%
 * [ ] 90-99%
