@@ -114,30 +114,28 @@ Coming soon
           "attributes":
                       [
                         {
-                          "name": "Denver Supercharger"
-                              "name": "denver, co",
-                              "distance": 1.7,
-                              "status": "Open",
-                              "hours": "9-5, M-F",
-                              "ev_network": "Tesla",
-                              "ev_charging_level": "Level 1",
-                              "street_address": "1456 Smith Road",
-                              "city": "Denver",
-                              "state": "CO",
-                              "zip_code": "80289"
+                          "name": "Denver Supercharger",
+                          "distance": 1.7,
+                          "status": "Open",
+                          "hours": "9-5, M-F",
+                          "ev_network": "Tesla",
+                          "ev_charging_level": "Level 1",
+                          "street_address": "1456 Smith Road",
+                          "city": "Denver",
+                          "state": "CO",
+                          "zip_code": "80289"
                         },
                         {
-                          "name": "Golden Supercharger"
-                              "name": "golden, co",
-                              "distance": 8.7,
-                              "status": "Open",
-                              "hours": "9-5, M-F",
-                              "ev_network": "Tesla",
-                              "ev_charging_level": "Level 1",
-                              "street_address": "1456 Smith Road",
-                              "city": "Golden",
-                              "state": "CO",
-                              "zip_code": "80401"
+                          "name": "Golden Supercharger",
+                          "distance": 8.7,
+                          "status": "Open",
+                          "hours": "9-5, M-F",
+                          "ev_network": "Tesla",
+                          "ev_charging_level": "Level 1",
+                          "street_address": "1456 Smith Road",
+                          "city": "Golden",
+                          "state": "CO",
+                          "zip_code": "80401"
                         },
                         ....up to 20 results
                       ]
