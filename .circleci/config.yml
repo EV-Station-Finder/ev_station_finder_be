@@ -12,11 +12,6 @@ jobs:
       - checkout
       - run: gem install bundler:2.2.23
       - run:
-          name: ev_station_finder_be
+          name: Which bundler?
           command: bundle -v
       - ruby/bundle-install
-
-      - checkout
-      - run: bundle config set --local path 'vendor/bundle'
-      - run: bundle exec rake db:setup
-      - run: bundle exec rspec
