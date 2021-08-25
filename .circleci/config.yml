@@ -6,7 +6,7 @@ jobs:
   build:
     working_directory: ~/ev_station_finder_be
     docker:
-      - image: circleci/ruby:2.5.3
+      - image: circleci/ruby:2.5.3-node-browsers
         environment:
           PGHOST: localhost
           PGUSER: ev_station_finder_be
