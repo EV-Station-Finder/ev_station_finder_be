@@ -18,7 +18,7 @@ Description/general information coming soon
   - [Acknowledgements](#acknowledgements)
 
 ## Learning Goals
-Coming soon!
+Coming soon
 
 ## Built With
 
