@@ -27,7 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2'
-gem 'faraday'
+gem 'faraday', '~> 1.4.3'
 gem 'figaro'
 gem 'rake'
 gem 'sass-rails', '~> 5.0'
@@ -58,7 +58,7 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'vcr'
-  gem 'webmock'
+  gem 'webmock', '~> 3.13.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
