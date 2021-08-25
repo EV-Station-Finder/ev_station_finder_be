@@ -37,7 +37,7 @@ RSpec.describe "Search for stations by location" do
     it "location is not provided" do
       get "/api/v1/stations"
       expect(response).to_not be_successful
-      expect(response.status).to eq(400)
+      expect(response).to have_http_status(:bad_request)
 
       body = JSON.parse(response.body, symbolize_names:true)
       expect(body).to have_key(:errors)
@@ -48,7 +48,7 @@ RSpec.describe "Search for stations by location" do
       location = " "
       get "/api/v1/stations?location=#{location}"
       expect(response).to_not be_successful
-      expect(response.status).to eq(400)
+      expect(response).to have_http_status(:bad_request)
 
       body = JSON.parse(response.body, symbolize_names:true)
       expect(body).to have_key(:errors)
@@ -59,7 +59,7 @@ RSpec.describe "Search for stations by location" do
       location = "oghkhhohoiho79808707"
       get "/api/v1/stations?location=#{location}"
       expect(response).to_not be_successful
-      expect(response.status).to eq(400)
+      expect(response).to have_http_status(:bad_request)
 
       body = JSON.parse(response.body, symbolize_names:true)
       expect(body).to have_key(:errors)
