@@ -14,7 +14,6 @@ class Station
     @id             = nil
     @name           = station_data[:station_name]
     @distance       = station_data[:distance]
-    # @status         = station_data[:status_code]
     @status         = status_finder(station_data[:status_code])
     @hours          = station_data[:access_days_time]
     @ev_network     = station_data[:ev_network]
