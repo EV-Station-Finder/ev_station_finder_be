@@ -68,12 +68,13 @@ RSpec.describe Station do
                        :distance=>0.59729,
                        :distance_km=>0.96125}
     end
-    
+
     it "exists and had attributes" do
       new_station = Station.new(@incoming_hash)
 
       expect(new_station).to be_a Station
       expect(new_station.id).to be_nil
+      expect(new_station.api_id).to eq(192187)
       expect(new_station.name).to eq("Ideal Market Capitol Hill")
       expect(new_station.distance).to eq(0.59729)
       expect(new_station.status).to eq("Available")
@@ -84,19 +85,19 @@ RSpec.describe Station do
       expect(new_station.state).to eq("CO")
       expect(new_station.zip_code).to eq("80218")
     end
-    
+
     it "Status is 'Coming Soon'" do
       @incoming_hash[:status_code] = "P"
       new_station = Station.new(@incoming_hash)
       expect(new_station.status).to eq("Coming Soon")
     end
-    
+
     it "Status is 'Temporarily Closed'" do
       @incoming_hash[:status_code] = "T"
       new_station = Station.new(@incoming_hash)
       expect(new_station.status).to eq("Temporarily Closed")
     end
-    
+
     it "Status is 'Temporarily Closed'" do
       @incoming_hash[:status_code] = ""
       new_station = Station.new(@incoming_hash)
