@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Search for stations by location" do
   describe "Happy Path" do
-    it "Enpoint exists and has attributes" do
+    it "Endpoint exists and has attributes" do
       location = "Denver, CO"
       get "/api/v1/stations?location=#{location}"
       expect(response).to be_successful
@@ -14,6 +14,7 @@ RSpec.describe "Search for stations by location" do
       expect(body[:data][0]).to have_key(:attributes)
       expect(body[:data][0][:id]).to eq(nil)
       expect(body[:data][0][:type]).to be_a String
+      expect(body[:data][0][:type]).to eq("stations")
       expect(body[:data][0][:attributes]).to be_a Hash
       expect(body[:data].size).to be < 21
 
