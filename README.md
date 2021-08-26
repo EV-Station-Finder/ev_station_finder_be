@@ -111,10 +111,9 @@ Coming soon
       "data": {
           "id": null,
           "type": "stations",
-          "attributes":
-                      [
-                        {
+          "attributes":[{
                           "name": "Denver Supercharger",
+                          "api_id": 152087,
                           "distance": 1.7,
                           "status": "Open",
                           "hours": "9-5, M-F",
@@ -126,6 +125,7 @@ Coming soon
                         },
                         {
                           "name": "Golden Supercharger",
+                          "api_id": 252687,
                           "distance": 8.7,
                           "status": "Open",
                           "hours": "9-5, M-F",
@@ -143,7 +143,9 @@ Coming soon
   </details>
 
 
-2. Coming soon
+2. Station View Page
+
+    `GET /api/v1/stations/:id`
     ```
 
     ```
@@ -151,7 +153,31 @@ Coming soon
     <summary>Example response </summary>
 
   ```json
-
+    { 
+     "data": {
+        "id": null,
+        "type": "stations", 
+        "attributes": {
+                       "name": "Some Charger", 
+                       "distance": "1.7", 
+                       "status": "Temporary Closed",
+                       "hours": "24hrs",
+                       "ev_network": "Tesla",
+                       "street_address": "123 Street Ave",
+                       "city": "Denver",
+                       "state": "CO",
+                       "zip": "12345",
+                       "accepted_payments": [
+                                              "apple_pay", "credit"
+                                             ],
+                       "hourly_weather": [{
+                                            "time": "1300",
+                                          "temperature": "75",
+                                          "conditions": "Sunny"
+                                          }] # up to 8 hours
+      }
+     }
+    }
   ```
   </details>
 
