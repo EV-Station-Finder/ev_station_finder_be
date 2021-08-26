@@ -8,6 +8,11 @@ class StationService
     parse_json(response)
   end
 
+  def self.get_station(id)
+    response = conn.get("api/alt-fuel-stations/v1/#{id}.json")
+    parse_json(response)
+  end
+
   def self.conn
     Faraday.new(url: "https://developer.nrel.gov") do |faraday|
       faraday.params['api_key'] = ENV['CHARGER_KEY']
