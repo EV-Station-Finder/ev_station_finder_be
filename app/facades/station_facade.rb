@@ -13,7 +13,6 @@ class StationFacade
     latitude = station_data[:alt_fuel_station][:latitude]
     longitude = station_data[:alt_fuel_station][:longitude]
     weather_data = WeatherService.get_hourly_weather(latitude, longitude)
-
-    StationDetails.new(station_data, weather_data)
+    StationDetails.new(station_data[:alt_fuel_station], weather_data)
   end
 end
