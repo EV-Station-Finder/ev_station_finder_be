@@ -6,7 +6,7 @@ class WeatherService
           faraday.params['units'] = 'imperial'
           faraday.params['exclude'] = 'minutely,daily,alerts'
     end
-    test = parse_json(response)
+    parse_json(response)
   end
 
   def self.conn
