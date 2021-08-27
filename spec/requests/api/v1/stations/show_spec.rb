@@ -5,7 +5,7 @@ RSpec.describe "Display a single station" do
     it "Endpoint exists and has attributes" do
       api_id = 152087
       get "/api/v1/stations/#{api_id}"
-      expect(response).to be_successful
+      expect(response).to have_http_status(:ok)
 
       body = JSON.parse(response.body, symbolize_names: true)
       expect(body).to have_key(:data)
@@ -32,7 +32,7 @@ RSpec.describe "Display a single station" do
 
       accepted_payments = new_station[:accepted_payments]
 
-      expect(accepted_payments).to be_an Array
+      expect(accepted_payments).to be_an String
 
       hourly_weather = new_station[:hourly_weather]
 
