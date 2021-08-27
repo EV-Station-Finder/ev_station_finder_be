@@ -23,8 +23,8 @@ class StationDetails
     @city              = station_data[:city]
     @state             = station_data[:state]
     @zip_code          = station_data[:zip]
-    @accepted_payments = station_data[:accepted_payments]
-    @hourly_weather    = HourlyWeather.new(weather_data)
+    @accepted_payments = station_data[:cards_accepted]
+    @hourly_weather    = create_hourly_weather(weather_data)
   end
 
   def status_finder(code)
@@ -39,5 +39,14 @@ class StationDetails
     else
       'Status Unavailable'
     end
+  end
+  
+  def create_hourly_weather(weather_data)
+    current_and_hourly_weather = []
+    current_and_hourly_weather << HourlyWeather.new(weather_data[:current])
+    weather_data[:hourly].each do |weather|
+      current_and_hourly_weather << HourlyWeather.new(weather)
+    end
+    current_and_hourly_weather.first(10)
   end
 end
