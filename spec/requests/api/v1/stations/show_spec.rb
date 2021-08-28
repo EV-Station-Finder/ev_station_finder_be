@@ -44,4 +44,15 @@ RSpec.describe "Display a single station" do
       expect(hourly_weather[0]).to have_key(:icon)
     end
   end
+  describe "Sad Path and Edge Cases" do
+    it "ID does not exist" do
+      api_id = 0
+      get "/api/v1/stations/#{api_id}"
+      expect(response).to have_http_status(:bad_request)
+      body = JSON.parse(response.body, symbolize_names: true)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to be_an Array
+      expect(body[:errors]).to eq("Cannot find station with ID #{api_id}")
+    end
+  end
 end
