@@ -3,14 +3,18 @@ class Api::V1::StationsController < ApplicationController
     stations = StationFacade.get_stations(search_location)
     render json: StationsSerializer.new(stations)
   rescue NoMethodError
-    render json: { errors: "A valid location must be provided" }, status: :bad_request
+    render json: { errors: "A valid location must be provided" }, status: @status
   end
   
   def show
     station = StationFacade.get_station(station_api_id)
-    render json: StationSerializer.new(station)
-    rescue NoMethodError
-      render json: { errors: "Cannot find station with ID #{station_api_id}" }, status: :bad_request
+    if station[:data].present?
+      render json: StationSerializer.new(station)
+    else
+      render json: station[:errors][0], status: :bad_request
+    end
+    # rescue NoMethodError
+    #   render json: { errors: "Cannot find station with ID #{station_api_id}" }, status: :bad_request
   end
 
 

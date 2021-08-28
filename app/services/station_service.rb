@@ -5,6 +5,8 @@ class StationService
       faraday.params['location'] = location
       faraday.params['ev_charging_level'] = 'dc_fast'
     end
+    #Start here, thinking about instace method for status to get it to controller
+    # @status = response.status
     parse_json(response)
   end
 
