@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe StationService do
   describe "::get_stations" do
-    it "fetches stations based on location" do
+    it "fetches stations based on location", :vcr do
       result = StationService.get_stations("Denver, CO")
       expect(result).to be_a Hash
       expect(result[:location_country]).to be_a String

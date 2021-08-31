@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Search for stations by location" do
   describe "Happy Path" do
-    it "Endpoint exists and has attributes" do
+    it "Endpoint exists and has attributes", :vcr do
       location = "Denver, CO"
       get "/api/v1/stations?location=#{location}"
       expect(response).to be_successful
@@ -35,7 +35,7 @@ RSpec.describe "Search for stations by location" do
   end
 
   describe "Sad Path/Edge Cases" do
-    it "location is not provided" do
+    it "location is not provided", :vcr do
       get "/api/v1/stations"
       expect(response).to_not be_successful
       expect(response).to have_http_status(:bad_request)
@@ -45,7 +45,7 @@ RSpec.describe "Search for stations by location" do
       expect(body[:errors]).to eq("A valid location must be provided")
     end
 
-    it "location is blank" do
+    it "location is blank", :vcr do
       location = " "
       get "/api/v1/stations?location=#{location}"
       expect(response).to_not be_successful
@@ -56,7 +56,7 @@ RSpec.describe "Search for stations by location" do
       expect(body[:errors]).to eq("A valid location must be provided")
     end
 
-    it "location is invalid" do
+    it "location is invalid", :vcr do
       location = "oghkhhohoiho79808707"
       get "/api/v1/stations?location=#{location}"
       expect(response).to_not be_successful
