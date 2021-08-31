@@ -5,13 +5,14 @@ class HourlyWeather
               :icon
 
   def initialize(weather_data)
-    @time        = seconds_to_hour_minutes(weather_data[:dt])
+    @time        = unix_time_to_hour_minutes(weather_data[:dt])
     @temperature = weather_data[:temp]
     @conditions  = weather_data[:weather][0][:description]
     @icon        = weather_data[:weather][0][:icon]
   end
   
-  def seconds_to_hour_minutes(seconds)
-    format("%02d:%02d:%02d", seconds / 3600, seconds / 60 % 60, seconds % 60)
+  def unix_time_to_hour_minutes(unix_time) # double check it's actually in Unix time
+    DateTime.strptime(unix_time.to_s, '%s').strftime("%H:%M")
+    #Time.at(seconds).strftime("%H:%M") # Alternate for local time - investigate later
   end
 end
