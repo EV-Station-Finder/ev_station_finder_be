@@ -44,7 +44,7 @@ class StationDetails
   def format_payments(station_data)
     accepted_payments = station_data[:cards_accepted]
     formatted_payments = []
-    if accepted_payments.present? && station_data[:ev_network] == "Tesla"
+    if accepted_payments.nil? && station_data[:ev_network] == "Tesla"
       formatted_payments << "Tesla Payment Network"
     elsif accepted_payments.present?
       rename_payment_methods(accepted_payments, formatted_payments)
@@ -68,6 +68,8 @@ class StationDetails
   def only_less_popular_payment_methods_available(formatted_payments)
     if formatted_payments.empty? #If defined payments are not available, but other payment forms are present
       formatted_payments =["Payment Information Unavailable"] 
+    else
+      formatted_payments
     end
   end
   

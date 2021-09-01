@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Display a single station" do
   describe "Happy Path" do
-    it "Endpoint exists and has attributes" do
+    it "Endpoint exists and has attributes", :vcr do
       api_id = 152087
       get "/api/v1/stations/#{api_id}"
       expect(response).to have_http_status(:ok)
@@ -32,7 +32,7 @@ RSpec.describe "Display a single station" do
 
       accepted_payments = new_station[:accepted_payments]
 
-      expect(accepted_payments).to be_an String
+      expect(accepted_payments).to be_an Array
 
       hourly_weather = new_station[:hourly_weather]
 
@@ -44,14 +44,55 @@ RSpec.describe "Display a single station" do
       expect(hourly_weather[0]).to have_key(:icon)
     end
   end
+  
   describe "Sad Path and Edge Cases" do
-    it "ID does not exist" do
+    it "ID is 0", :vcr do
       api_id = 0
       get "/api/v1/stations/#{api_id}"
-      expect(response).to have_http_status(:bad_request)
+      
       body = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(response).to have_http_status(:bad_request)
       expect(body).to have_key(:errors)
-      expect(body[:errors]).to be_an Array
+      expect(body[:errors]).to be_a String
+      expect(body[:errors]).to eq("Cannot find station with ID #{api_id}")
+    end
+    
+    it "ID does not exist", :vcr do
+      api_id = 8393939300393
+      get "/api/v1/stations/#{api_id}"
+      
+      body = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(response).to have_http_status(:bad_request)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to be_a String
+      expect(body[:errors]).to eq("Cannot find station with ID #{api_id}")
+    end
+    
+    it "ID is invalid", :vcr do
+      api_id = "dhshdh"
+      get "/api/v1/stations/#{api_id}"
+      
+      body = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(response).to have_http_status(:bad_request)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to be_a String
+      expect(body[:errors]).to eq("Cannot find station with ID #{api_id}")
+    end
+    
+    xit "ID is blank", :vcr do
+# URI::InvalidURIError:
+  # bad URI(is not URI?): http://www.example.com:80/api/v1/stations/
+      api_id = " "
+      get "/api/v1/stations/#{api_id}"
+      
+      body = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(response).to have_http_status(:bad_request)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to be_a String
       expect(body[:errors]).to eq("Cannot find station with ID #{api_id}")
     end
   end

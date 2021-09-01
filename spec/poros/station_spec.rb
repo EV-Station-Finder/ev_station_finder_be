@@ -69,7 +69,7 @@ RSpec.describe Station do
                        :distance_km=>0.96125}
     end
 
-    it "exists and had attributes" do
+    it "exists, has attributes, and Status is available" do
       new_station = Station.new(@incoming_hash)
 
       expect(new_station).to be_a Station
@@ -98,7 +98,7 @@ RSpec.describe Station do
       expect(new_station.status).to eq("Temporarily Closed")
     end
 
-    it "Status is 'Temporarily Closed'" do
+    it "Status is 'Status Unavailable'" do
       @incoming_hash[:status_code] = ""
       new_station = Station.new(@incoming_hash)
       expect(new_station.status).to eq("Status Unavailable")
