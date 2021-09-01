@@ -1,5 +1,6 @@
 class Station
   attr_reader :id,
+              :api_id,
               :name,
               :distance,
               :status,
@@ -12,6 +13,7 @@ class Station
 
   def initialize(station_data)
     @id             = nil
+    @api_id         = station_data[:id]
     @name           = station_data[:station_name]
     @distance       = station_data[:distance]
     @status         = status_finder(station_data[:status_code])
