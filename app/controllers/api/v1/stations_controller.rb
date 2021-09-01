@@ -3,7 +3,7 @@ class Api::V1::StationsController < ApplicationController
     stations = StationFacade.get_stations(search_location)
     render json: StationsSerializer.new(stations)
   rescue NoMethodError
-    render json: { errors: "A valid location must be provided" }, status: @status
+    render json: { errors: "A valid location must be provided" }, status: :bad_request
   end
 
   def show
