@@ -178,7 +178,7 @@ Coming soon
                                             "temperature": "75",
                                             "conditions": "Sunny",
                                             "icon": "10d"
-                                          }] # up to 8 hours
+                                          }] # ... 10 hour forecasts
       }
      }
     }
