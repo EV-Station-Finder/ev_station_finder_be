@@ -19,7 +19,7 @@ http_interactions:
       message: Unprocessable Entity
     headers:
       Date:
-      - Tue, 31 Aug 2021 23:42:48 GMT
+      - Thu, 23 Sep 2021 20:58:08 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -29,7 +29,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '960'
+      - '983'
       X-Frame-Options:
       - ALLOWALL
       X-Xss-Protection:
@@ -51,9 +51,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 3b83a918b199b4071214c636e20ebb7b
+      - d06aa4472d67e5b6c50cc1b118cd915c
       X-Runtime:
-      - '0.043219'
+      - '0.043813'
       Vary:
       - Origin
       Strict-Transport-Security:
@@ -71,5 +71,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"errors":["The ''location'' parameter could not be located."]}'
-  recorded_at: Tue, 31 Aug 2021 23:42:48 GMT
+  recorded_at: Thu, 23 Sep 2021 20:58:08 GMT
 recorded_with: VCR 6.0.0
