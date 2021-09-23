@@ -165,6 +165,7 @@ Coming soon
                        "api_id": 152087,
                        "status": "Temporary Closed",
                        "hours": "24hrs",
+                       "ev_connector_types": ["CHADEMO", "J1772COMBO"],
                        "ev_network": "Tesla",
                        "street_address": "123 Street Ave",
                        "city": "Denver",
