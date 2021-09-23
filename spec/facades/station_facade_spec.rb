@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe StationFacade do
-  describe "::get_stations", :vcr do
+  describe "::get_stations" do
     it "should return an array of station objects", :vcr do
       location = "Denver, CO"
       result = StationFacade.get_stations(location)
@@ -10,8 +10,8 @@ RSpec.describe StationFacade do
       expect(result[0]).to be_a Station
     end
   end
-  
-  describe "::get_station", :vcr do
+
+  describe "::get_station" do
     it "should return an array of station objects", :vcr do
       id = 152087
       result = StationFacade.get_station(id)
