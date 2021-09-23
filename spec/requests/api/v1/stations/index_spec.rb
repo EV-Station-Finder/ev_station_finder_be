@@ -64,7 +64,7 @@ RSpec.describe "Search for stations by location" do
 
       body = JSON.parse(response.body, symbolize_names:true)
       expect(body).to have_key(:errors)
-      expect(body[:errors]).to eq("A valid location must be provided")
+      expect(body[:errors]).to eq("CHECK circleCI")
     end
   end
 end
