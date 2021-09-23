@@ -67,7 +67,7 @@ RSpec.describe StationDetails do
                        :ev_network_ids=>{:station=>["27102"], :posts=>["56139", "56141"]},
                        :distance=>0.59729,
                        :distance_km=>0.96125}
-                       
+
       @weather_hash = {:lat=>44.7953,
                        :lon=>-91.4481,
                        :timezone=>"America/Chicago",
@@ -549,6 +549,7 @@ RSpec.describe StationDetails do
       expect(new_station.name).to eq("Ideal Market Capitol Hill")
       expect(new_station.status).to eq("Available")
       expect(new_station.hours).to eq("24 hours daily")
+      expect(new_station.ev_connector_types).to eq(["CHADEMO", "J1772COMBO"])
       expect(new_station.ev_network).to eq("eVgo Network")
       expect(new_station.street_address).to eq("900 E 11th Ave")
       expect(new_station.city).to eq("Denver")
@@ -587,6 +588,12 @@ RSpec.describe StationDetails do
       @station_hash[:cards_accepted] = "Checks CREDIT ARI"
       new_station = StationDetails.new(@station_hash, @weather_hash)
       expect(new_station.accepted_payments).to eq(["Payment Information Unavailable"])
+    end
+
+    it "Account for when ev_network is nil/null" do
+      @station_hash[:ev_network] = nil
+      new_station = StationDetails.new(@station_hash, @weather_hash)
+      expect(new_station.ev_network).to eq("Non-Networked")
     end
   end
 end
