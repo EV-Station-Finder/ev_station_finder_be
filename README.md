@@ -186,6 +186,76 @@ Coming soon
   ```
   </details>
 
+3. Users
+
+    a. `POST /api/v1/users`
+    ```json
+    request_body = {
+                    "first_name": "Hari",
+                    "last_name": "Seldon",
+                    "email": "hari.seldon@foundation.com",
+                    "street_address": "123 Planet XYZ",
+                    "city": "Jupiter",
+                    "state": "UN",
+                    "zip_code": "12345",
+                    "password": "verysecurepassword"
+                   }
+    ```
+
+    <details>
+    <summary>Example response </summary>
+
+    ```json
+      { 
+       "data": {
+          "id": 1,
+          "type": "user", 
+          "attributes": {
+            "first_name": "Hari",
+            "last_name": "Seldon",
+            "email": "hari.seldon@foundation.com",
+            "street_address": "123 Planet XYZ",
+            "city": "Jupiter",
+            "state": "UN",
+            "zip_code": "12345"
+         }
+        }
+       }
+      }
+    ```
+    </details>
+
+    b. `POST /api/v1/sessions`
+    ```json
+    request_body = {
+                    "email": "hari.seldon@foundation.com",
+                    "password": "verysecurepassword"
+                   }
+    ```
+
+    <details>
+    <summary>Example response </summary>
+
+    ```json
+      { 
+       "data": {
+          "id": 1,
+          "type": "user", 
+          "attributes": {
+            "first_name": "Hari",
+            "last_name": "Seldon",
+            "email": "hari.seldon@foundation.com",
+            "street_address": "123 Planet XYZ",
+            "city": "Jupiter",
+            "state": "UN",
+            "zip_code": "12345"
+         }
+        }
+       }
+      }
+    ```
+    </details>
+
 ## Contributing
 
    Contributions are welcome! And they are **sincerely appreciated**.
