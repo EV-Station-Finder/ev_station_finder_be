@@ -99,9 +99,15 @@ Coming soon
 
   ```json
   request_body = {
-                  "location": "Denver,CO (or zip code)"
+                  "location": "Denver,CO"
                  }
   ```
+  **`location` parameter can accept the following:**
+      - street, city, state, postal code
+      - street, city, state
+      - street, postal code
+      - postal code
+      - city, state
 
   <details>
   <summary>Example response </summary>
@@ -185,6 +191,7 @@ Coming soon
     }
   ```
   </details>
+
 
 3. Users
 
