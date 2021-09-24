@@ -201,7 +201,7 @@ Coming soon
                     "password": "verysecurepassword"
                    }
     ```
-
+<!-- TODO: double check that we indeed want to send all this information in the response. -->
     <details>
     <summary>Example response </summary>
 
@@ -232,7 +232,7 @@ Coming soon
                     "password": "verysecurepassword"
                    }
     ```
-
+<!-- TODO: double check that we indeed want to send all this information in the response. -->
     <details>
     <summary>Example response </summary>
 
