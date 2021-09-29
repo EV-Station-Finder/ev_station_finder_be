@@ -1,8 +1,4 @@
 class Api::V1::UsersController < ApplicationController
-  # def new
-  #   @user = User.new
-  # end
-
   def create
     user = User.create!(user_params)
     render json: UserSerializer.new(user), status: 201
