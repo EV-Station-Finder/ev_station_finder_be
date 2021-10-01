@@ -99,9 +99,15 @@ Coming soon
 
   ```json
   request_body = {
-                  "location": "Denver,CO (or zip code)"
+                  "location": "Denver,CO"
                  }
   ```
+  **`location` parameter can accept the following:**
+      - street, city, state, postal code
+      - street, city, state
+      - street, postal code
+      - postal code
+      - city, state
 
   <details>
   <summary>Example response </summary>
@@ -185,6 +191,77 @@ Coming soon
     }
   ```
   </details>
+
+
+3. Users
+
+    a. `POST /api/v1/users`
+    ```json
+    request_body = {
+                    "first_name": "Hari",
+                    "last_name": "Seldon",
+                    "email": "hari.seldon@foundation.com",
+                    "street_address": "123 Planet XYZ",
+                    "city": "Jupiter",
+                    "state": "UN",
+                    "zip_code": "12345",
+                    "password": "verysecurepassword"
+                   }
+    ```
+<!-- TODO: double check that we indeed want to send all this information in the response. -->
+    <details>
+    <summary>Example response </summary>
+
+    ```json
+      { 
+       "data": {
+          "id": 1,
+          "type": "user", 
+          "attributes": {
+            "first_name": "Hari",
+            "last_name": "Seldon",
+            "email": "hari.seldon@foundation.com",
+            "street_address": "123 Planet XYZ",
+            "city": "Jupiter",
+            "state": "UN",
+            "zip_code": "12345"
+         }
+        }
+       }
+      }
+    ```
+    </details>
+
+    b. `POST /api/v1/sessions`
+    ```json
+    request_body = {
+                    "email": "hari.seldon@foundation.com",
+                    "password": "verysecurepassword"
+                   }
+    ```
+<!-- TODO: double check that we indeed want to send all this information in the response. -->
+    <details>
+    <summary>Example response </summary>
+
+    ```json
+      { 
+       "data": {
+          "id": 1,
+          "type": "user", 
+          "attributes": {
+            "first_name": "Hari",
+            "last_name": "Seldon",
+            "email": "hari.seldon@foundation.com",
+            "street_address": "123 Planet XYZ",
+            "city": "Jupiter",
+            "state": "UN",
+            "zip_code": "12345"
+         }
+        }
+       }
+      }
+    ```
+    </details>
 
 ## Contributing
 

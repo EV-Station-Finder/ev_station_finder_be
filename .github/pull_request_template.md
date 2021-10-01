@@ -1,5 +1,3 @@
-## All Submissions:
-
 ### 🚨 Problem:
  <!-- What needed changed? bug? refactor? feature? Please describe the problem you're trying to solve -->
 
