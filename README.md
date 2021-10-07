@@ -196,72 +196,144 @@ Coming soon
 3. Users
 
     a. `POST /api/v1/users`
-    ```json
-    request_body = {
-                    "first_name": "Hari",
-                    "last_name": "Seldon",
-                    "email": "hari.seldon@foundation.com",
-                    "street_address": "123 Planet XYZ",
-                    "city": "Jupiter",
-                    "state": "UN",
-                    "zip_code": "12345",
-                    "password": "verysecurepassword"
-                   }
-    ```
-<!-- TODO: double check that we indeed want to send all this information in the response. -->
-    <details>
-    <summary>Example response </summary>
+      ```json
+      request_body = {
+                      "first_name": "Hari",
+                      "last_name": "Seldon",
+                      "email": "hari.seldon@foundation.com",
+                      "street_address": "123 Planet XYZ",
+                      "city": "Jupiter",
+                      "state": "UN",
+                      "zip_code": "12345",
+                      "password": "verysecurepassword"
+                     }
+      ```
+  <!-- TODO: double check that we indeed want to send all this information in the response. -->
+      <details>
+      <summary>Example response </summary>
 
-    ```json
-      { 
-       "data": {
-          "id": 1,
-          "type": "user", 
-          "attributes": {
-            "first_name": "Hari",
-            "last_name": "Seldon",
-            "email": "hari.seldon@foundation.com",
-            "street_address": "123 Planet XYZ",
-            "city": "Jupiter",
-            "state": "UN",
-            "zip_code": "12345"
-         }
-        }
-       }
-      }
-    ```
-    </details>
+      ```json
+        { 
+         "data": {
+            "id": 1,
+            "type": "user", 
+            "attributes": {
+              "message": "User account successfully created."
+          }
+         }
+        }
+      ```
+      </details>
 
     b. `POST /api/v1/sessions`
-    ```json
-    request_body = {
-                    "email": "hari.seldon@foundation.com",
-                    "password": "verysecurepassword"
-                   }
-    ```
-<!-- TODO: double check that we indeed want to send all this information in the response. -->
-    <details>
-    <summary>Example response </summary>
+      ```json
+      request_body = {
+                      "email": "hari.seldon@foundation.com",
+                      "password": "verysecurepassword"
+                     }
+      ```
+  <!-- TODO: double check that we indeed want to send all this information in the response. -->
+      <details>
+      <summary>Example response </summary>
 
-    ```json
-      { 
-       "data": {
-          "id": 1,
-          "type": "user", 
-          "attributes": {
-            "first_name": "Hari",
-            "last_name": "Seldon",
-            "email": "hari.seldon@foundation.com",
-            "street_address": "123 Planet XYZ",
-            "city": "Jupiter",
-            "state": "UN",
-            "zip_code": "12345"
-         }
-        }
-       }
-      }
-    ```
-    </details>
+      ```json
+        { 
+         "data": {
+            "id": 1,
+            "type": "user", 
+            "attributes": {
+                "message": "Successfully logged in."
+          }
+         }
+        }
+      ```
+      </details>
+
+    c. `GET /api/v1/users/:id/dashboard`
+      - It will search for the 3 nearest stations using the address in the user account
+      - Params required: `user_id`
+
+      <details>
+      <summary>Example response </summary>
+
+      ```json
+        { 
+         "data": {
+            "id": 5,
+            "type": "user_get_stations", 
+            "attributes": {
+              "user": {
+                "email": "hari.seldon@foundation.com",
+                "street_address": "123 Planet XYZ",
+                "city": "Jupiter",
+                "state": "UN",
+                "zip_code": "12345"
+              },
+              "nearest_stations": [{
+                              "name": "Denver Supercharger",
+                              "api_id": 152087,
+                              "distance": 1.7,
+                              "status": "Open",
+                              "hours": "9-5, M-F",
+                              "ev_network": "Tesla",
+                              "street_address": "1456 Smith Road",
+                              "city": "Denver",
+                              "state": "CO",
+                              "zip_code": "80289"
+                            },
+                            {
+                              "name": "Golden Supercharger",
+                              "api_id": 252687,
+                              "distance": 8.7,
+                              "status": "Open",
+                              "hours": "9-5, M-F",
+                              "ev_network": "Tesla",
+                              "street_address": "1456 Smith Road",
+                              "city": "Golden",
+                              "state": "CO",
+                              "zip_code": "80401"
+                            },
+                            {
+                              "name": "The Best Supercharger",
+                              "api_id": 259787,
+                              "distance": 9.7,
+                              "status": "Open",
+                              "hours": "9-5, M-F",
+                              "ev_network": "Tesla",
+                              "street_address": "1456 John Deer Road",
+                              "city": "Golden",
+                              "state": "CO",
+                              "zip_code": "80401"
+                            }],
+              "favorite_stations": [{
+                              "name": "Denver Supercharger",
+                              "api_id": 152087,
+                              "distance": 1.7,
+                              "status": "Open",
+                              "hours": "9-5, M-F",
+                              "ev_network": "Tesla",
+                              "street_address": "1456 Smith Road",
+                              "city": "Denver",
+                              "state": "CO",
+                              "zip_code": "80289"
+                            },
+                            {
+                              "name": "The Best Supercharger",
+                              "api_id": 259787,
+                              "distance": 9.7,
+                              "status": "Open",
+                              "hours": "9-5, M-F",
+                              "ev_network": "Tesla",
+                              "street_address": "1456 John Deer Road",
+                              "city": "Golden",
+                              "state": "CO",
+                              "zip_code": "80401"
+                            }]
+                         }
+                      }
+                    }
+      ```
+      </details>
 
 ## Contributing
 
