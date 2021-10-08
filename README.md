@@ -217,9 +217,6 @@ Coming soon
          "data": {
             "id": 1,
             "type": "user", 
-            "attributes": {
-              "message": "User account successfully created."
-          }
          }
         }
       ```
@@ -241,9 +238,6 @@ Coming soon
          "data": {
             "id": 1,
             "type": "user", 
-            "attributes": {
-                "message": "Successfully logged in."
-          }
          }
         }
       ```
