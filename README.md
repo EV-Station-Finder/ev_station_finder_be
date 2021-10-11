@@ -215,7 +215,7 @@ Coming soon
       ```json
         { 
          "data": {
-            "id": 1,
+            "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
             "type": "user", 
          }
         }
@@ -235,9 +235,9 @@ Coming soon
 
       ```json
         { 
-         "data": {
-            "id": 1,
-            "type": "user", 
+          "data": {
+              "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
+              "type": "user", 
          }
         }
       ```
