@@ -27,19 +27,21 @@ RSpec.describe 'User creation' do
       expect(response.status).to eq(201)
       expect(user_response).to have_key(:data)
       expect(user_response[:data]).to be_a Hash
+      expect(user_response[:data]).to have_key(:token)
       expect(user_response[:data]).to have_key(:type)
-      expect(user_response[:data]).to have_key(:id)
-      expect(user_response[:data]).to have_key(:attributes)
-      expect(user_response[:data][:id]).to eq(new_user.id.to_s)
       expect(user_response[:data][:type]).to eq("user")
-      expect(user_response[:data][:attributes].size).to eq(7)
-      expect(user_response[:data][:attributes][:first_name]).to eq("Hari")
-      expect(user_response[:data][:attributes][:last_name]).to eq("Seldon")
-      expect(user_response[:data][:attributes][:email]).to eq("hari.seldon@foundation.com")
-      expect(user_response[:data][:attributes][:street_address]).to eq("123 Planet XYZ")
-      expect(user_response[:data][:attributes][:city]).to eq("Jupiter")
-      expect(user_response[:data][:attributes][:state]).to eq("UN")
-      expect(user_response[:data][:attributes][:zip_code]).to eq("12345")
+    end
+
+    it 'Creates a token for a new user' do
+      post "/api/v1/users", headers: @headers, params: JSON.generate(@user_params)
+
+      new_user_id = User.last.id
+      user_response = JSON.parse(response.body, symbolize_names: true)
+
+      token = user_response[:data][:token]
+      decoded_user_id = JWT.decode(token, 'hasselhoff', true, {algorithm: 'HS256'})[0]["user_id"]
+
+      expect(new_user_id).to eq(decoded_user_id)
     end
   end
 
