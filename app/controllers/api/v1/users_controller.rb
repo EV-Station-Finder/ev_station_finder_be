@@ -1,7 +1,9 @@
 class Api::V1::UsersController < ApplicationController
   def create
     user = User.create!(user_params)
-    render json: UserSerializer.new(user), status: 201
+    token = JWT.encode({user_id: user.id}, 'hasselhoff', 'HS256')
+    # user_id = JWT.decode(token, 'hasselhoff', true, {algorithm: 'HS256'})
+    render json: { data: { token: token, type: 'user' } }.to_json, status: 201
   end
 
   private
