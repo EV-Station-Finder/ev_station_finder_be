@@ -45,9 +45,28 @@ RSpec.describe 'User authorization' do
   end
 
   describe 'Sad Path' do
-    it 'Does not authorize user' do
+    it 'Does not authorize user because token is incorrect' do
       token_params = {"token": "wrJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNDV9.l_pdekbafUTPaz88h1qXUIw_Bg7PJPa_4Eu81AN7yfA"}
       get api_v1_authorize_path, headers: @headers, params: token_params
+      session_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+      expect(session_response[:errors]).to eq("Not logged in")
+    end
+    
+    it 'Does not authorize user because token is empty string' do
+      token_params = {"token": ""}
+      get api_v1_authorize_path, headers: @headers, params: token_params
+      session_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+      expect(session_response[:errors]).to eq("Not logged in")
+    end
+    
+    it 'Does not authorize user because token is not provided' do
+      get api_v1_authorize_path
       session_response = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to_not be_successful
