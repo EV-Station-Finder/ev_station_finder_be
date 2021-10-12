@@ -208,14 +208,13 @@ Coming soon
                       "password": "verysecurepassword"
                      }
       ```
-  <!-- TODO: double check that we indeed want to send all this information in the response. -->
       <details>
       <summary>Example response </summary>
 
       ```json
         { 
          "data": {
-            "id": 1,
+            "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
             "type": "user", 
          }
         }
@@ -229,21 +228,35 @@ Coming soon
                       "password": "verysecurepassword"
                      }
       ```
-  <!-- TODO: double check that we indeed want to send all this information in the response. -->
       <details>
       <summary>Example response </summary>
 
       ```json
         { 
-         "data": {
-            "id": 1,
-            "type": "user", 
+          "data": {
+              "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
+              "type": "user", 
          }
         }
       ```
       </details>
 
-    c. `GET /api/v1/users/:id/dashboard`
+    c. `GET /api/v1/sessions/:token`
+      - Required params: token
+      <details>
+      <summary>Example response </summary>
+
+      ```json
+        { 
+          "data": {
+              "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
+              "type": "user", 
+         }
+        }
+      ```
+      </details>
+
+    d. `GET /api/v1/users/:id/dashboard`
       - It will search for the 3 nearest stations using the address in the user account
       - Params required: `user_id`
 

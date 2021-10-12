@@ -36,19 +36,9 @@ RSpec.describe 'User session' do
       expect(response.status).to eq(200)
       expect(session_response).to have_key(:data)
       expect(session_response[:data]).to be_a Hash
+      expect(session_response[:data]).to have_key(:token)
       expect(session_response[:data]).to have_key(:type)
-      expect(session_response[:data]).to have_key(:id)
-      expect(session_response[:data]).to have_key(:attributes)
-      expect(session_response[:data][:id]).to eq(@new_user.id.to_s)
       expect(session_response[:data][:type]).to eq("user")
-      expect(session_response[:data][:attributes].size).to eq(7)
-      expect(session_response[:data][:attributes][:first_name]).to eq("Hari")
-      expect(session_response[:data][:attributes][:last_name]).to eq("Seldon")
-      expect(session_response[:data][:attributes][:email]).to eq("hari.seldon@foundation.com")
-      expect(session_response[:data][:attributes][:street_address]).to eq("123 Planet XYZ")
-      expect(session_response[:data][:attributes][:city]).to eq("Jupiter")
-      expect(session_response[:data][:attributes][:state]).to eq("UN")
-      expect(session_response[:data][:attributes][:zip_code]).to eq("12345")
     end
   end
 
