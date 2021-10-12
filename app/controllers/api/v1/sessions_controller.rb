@@ -10,13 +10,10 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def authorize
-    # TODO: refactor
     token = params[:token]
     decoded_token = JWT.decode(token, 'hasselhoff', true, {algorithm: 'HS256'})
     user_id = decoded_token[0]["user_id"]
     user = User.find(user_id)
-    if user
-      render json: { data: { token: token, type: 'user' } }.to_json, status: 200
-    end
+    render json: { data: { token: token, type: 'user' } }.to_json, status: 200
   end
 end
