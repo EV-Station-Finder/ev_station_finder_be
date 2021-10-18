@@ -256,9 +256,9 @@ Coming soon
       ```
       </details>
 
-    d. `GET /api/v1/users/:id/dashboard`
+    d. `GET /api/v1/dashboard/:session_token`
       - It will search for the 3 nearest stations using the address in the user account
-      - Params required: `user_id`
+      - Params required: `session_token`
 
       <details>
       <summary>Example response </summary>
