@@ -41,7 +41,7 @@ gem 'rack-cors'
 group :development, :test do
   gem 'pry'
   gem 'shoulda-matchers'
-  # gem "factory_bot_rails"
+  gem "factory_bot_rails"
   # gem 'travis'
 end
 
@@ -55,7 +55,7 @@ end
 
 group :test do
   gem 'capybara'
-  # gem 'launchy'
+  gem 'launchy'
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'vcr'
