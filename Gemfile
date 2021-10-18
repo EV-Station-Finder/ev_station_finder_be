@@ -50,7 +50,7 @@ group :development do
   gem 'rubocop-rails'
   gem 'web-console', '>= 3.3.0'
   # gem 'graphiql-rails'
-  # gem 'faker'
+  gem 'faker'
 end
 
 group :test do
