@@ -19,7 +19,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Mon, 11 Oct 2021 23:09:04 GMT
+      - Mon, 18 Oct 2021 23:53:40 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -55,9 +55,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 70cf8245acd7898281d44b3e25c4e93e
+      - b3164c8f4f85c1a05cd9a918d33f451f
       X-Runtime:
-      - '0.089222'
+      - '0.088158'
       Strict-Transport-Security:
       - max-age=31536000; preload
       - max-age=31622400
@@ -73,5 +73,5 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"errors":["Couldn''t find alternative fuel station with ID of 8393939300393"]}'
-  recorded_at: Mon, 11 Oct 2021 23:09:04 GMT
+  recorded_at: Mon, 18 Oct 2021 23:53:39 GMT
 recorded_with: VCR 6.0.0
