@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :stations, only: [:index, :show]
       resources :users, only: [:create]
       resources :sessions, only: [:create]
+      resources :dashboard, only: [:index]
       get '/authorize', to: 'sessions#authorize'
     end
   end
