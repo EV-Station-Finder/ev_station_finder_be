@@ -1,45 +1,81 @@
 require 'rails_helper'
 
 RSpec.describe "See a user's dashboard page information" do
-  let(:user) { FactoryBot.create(:user, first_name: 'Bill', 
-                                        last_name: 'Seldon', 
-                                        email: 'email@example.com', 
-                                        street_address: 'st', 
-                                        city: 'c', 
-                                        state: 's', 
-                                        zip_code: 'zc', 
+  let(:user) { FactoryBot.create(:user, first_name: 'Bill',
+                                        last_name: 'Seldon',
+                                        email: 'email@example.com',
+                                        street_address: 'st',
+                                        city: 'c',
+                                        state: 's',
+                                        zip_code: 'zc',
                                         password: 'verysecurepassword') }
-                                        
+
   let(:token) { JWT.encode({user_id: user.id}, 'hasselhoff', 'HS256') }
+  let(:headers) { {CONTENT_TYPE: "application/json",
+                  ACCEPT: "application/json"} }
+  let(:params) { {token: "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNTN9._XU4x6ExpqMLb2MCMpR2fb6vX_46MgTIo2QxfqKr6As"} }
+
   describe "Happy Path" do
     it "Endpoint exists and has attributes", :vcr do
-      get "/api/v1/dashboard/#{user}"
+
+      get "/api/v1/dashboard", headers: headers, params: params
+
       expect(response).to be_successful
-      
+
       body = JSON.parse(response.body, symbolize_names:true)
       expect(body).to have_key(:data)
-      expect(body[:data][0]).to have_key(:id)
-      expect(body[:data][0]).to have_key(:type)
-      expect(body[:data][0]).to have_key(:attributes)
-      expect(body[:data][0][:id]).to eq(nil)
-      expect(body[:data][0][:type]).to be_a String
-      expect(body[:data][0][:type]).to eq("stations")
-      expect(body[:data][0][:attributes]).to be_a Hash
-      expect(body[:data].size).to be < 21
+      expect(body[:data]).to have_key(:id)
+      expect(body[:data]).to have_key(:type)
+      expect(body[:data]).to have_key(:attributes)
+      expect(body[:data][:id]).to eq(nil)
+      expect(body[:data][:type]).to eq("dashboard")
 
-      station_1 = body[:data][0][:attributes]
+      attributes = body[:data][:attributes]
 
-      expect(station_1).to be_a Hash
-      expect(station_1.size).to eq(9)
-      expect(station_1).to have_key(:name)
-      expect(station_1).to have_key(:distance)
-      expect(station_1).to have_key(:status)
-      expect(station_1).to have_key(:hours)
-      expect(station_1).to have_key(:ev_network)
-      expect(station_1).to have_key(:street_address)
-      expect(station_1).to have_key(:city)
-      expect(station_1).to have_key(:state)
-      expect(station_1).to have_key(:zip_code)
+      expect(attributes).to be_a Hash
+      expect(attributes.size).to eq(3)
+      expect(attributes).to have_key(:user)
+      expect(attributes).to have_key(:nearest_stations)
+      expect(attributes).to have_key(:favorite_stations)
+
+      user = attributes[:user]
+
+      expect(user).to be_a Hash
+      expect(user).to have_key(:token)
+      expect(user).to have_key(:email)
+      expect(user).to have_key(:street_address)
+      expect(user).to have_key(:city)
+      expect(user).to have_key(:state)
+      expect(user).to have_key(:zip_code)
+
+      nearest_stations = attributes[:nearest_stations]
+
+      expect(nearest_stations).to be_an Array
+      expect(nearest_stations.size).to eq(3)
+      expect(nearest_stations[0]).to have_key(:name)
+      expect(nearest_stations[0]).to have_key(:api_id)
+      expect(nearest_stations[0]).to have_key(:distance)
+      expect(nearest_stations[0]).to have_key(:status)
+      expect(nearest_stations[0]).to have_key(:hours)
+      expect(nearest_stations[0]).to have_key(:ev_network)
+      expect(nearest_stations[0]).to have_key(:street_address)
+      expect(nearest_stations[0]).to have_key(:city)
+      expect(nearest_stations[0]).to have_key(:state)
+      expect(nearest_stations[0]).to have_key(:zip_code)
+
+      favorite_stations = attributes[:favorite_stations]
+
+      expect(favorite_stations).to be_an Array
+      expect(favorite_stations[0]).to have_key(:name)
+      expect(favorite_stations[0]).to have_key(:api_id)
+      expect(favorite_stations[0]).to have_key(:distance)
+      expect(favorite_stations[0]).to have_key(:status)
+      expect(favorite_stations[0]).to have_key(:hours)
+      expect(favorite_stations[0]).to have_key(:ev_network)
+      expect(favorite_stations[0]).to have_key(:street_address)
+      expect(favorite_stations[0]).to have_key(:city)
+      expect(favorite_stations[0]).to have_key(:state)
+      expect(favorite_stations[0]).to have_key(:zip_code)
     end
   end
 
