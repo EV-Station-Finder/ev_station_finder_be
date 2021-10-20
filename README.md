@@ -266,10 +266,11 @@ Coming soon
       ```json
         { 
          "data": {
-            "id": 5,
-            "type": "user_get_stations", 
+            "id": null,
+            "type": "dashboard", 
             "attributes": {
               "user": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
                 "email": "hari.seldon@foundation.com",
                 "street_address": "123 Planet XYZ",
                 "city": "Jupiter",
