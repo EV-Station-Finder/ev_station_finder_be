@@ -9,6 +9,10 @@ RSpec.describe "See a user's dashboard page information" do
                                         state: 'Virginia',
                                         zip_code: '23452',
                                         password: 'verysecurepassword') }
+  let(:station1) { FactoryBot.create(:station, api_id: "152087") }
+  let(:station2) { FactoryBot.create(:station, api_id: "152070") }
+  let!(:user_station1) { FactoryBot.create(:user_station, user_id: user.id, station_id: station1.id) }
+  let!(:user_station2) { FactoryBot.create(:user_station, user_id: user.id, station_id: station2.id) }
   let(:token) { JWT.encode({user_id: user.id}, 'hasselhoff', 'HS256') }
   let(:headers) { {CONTENT_TYPE: "application/json",
                   ACCEPT: "application/json"} }
@@ -16,7 +20,6 @@ RSpec.describe "See a user's dashboard page information" do
 
   describe "Happy Path" do
     it "Endpoint exists and has attributes", :vcr do
-# binding.pry
       get "/api/v1/dashboard", headers: headers, params: params
 
       expect(response).to be_successful
@@ -65,16 +68,17 @@ RSpec.describe "See a user's dashboard page information" do
       favorite_stations = attributes[:favorite_stations]
 
       expect(favorite_stations).to be_an Array
-      # expect(favorite_stations[0]).to have_key(:name)
-      # expect(favorite_stations[0]).to have_key(:api_id)
-      # expect(favorite_stations[0]).to have_key(:distance)
-      # expect(favorite_stations[0]).to have_key(:status)
-      # expect(favorite_stations[0]).to have_key(:hours)
-      # expect(favorite_stations[0]).to have_key(:ev_network)
-      # expect(favorite_stations[0]).to have_key(:street_address)
-      # expect(favorite_stations[0]).to have_key(:city)
-      # expect(favorite_stations[0]).to have_key(:state)
-      # expect(favorite_stations[0]).to have_key(:zip_code)
+      expect(favorite_stations.size).to eq(2)
+      expect(favorite_stations[0]).to have_key(:name)
+      expect(favorite_stations[0]).to have_key(:api_id)
+      expect(favorite_stations[0]).to have_key(:distance)
+      expect(favorite_stations[0]).to have_key(:status)
+      expect(favorite_stations[0]).to have_key(:hours)
+      expect(favorite_stations[0]).to have_key(:ev_network)
+      expect(favorite_stations[0]).to have_key(:street_address)
+      expect(favorite_stations[0]).to have_key(:city)
+      expect(favorite_stations[0]).to have_key(:state)
+      expect(favorite_stations[0]).to have_key(:zip_code)
     end
   end
 
