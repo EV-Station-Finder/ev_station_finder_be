@@ -1,9 +1,10 @@
 class Api::V1::DashboardController < ApplicationController
   def index
     user = find_user_by_id
-    address = format_user_addres(user)
+    address = format_user_address(user)
     nearest_stations = StationFacade.get_stations(address).first(3)
-    dashboard = Dashboard.new(user, nearest_stations)
+    favorite_stations = StationFacade.get_favorite_stations(user.stations)
+    dashboard = Dashboard.new(user, nearest_stations, favorite_stations)
     render json: DashboardSerializer.new(dashboard) #TODO: make the ID nil in the poro
   end
 
@@ -17,7 +18,7 @@ class Api::V1::DashboardController < ApplicationController
     UserDetails.new(user.attributes)
   end
 
-  def format_user_addres(user)
+  def format_user_address(user)
     "#{user.street_address} #{user.city}, #{user.state} #{user.zip_code}"
   end
 end

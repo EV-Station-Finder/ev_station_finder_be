@@ -4,7 +4,15 @@ class StationFacade
     stations = stations_data[:fuel_stations]
 
     stations.map do |station|
-      Station.new(station)
+      StationBasic.new(station)
+    end
+  end
+  
+  def self.get_favorite_stations(favorite_stations)
+    stations = []
+    favorite_stations.map do |station|
+      station_data = StationService.get_station(station.api_id)
+      stations << StationBasic.new(station_data)
     end
   end
 
