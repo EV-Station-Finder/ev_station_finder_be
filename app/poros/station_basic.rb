@@ -1,4 +1,4 @@
-class Station
+class StationBasic
   attr_reader :id,
               :api_id,
               :name,

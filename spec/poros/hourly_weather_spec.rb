@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Station do
+RSpec.describe StationBasic do
   describe "Station Object" do
     before:each do
       @incoming_hash = {:dt=>1630450432,
@@ -38,19 +38,19 @@ RSpec.describe Station do
 
     it "Status is 'Coming Soon'" do
       @incoming_hash[:status_code] = "P"
-      new_station = Station.new(@incoming_hash)
+      new_station = StationBasic.new(@incoming_hash)
       expect(new_station.status).to eq("Coming Soon")
     end
 
     it "Status is 'Temporarily Closed'" do
       @incoming_hash[:status_code] = "T"
-      new_station = Station.new(@incoming_hash)
+      new_station = StationBasic.new(@incoming_hash)
       expect(new_station.status).to eq("Temporarily Closed")
     end
 
     it "Status is 'Status Unavailable'" do
       @incoming_hash[:status_code] = ""
-      new_station = Station.new(@incoming_hash)
+      new_station = StationBasic.new(@incoming_hash)
       expect(new_station.status).to eq("Status Unavailable")
     end
   end
