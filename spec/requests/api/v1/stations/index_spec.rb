@@ -56,7 +56,7 @@ RSpec.describe "Search for stations by location" do
       expect(body[:errors]).to eq("A valid location must be provided")
     end
 
-    it "location is invalid", :vcr do
+    it "location is invalid or there are no nearby stations", :vcr do
       location = "oghkhhohoiho79808707"
       get "/api/v1/stations?location=#{location}"
       expect(response).to_not be_successful
