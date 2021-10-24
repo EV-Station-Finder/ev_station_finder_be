@@ -83,8 +83,10 @@ RSpec.describe "See a user's dashboard page information" do
   end
 
   describe "Sad Path/Edge Cases" do
-    xit "location is not provided", :vcr do
-      get "/api/v1/stations"
+    it "User does not have favorite stations", :vcr do
+      get "/api/v1/dashboard", headers: headers, params: params
+
+      expect(response).to be_successful
       expect(response).to_not be_successful
       expect(response).to have_http_status(:bad_request)
 
@@ -93,19 +95,8 @@ RSpec.describe "See a user's dashboard page information" do
       expect(body[:errors]).to eq("A valid location must be provided")
     end
 
-    xit "location is blank", :vcr do
+    it "User saved address has no nearby stations", :vcr do
       location = " "
-      get "/api/v1/stations?location=#{location}"
-      expect(response).to_not be_successful
-      expect(response).to have_http_status(:bad_request)
-
-      body = JSON.parse(response.body, symbolize_names:true)
-      expect(body).to have_key(:errors)
-      expect(body[:errors]).to eq("A valid location must be provided")
-    end
-
-    xit "location is invalid", :vcr do
-      location = "oghkhhohoiho79808707"
       get "/api/v1/stations?location=#{location}"
       expect(response).to_not be_successful
       expect(response).to have_http_status(:bad_request)
