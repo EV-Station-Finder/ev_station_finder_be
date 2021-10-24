@@ -1,0 +1,237 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=<CHARGER_KEY>&ev_charging_level=dc_fast&fuel_type=ELEC&location=2954%20Virginia%20Beach%20Boulevard%20Virginia%20Beach,%20Virginia%2023452
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.4.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 Oct 2021 17:37:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      - Origin
+      X-Ratelimit-Limit:
+      - '1000'
+      X-Ratelimit-Remaining:
+      - '999'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Max-Age:
+      - '86400'
+      Last-Modified:
+      - Sun, 24 Oct 2021 17:37:25 GMT
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 16d289d70a2e5cd59edb7682730c7800
+      X-Runtime:
+      - '0.218788'
+      Strict-Transport-Security:
+      - max-age=31536000; preload
+      - max-age=31622400
+      Public-Key-Pins:
+      - pin-sha256="X3pGTSOuJeEVw989IJ/cEtXUEmy52zs1TZQrU06KUKg=" max-age=15552000;
+        includeSubDomains
+      Age:
+      - '0'
+      Via:
+      - https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      X-Cache:
+      - MISS
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJsYXRpdHVkZSI6MzYuODQzOTU5LCJsb25naXR1ZGUiOi03Ni4wNzQyMTQsImxvY2F0aW9uX2NvdW50cnkiOiJVUyIsInByZWNpc2lvbiI6eyJ2YWx1ZSI6OSwibmFtZSI6InByZW1pc2UiLCJ0eXBlcyI6WyJwcmVtaXNlIl19LCJzdGF0aW9uX2xvY2F0b3JfdXJsIjoiaHR0cHM6Ly9hZmRjLmVuZXJneS5nb3Yvc3RhdGlvbnMvIiwidG90YWxfcmVzdWx0cyI6NCwic3RhdGlvbl9jb3VudHMiOnsidG90YWwiOjExLCJmdWVscyI6eyJCRCI6eyJ0b3RhbCI6MH0sIkU4NSI6eyJ0b3RhbCI6MH0sIkVMRUMiOnsidG90YWwiOjExLCJzdGF0aW9ucyI6eyJ0b3RhbCI6NH19LCJIWSI6eyJ0b3RhbCI6MH0sIkxORyI6eyJ0b3RhbCI6MH0sIkNORyI6eyJ0b3RhbCI6MH0sIkxQRyI6eyJ0b3RhbCI6MH19fSwib2Zmc2V0IjowLCJmdWVsX3N0YXRpb25zIjpbeyJhY2Nlc3NfY29kZSI6InB1YmxpYyIsImFjY2Vzc19kYXlzX3RpbWUiOiIyNCBob3VycyBkYWlseTsgZm9yIFRlc2xhIHVzZSBvbmx5IiwiYWNjZXNzX2RldGFpbF9jb2RlIjpudWxsLCJjYXJkc19hY2NlcHRlZCI6bnVsbCwiZGF0ZV9sYXN0X2NvbmZpcm1lZCI6IjIwMjEtMDYtMDciLCJleHBlY3RlZF9kYXRlIjpudWxsLCJmdWVsX3R5cGVfY29kZSI6IkVMRUMiLCJncm91cHNfd2l0aF9hY2Nlc3NfY29kZSI6IlB1YmxpYyIsImlkIjoxOTA0NzcsIm9wZW5fZGF0ZSI6IjIwMjEtMDUtMjMiLCJvd25lcl90eXBlX2NvZGUiOiJQIiwic3RhdHVzX2NvZGUiOiJFIiwic3RhdGlvbl9uYW1lIjoiV2F3YSAtIFRlc2xhIFN1cGVyY2hhcmdlciIsInN0YXRpb25fcGhvbmUiOiI4NzctNzk4LTM3NTIiLCJ1cGRhdGVkX2F0IjoiMjAyMS0wNi0wN1QxNzozNzozN1oiLCJmYWNpbGl0eV90eXBlIjoiQ09OVkVOSUVOQ0VfU1RPUkUiLCJnZW9jb2RlX3N0YXR1cyI6IkdQUyIsImxhdGl0dWRlIjozNi44NDA2NSwibG9uZ2l0dWRlIjotNzYuMDU1NTg0LCJjaXR5IjoiVmlyZ2luaWEgQmVhY2giLCJpbnRlcnNlY3Rpb25fZGlyZWN0aW9ucyI6bnVsbCwicGx1czQiOm51bGwsInN0YXRlIjoiVkEiLCJzdHJlZXRfYWRkcmVzcyI6IjI1MDEgVmlyZ2luaWEgQmVhY2ggQmx2ZCIsInppcCI6IjIzNDUyIiwiY291bnRyeSI6IlVTIiwiYmRfYmxlbmRzIjpudWxsLCJjbmdfZGlzcGVuc2VyX251bSI6bnVsbCwiY25nX2ZpbGxfdHlwZV9jb2RlIjpudWxsLCJjbmdfcHNpIjpudWxsLCJjbmdfcmVuZXdhYmxlX3NvdXJjZSI6bnVsbCwiY25nX3RvdGFsX2NvbXByZXNzaW9uIjpudWxsLCJjbmdfdG90YWxfc3RvcmFnZSI6bnVsbCwiY25nX3ZlaGljbGVfY2xhc3MiOm51bGwsImU4NV9ibGVuZGVyX3B1bXAiOm51bGwsImU4NV9vdGhlcl9ldGhhbm9sX2JsZW5kcyI6bnVsbCwiZXZfY29ubmVjdG9yX3R5cGVzIjpbIlRFU0xBIl0sImV2X2RjX2Zhc3RfbnVtIjo4LCJldl9sZXZlbDFfZXZzZV9udW0iOm51bGwsImV2X2xldmVsMl9ldnNlX251bSI6bnVsbCwiZXZfbmV0d29yayI6IlRlc2xhIiwiZXZfbmV0d29ya193ZWIiOiJodHRwOi8vd3d3LnRlc2xhbW90b3JzLmNvbS9zdXBlcmNoYXJnZXIiLCJldl9vdGhlcl9ldnNlIjpudWxsLCJldl9wcmljaW5nIjpudWxsLCJldl9yZW5ld2FibGVfc291cmNlIjpudWxsLCJoeV9pc19yZXRhaWwiOm51bGwsImh5X3ByZXNzdXJlcyI6bnVsbCwiaHlfc3RhbmRhcmRzIjpudWxsLCJoeV9zdGF0dXNfbGluayI6bnVsbCwibG5nX3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImxuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJscGdfcHJpbWFyeSI6bnVsbCwibHBnX25venpsZV90eXBlcyI6bnVsbCwibmdfZmlsbF90eXBlX2NvZGUiOm51bGwsIm5nX3BzaSI6bnVsbCwibmdfdmVoaWNsZV9jbGFzcyI6bnVsbCwiYWNjZXNzX2RheXNfdGltZV9mciI6bnVsbCwiaW50ZXJzZWN0aW9uX2RpcmVjdGlvbnNfZnIiOm51bGwsImJkX2JsZW5kc19mciI6bnVsbCwiZ3JvdXBzX3dpdGhfYWNjZXNzX2NvZGVfZnIiOiJQdWJsaWMiLCJldl9wcmljaW5nX2ZyIjpudWxsLCJkaXN0YW5jZSI6MS4wNTc0NSwiZGlzdGFuY2Vfa20iOjEuNzAxOH0seyJhY2Nlc3NfY29kZSI6InB1YmxpYyIsImFjY2Vzc19kYXlzX3RpbWUiOiJEZWFsZXJzaGlwIGJ1c2luZXNzIGhvdXJzIiwiYWNjZXNzX2RldGFpbF9jb2RlIjoiQ0FMTCIsImNhcmRzX2FjY2VwdGVkIjpudWxsLCJkYXRlX2xhc3RfY29uZmlybWVkIjoiMjAyMC0wNi0wOSIsImV4cGVjdGVkX2RhdGUiOm51bGwsImZ1ZWxfdHlwZV9jb2RlIjoiRUxFQyIsImdyb3Vwc193aXRoX2FjY2Vzc19jb2RlIjoiUHVibGljIC0gQ2FsbCBhaGVhZCIsImlkIjo0NzU3Nywib3Blbl9kYXRlIjoiMjAxMi0wMS0zMSIsIm93bmVyX3R5cGVfY29kZSI6IlAiLCJzdGF0dXNfY29kZSI6IkUiLCJzdGF0aW9uX25hbWUiOiJIYWxsIE5pc3NhbiAtIFZpcmdpbmlhIEJlYWNoIiwic3RhdGlvbl9waG9uZSI6Ijc1Ny02MzEtNzYwMCIsInVwZGF0ZWRfYXQiOiIyMDIxLTAzLTExVDIzOjIyOjE3WiIsImZhY2lsaXR5X3R5cGUiOiJDQVJfREVBTEVSIiwiZ2VvY29kZV9zdGF0dXMiOiJHUFMiLCJsYXRpdHVkZSI6MzYuODM4OTg5LCJsb25naXR1ZGUiOi03Ni4xMDI0MzMsImNpdHkiOiJWaXJnaW5pYSBCZWFjaCIsImludGVyc2VjdGlvbl9kaXJlY3Rpb25zIjpudWxsLCJwbHVzNCI6bnVsbCwic3RhdGUiOiJWQSIsInN0cmVldF9hZGRyZXNzIjoiMzc1NyBCb29uZXkgUmQiLCJ6aXAiOiIyMzQ1MiIsImNvdW50cnkiOiJVUyIsImJkX2JsZW5kcyI6bnVsbCwiY25nX2Rpc3BlbnNlcl9udW0iOm51bGwsImNuZ19maWxsX3R5cGVfY29kZSI6bnVsbCwiY25nX3BzaSI6bnVsbCwiY25nX3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImNuZ190b3RhbF9jb21wcmVzc2lvbiI6bnVsbCwiY25nX3RvdGFsX3N0b3JhZ2UiOm51bGwsImNuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJlODVfYmxlbmRlcl9wdW1wIjpudWxsLCJlODVfb3RoZXJfZXRoYW5vbF9ibGVuZHMiOm51bGwsImV2X2Nvbm5lY3Rvcl90eXBlcyI6WyJDSEFERU1PIiwiSjE3NzIiXSwiZXZfZGNfZmFzdF9udW0iOjEsImV2X2xldmVsMV9ldnNlX251bSI6bnVsbCwiZXZfbGV2ZWwyX2V2c2VfbnVtIjoyLCJldl9uZXR3b3JrIjoiTm9uLU5ldHdvcmtlZCIsImV2X25ldHdvcmtfd2ViIjpudWxsLCJldl9vdGhlcl9ldnNlIjpudWxsLCJldl9wcmljaW5nIjoiRnJlZSIsImV2X3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImh5X2lzX3JldGFpbCI6bnVsbCwiaHlfcHJlc3N1cmVzIjpudWxsLCJoeV9zdGFuZGFyZHMiOm51bGwsImh5X3N0YXR1c19saW5rIjpudWxsLCJsbmdfcmVuZXdhYmxlX3NvdXJjZSI6bnVsbCwibG5nX3ZlaGljbGVfY2xhc3MiOm51bGwsImxwZ19wcmltYXJ5IjpudWxsLCJscGdfbm96emxlX3R5cGVzIjpudWxsLCJuZ19maWxsX3R5cGVfY29kZSI6bnVsbCwibmdfcHNpIjpudWxsLCJuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJhY2Nlc3NfZGF5c190aW1lX2ZyIjpudWxsLCJpbnRlcnNlY3Rpb25fZGlyZWN0aW9uc19mciI6bnVsbCwiYmRfYmxlbmRzX2ZyIjpudWxsLCJncm91cHNfd2l0aF9hY2Nlc3NfY29kZV9mciI6IlB1YmxpYyAtIEFwcGVsZXIgw6AgbCdhdmFuY2UiLCJldl9wcmljaW5nX2ZyIjpudWxsLCJkaXN0YW5jZSI6MS42MDExMiwiZGlzdGFuY2Vfa20iOjIuNTc2NzV9LHsiYWNjZXNzX2NvZGUiOiJwdWJsaWMiLCJhY2Nlc3NfZGF5c190aW1lIjoiMjQgaG91cnMgZGFpbHkiLCJhY2Nlc3NfZGV0YWlsX2NvZGUiOm51bGwsImNhcmRzX2FjY2VwdGVkIjpudWxsLCJkYXRlX2xhc3RfY29uZmlybWVkIjoiMjAyMS0xMC0yNCIsImV4cGVjdGVkX2RhdGUiOm51bGwsImZ1ZWxfdHlwZV9jb2RlIjoiRUxFQyIsImdyb3Vwc193aXRoX2FjY2Vzc19jb2RlIjoiUHVibGljIiwiaWQiOjE5MjE4OSwib3Blbl9kYXRlIjoiMjAyMS0wNy0wNCIsIm93bmVyX3R5cGVfY29kZSI6bnVsbCwic3RhdHVzX2NvZGUiOiJFIiwic3RhdGlvbl9uYW1lIjoiSGlsbHRvcCBQbGF6YSIsInN0YXRpb25fcGhvbmUiOiI4NzctNDU1LTM4MzMiLCJ1cGRhdGVkX2F0IjoiMjAyMS0xMC0yNFQwMToxMTo1MVoiLCJmYWNpbGl0eV90eXBlIjpudWxsLCJnZW9jb2RlX3N0YXR1cyI6IkdQUyIsImxhdGl0dWRlIjozNi44NDk4OCwibG9uZ2l0dWRlIjotNzYuMDI0MDYsImNpdHkiOiJWaXJnaW5pYSBCZWFjaCIsImludGVyc2VjdGlvbl9kaXJlY3Rpb25zIjpudWxsLCJwbHVzNCI6bnVsbCwic3RhdGUiOiJWQSIsInN0cmVldF9hZGRyZXNzIjoiMTcyNSBMYXNraW4gUmQiLCJ6aXAiOiIyMzQ1NCIsImNvdW50cnkiOiJVUyIsImJkX2JsZW5kcyI6bnVsbCwiY25nX2Rpc3BlbnNlcl9udW0iOm51bGwsImNuZ19maWxsX3R5cGVfY29kZSI6bnVsbCwiY25nX3BzaSI6bnVsbCwiY25nX3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImNuZ190b3RhbF9jb21wcmVzc2lvbiI6bnVsbCwiY25nX3RvdGFsX3N0b3JhZ2UiOm51bGwsImNuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJlODVfYmxlbmRlcl9wdW1wIjpudWxsLCJlODVfb3RoZXJfZXRoYW5vbF9ibGVuZHMiOm51bGwsImV2X2Nvbm5lY3Rvcl90eXBlcyI6WyJDSEFERU1PIiwiSjE3NzJDT01CTyJdLCJldl9kY19mYXN0X251bSI6MSwiZXZfbGV2ZWwxX2V2c2VfbnVtIjpudWxsLCJldl9sZXZlbDJfZXZzZV9udW0iOm51bGwsImV2X25ldHdvcmsiOiJlVmdvIE5ldHdvcmsiLCJldl9uZXR3b3JrX3dlYiI6Imh0dHBzOi8vd3d3LmV2Z28uY29tLyIsImV2X290aGVyX2V2c2UiOm51bGwsImV2X3ByaWNpbmciOm51bGwsImV2X3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImh5X2lzX3JldGFpbCI6bnVsbCwiaHlfcHJlc3N1cmVzIjpudWxsLCJoeV9zdGFuZGFyZHMiOm51bGwsImh5X3N0YXR1c19saW5rIjpudWxsLCJsbmdfcmVuZXdhYmxlX3NvdXJjZSI6bnVsbCwibG5nX3ZlaGljbGVfY2xhc3MiOm51bGwsImxwZ19wcmltYXJ5IjpudWxsLCJscGdfbm96emxlX3R5cGVzIjpudWxsLCJuZ19maWxsX3R5cGVfY29kZSI6bnVsbCwibmdfcHNpIjpudWxsLCJuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJhY2Nlc3NfZGF5c190aW1lX2ZyIjpudWxsLCJpbnRlcnNlY3Rpb25fZGlyZWN0aW9uc19mciI6bnVsbCwiYmRfYmxlbmRzX2ZyIjpudWxsLCJncm91cHNfd2l0aF9hY2Nlc3NfY29kZV9mciI6IlB1YmxpYyIsImV2X3ByaWNpbmdfZnIiOm51bGwsImV2X25ldHdvcmtfaWRzIjp7InN0YXRpb24iOlsiMjcxMDMiXSwicG9zdHMiOlsiNTYxNTUiXX0sImRpc3RhbmNlIjoyLjgwOTM2LCJkaXN0YW5jZV9rbSI6NC41MjEyM30seyJhY2Nlc3NfY29kZSI6InB1YmxpYyIsImFjY2Vzc19kYXlzX3RpbWUiOiIyNCBob3VycyBkYWlseSIsImFjY2Vzc19kZXRhaWxfY29kZSI6bnVsbCwiY2FyZHNfYWNjZXB0ZWQiOm51bGwsImRhdGVfbGFzdF9jb25maXJtZWQiOiIyMDIxLTEwLTI0IiwiZXhwZWN0ZWRfZGF0ZSI6bnVsbCwiZnVlbF90eXBlX2NvZGUiOiJFTEVDIiwiZ3JvdXBzX3dpdGhfYWNjZXNzX2NvZGUiOiJQdWJsaWMiLCJpZCI6MTQzMjIzLCJvcGVuX2RhdGUiOiIyMDE5LTA4LTE1Iiwib3duZXJfdHlwZV9jb2RlIjpudWxsLCJzdGF0dXNfY29kZSI6IkUiLCJzdGF0aW9uX25hbWUiOiJTT1VUSFNJREUgSC1EIERDRkFTVCBIT0ciLCJzdGF0aW9uX3Bob25lIjoiODg4LTc1OC00Mzg5IiwidXBkYXRlZF9hdCI6IjIwMjEtMTAtMjRUMDA6Mjc6MDNaIiwiZmFjaWxpdHlfdHlwZSI6bnVsbCwiZ2VvY29kZV9zdGF0dXMiOiJHUFMiLCJsYXRpdHVkZSI6MzYuODQ4NzQsImxvbmdpdHVkZSI6LTc2LjE1NTY1NSwiY2l0eSI6IlZpcmdpbmlhIEJlYWNoIiwiaW50ZXJzZWN0aW9uX2RpcmVjdGlvbnMiOm51bGwsInBsdXM0IjpudWxsLCJzdGF0ZSI6IlZBIiwic3RyZWV0X2FkZHJlc3MiOiIzODUgTiBXaXRjaGR1Y2sgUmQiLCJ6aXAiOiIyMzQ2MiIsImNvdW50cnkiOiJVUyIsImJkX2JsZW5kcyI6bnVsbCwiY25nX2Rpc3BlbnNlcl9udW0iOm51bGwsImNuZ19maWxsX3R5cGVfY29kZSI6bnVsbCwiY25nX3BzaSI6bnVsbCwiY25nX3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImNuZ190b3RhbF9jb21wcmVzc2lvbiI6bnVsbCwiY25nX3RvdGFsX3N0b3JhZ2UiOm51bGwsImNuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJlODVfYmxlbmRlcl9wdW1wIjpudWxsLCJlODVfb3RoZXJfZXRoYW5vbF9ibGVuZHMiOm51bGwsImV2X2Nvbm5lY3Rvcl90eXBlcyI6WyJKMTc3MkNPTUJPIl0sImV2X2RjX2Zhc3RfbnVtIjoxLCJldl9sZXZlbDFfZXZzZV9udW0iOm51bGwsImV2X2xldmVsMl9ldnNlX251bSI6bnVsbCwiZXZfbmV0d29yayI6IkNoYXJnZVBvaW50IE5ldHdvcmsiLCJldl9uZXR3b3JrX3dlYiI6Imh0dHA6Ly93d3cuY2hhcmdlcG9pbnQuY29tLyIsImV2X290aGVyX2V2c2UiOm51bGwsImV2X3ByaWNpbmciOm51bGwsImV2X3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImh5X2lzX3JldGFpbCI6bnVsbCwiaHlfcHJlc3N1cmVzIjpudWxsLCJoeV9zdGFuZGFyZHMiOm51bGwsImh5X3N0YXR1c19saW5rIjpudWxsLCJsbmdfcmVuZXdhYmxlX3NvdXJjZSI6bnVsbCwibG5nX3ZlaGljbGVfY2xhc3MiOm51bGwsImxwZ19wcmltYXJ5IjpudWxsLCJscGdfbm96emxlX3R5cGVzIjpudWxsLCJuZ19maWxsX3R5cGVfY29kZSI6bnVsbCwibmdfcHNpIjpudWxsLCJuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJhY2Nlc3NfZGF5c190aW1lX2ZyIjpudWxsLCJpbnRlcnNlY3Rpb25fZGlyZWN0aW9uc19mciI6bnVsbCwiYmRfYmxlbmRzX2ZyIjpudWxsLCJncm91cHNfd2l0aF9hY2Nlc3NfY29kZV9mciI6IlB1YmxpYyIsImV2X3ByaWNpbmdfZnIiOm51bGwsImV2X25ldHdvcmtfaWRzIjp7InN0YXRpb24iOlsiVVNDUElMMTg1MzIzMSJdLCJwb3N0cyI6WyIyMTc4OTYxIl19LCJkaXN0YW5jZSI6NC41MjU1MiwiZGlzdGFuY2Vfa20iOjcuMjgzMTJ9XX0=
+  recorded_at: Sun, 24 Oct 2021 17:37:25 GMT
+- request:
+    method: get
+    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/152087.json?api_key=<CHARGER_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.4.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 Oct 2021 17:37:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      - Origin
+      X-Ratelimit-Limit:
+      - '1000'
+      X-Ratelimit-Remaining:
+      - '998'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Max-Age:
+      - '86400'
+      Etag:
+      - W/"de38db992d6e9874e850c95e226e5498"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 8860ba5fa7d04222c0cd88bc000f500f
+      X-Runtime:
+      - '0.092050'
+      Strict-Transport-Security:
+      - max-age=31536000; preload
+      - max-age=31622400
+      Public-Key-Pins:
+      - pin-sha256="X3pGTSOuJeEVw989IJ/cEtXUEmy52zs1TZQrU06KUKg=" max-age=15552000;
+        includeSubDomains
+      Age:
+      - '2'
+      Via:
+      - https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      X-Cache:
+      - MISS
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJhbHRfZnVlbF9zdGF0aW9uIjp7ImFjY2Vzc19jb2RlIjoicHVibGljIiwiYWNjZXNzX2RheXNfdGltZSI6IjI0IGhvdXJzIGRhaWx5IiwiYWNjZXNzX2RldGFpbF9jb2RlIjoiQ1JFRElUX0NBUkRfQUxXQVlTIiwiY2FyZHNfYWNjZXB0ZWQiOiJBIEQgTSBWIiwiZGF0ZV9sYXN0X2NvbmZpcm1lZCI6IjIwMjAtMDYtMDkiLCJleHBlY3RlZF9kYXRlIjpudWxsLCJmdWVsX3R5cGVfY29kZSI6IkU4NSIsImdyb3Vwc193aXRoX2FjY2Vzc19jb2RlIjoiUHVibGljIC0gQ3JlZGl0IGNhcmQgYXQgYWxsIHRpbWVzIiwiaWQiOjE1MjA4Nywib3Blbl9kYXRlIjoiMjAyMC0wMS0wMyIsIm93bmVyX3R5cGVfY29kZSI6IlAiLCJzdGF0dXNfY29kZSI6IkUiLCJzdGF0aW9uX25hbWUiOiJDYXNleSdzIEdlbmVyYWwgU3RvcmUiLCJzdGF0aW9uX3Bob25lIjoiNzE1LTgzMi01MDI2IiwidXBkYXRlZF9hdCI6IjIwMjEtMDktMjRUMTk6NDQ6NTdaIiwiZmFjaWxpdHlfdHlwZSI6IkNPTlZFTklFTkNFX1NUT1JFIiwiZ2VvY29kZV9zdGF0dXMiOiJHUFMiLCJsYXRpdHVkZSI6NDQuNzk1Mjk2ODY0NDQyMzgsImxvbmdpdHVkZSI6LTkxLjQ0ODExNTM0Mzk5NDEyLCJjaXR5IjoiQWx0b29uYSIsImludGVyc2VjdGlvbl9kaXJlY3Rpb25zIjpudWxsLCJwbHVzNCI6bnVsbCwic3RhdGUiOiJXSSIsInN0cmVldF9hZGRyZXNzIjoiMjM3NSBTdCBBbmRyZXdzIERyIiwiemlwIjoiNTQ3MjAiLCJjb3VudHJ5IjoiVVMiLCJiZF9ibGVuZHMiOm51bGwsImNuZ19kaXNwZW5zZXJfbnVtIjpudWxsLCJjbmdfZmlsbF90eXBlX2NvZGUiOm51bGwsImNuZ19wc2kiOm51bGwsImNuZ19yZW5ld2FibGVfc291cmNlIjpudWxsLCJjbmdfdG90YWxfY29tcHJlc3Npb24iOm51bGwsImNuZ190b3RhbF9zdG9yYWdlIjpudWxsLCJjbmdfdmVoaWNsZV9jbGFzcyI6bnVsbCwiZTg1X2JsZW5kZXJfcHVtcCI6ZmFsc2UsImU4NV9vdGhlcl9ldGhhbm9sX2JsZW5kcyI6bnVsbCwiZXZfY29ubmVjdG9yX3R5cGVzIjpudWxsLCJldl9kY19mYXN0X251bSI6bnVsbCwiZXZfbGV2ZWwxX2V2c2VfbnVtIjpudWxsLCJldl9sZXZlbDJfZXZzZV9udW0iOm51bGwsImV2X25ldHdvcmsiOm51bGwsImV2X25ldHdvcmtfd2ViIjpudWxsLCJldl9vdGhlcl9ldnNlIjpudWxsLCJldl9wcmljaW5nIjpudWxsLCJldl9yZW5ld2FibGVfc291cmNlIjpudWxsLCJoeV9pc19yZXRhaWwiOm51bGwsImh5X3ByZXNzdXJlcyI6bnVsbCwiaHlfc3RhbmRhcmRzIjpudWxsLCJoeV9zdGF0dXNfbGluayI6bnVsbCwibG5nX3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImxuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJscGdfcHJpbWFyeSI6bnVsbCwibHBnX25venpsZV90eXBlcyI6bnVsbCwibmdfZmlsbF90eXBlX2NvZGUiOm51bGwsIm5nX3BzaSI6bnVsbCwibmdfdmVoaWNsZV9jbGFzcyI6bnVsbCwiYWNjZXNzX2RheXNfdGltZV9mciI6bnVsbCwiaW50ZXJzZWN0aW9uX2RpcmVjdGlvbnNfZnIiOm51bGwsImJkX2JsZW5kc19mciI6bnVsbCwiZ3JvdXBzX3dpdGhfYWNjZXNzX2NvZGVfZnIiOiJQdWJsaWMgLSBDYXJ0ZSBkZSBjcsOpZGl0IGVuIHRvdXQgdGVtcHMiLCJldl9wcmljaW5nX2ZyIjpudWxsfX0=
+  recorded_at: Sun, 24 Oct 2021 17:37:25 GMT
+- request:
+    method: get
+    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/152070.json?api_key=<CHARGER_KEY>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.4.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 24 Oct 2021 17:37:26 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
+      - Origin
+      X-Ratelimit-Limit:
+      - '1000'
+      X-Ratelimit-Remaining:
+      - '998'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Max-Age:
+      - '86400'
+      Etag:
+      - W/"51f8a70a6069b70bb6419751905adeea"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 47745369dd654526079557684efce29c
+      X-Runtime:
+      - '0.089382'
+      Strict-Transport-Security:
+      - max-age=31536000; preload
+      - max-age=31622400
+      Public-Key-Pins:
+      - pin-sha256="X3pGTSOuJeEVw989IJ/cEtXUEmy52zs1TZQrU06KUKg=" max-age=15552000;
+        includeSubDomains
+      Age:
+      - '0'
+      Via:
+      - https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
+      X-Cache:
+      - MISS
+    body:
+      encoding: ASCII-8BIT
+      string: '{"alt_fuel_station":{"access_code":"public","access_days_time":"24
+        hours daily; Also accepts Murphy USA Fleet Card","access_detail_code":null,"cards_accepted":"A
+        Cash D Debit M V","date_last_confirmed":"2021-08-04","expected_date":null,"fuel_type_code":"E85","groups_with_access_code":"Public","id":152070,"open_date":"2020-01-03","owner_type_code":"P","status_code":"E","station_name":"Murphy
+        Express","station_phone":"505-294-8361","updated_at":"2021-08-04T13:11:32Z","facility_type":"GAS_STATION","geocode_status":"200-9","latitude":35.094311,"longitude":-106.550313,"city":"Albuquerque","intersection_directions":null,"plus4":null,"state":"NM","street_address":"1358
+        Wyoming Blvd NE","zip":"87112","country":"US","bd_blends":null,"cng_dispenser_num":null,"cng_fill_type_code":null,"cng_psi":null,"cng_renewable_source":null,"cng_total_compression":null,"cng_total_storage":null,"cng_vehicle_class":null,"e85_blender_pump":false,"e85_other_ethanol_blends":null,"ev_connector_types":null,"ev_dc_fast_num":null,"ev_level1_evse_num":null,"ev_level2_evse_num":null,"ev_network":null,"ev_network_web":null,"ev_other_evse":null,"ev_pricing":null,"ev_renewable_source":null,"hy_is_retail":null,"hy_pressures":null,"hy_standards":null,"hy_status_link":null,"lng_renewable_source":null,"lng_vehicle_class":null,"lpg_primary":null,"lpg_nozzle_types":null,"ng_fill_type_code":null,"ng_psi":null,"ng_vehicle_class":null,"access_days_time_fr":null,"intersection_directions_fr":null,"bd_blends_fr":null,"groups_with_access_code_fr":"Public","ev_pricing_fr":null}}'
+  recorded_at: Sun, 24 Oct 2021 17:37:26 GMT
+recorded_with: VCR 6.0.0
