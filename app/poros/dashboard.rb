@@ -3,10 +3,10 @@ class Dashboard
               :user,
               :nearest_stations,
               :favorite_stations
-  def initialize(user, nearest_stations)
+  def initialize(user, nearest_stations, favorite_stations)
     @id = nil
     @user = user
     @nearest_stations = nearest_stations
-    @favorite_stations = []
+    @favorite_stations = favorite_stations
   end
 end
