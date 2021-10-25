@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=<CHARGER_KEY>&ev_charging_level=dc_fast&fuel_type=ELEC&location=%20
+    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=<CHARGER_KEY>&ev_charging_level=dc_fast&fuel_type=ELEC&location=hfjflkdn%20sdhddkndfk,%20fnnflasjm%20nkfnkdnfsd
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: Unprocessable Entity
     headers:
       Date:
-      - Sun, 24 Oct 2021 17:37:26 GMT
+      - Mon, 25 Oct 2021 22:24:53 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -29,7 +29,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '996'
+      - '971'
       X-Frame-Options:
       - ALLOWALL
       X-Xss-Protection:
@@ -51,9 +51,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 6fa68e864a7e0c9227fb8fda78078a5e
+      - e479eda551d40f808bf67810a46ccd10
       X-Runtime:
-      - '0.003398'
+      - '0.859038'
       Vary:
       - Origin
       Strict-Transport-Security:
@@ -63,14 +63,13 @@ http_interactions:
       - pin-sha256="X3pGTSOuJeEVw989IJ/cEtXUEmy52zs1TZQrU06KUKg=" max-age=15552000;
         includeSubDomains
       Age:
-      - '0'
+      - '1'
       Via:
       - https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
       X-Cache:
       - MISS
     body:
       encoding: UTF-8
-      string: '{"errors":["Either the ''location'' or both ''latitude'' and ''longitude''
-        parameters must be given to."]}'
-  recorded_at: Sun, 24 Oct 2021 17:37:26 GMT
+      string: '{"errors":["The ''location'' parameter could not be located."]}'
+  recorded_at: Mon, 25 Oct 2021 22:24:52 GMT
 recorded_with: VCR 6.0.0
