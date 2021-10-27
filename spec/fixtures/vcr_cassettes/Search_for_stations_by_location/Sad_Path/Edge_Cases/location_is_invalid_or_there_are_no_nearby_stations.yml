@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/dhshdh.json?api_key=<CHARGER_KEY>
+    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=<CHARGER_KEY>&ev_charging_level=dc_fast&fuel_type=ELEC&location=oghkhhohoiho79808707
     body:
       encoding: US-ASCII
       string: ''
@@ -15,25 +15,21 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 404
-      message: Not Found
+      code: 422
+      message: Unprocessable Entity
     headers:
       Date:
-      - Wed, 27 Oct 2021 21:27:26 GMT
+      - Wed, 27 Oct 2021 21:27:25 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Vary:
-      - Accept-Encoding
-      - Accept-Encoding
-      - Origin
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '984'
+      - '987'
       X-Frame-Options:
       - ALLOWALL
       X-Xss-Protection:
@@ -55,9 +51,11 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 7511558f9db174c650564106b299872d
+      - db65d0c14aa3f4aa455f8c86dc1d1365
       X-Runtime:
-      - '0.091729'
+      - '0.406998'
+      Vary:
+      - Origin
       Strict-Transport-Security:
       - max-age=31536000; preload
       - max-age=31622400
@@ -65,13 +63,13 @@ http_interactions:
       - pin-sha256="X3pGTSOuJeEVw989IJ/cEtXUEmy52zs1TZQrU06KUKg=" max-age=15552000;
         includeSubDomains
       Age:
-      - '0'
+      - '1'
       Via:
       - https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
       X-Cache:
       - MISS
     body:
-      encoding: ASCII-8BIT
-      string: '{"errors":["Couldn''t find alternative fuel station with ID of dhshdh"]}'
-  recorded_at: Wed, 27 Oct 2021 21:27:26 GMT
+      encoding: UTF-8
+      string: '{"errors":["The ''location'' parameter could not be located."]}'
+  recorded_at: Wed, 27 Oct 2021 21:27:24 GMT
 recorded_with: VCR 6.0.0
