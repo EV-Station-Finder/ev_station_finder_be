@@ -279,7 +279,6 @@ Coming soon
             "id": null,
             "type": "user", 
             "attributes": {
-                "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
                 "first_name": "Hari",
                 "last_name": "Seldon",
                 "email": "hari.seldon@foundation.com",
