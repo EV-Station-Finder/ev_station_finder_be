@@ -2,9 +2,8 @@ class StationFacade
   def self.get_stations(location)
     stations_data = StationService.get_stations(location)
     # TODO ADD Sad Path
-    require "pry";binding.pry
     if stations_data[:errors]
-      
+
     else
       stations = stations_data[:fuel_stations]
       stations.map do |station|
