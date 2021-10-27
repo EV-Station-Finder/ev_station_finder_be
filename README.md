@@ -261,9 +261,14 @@ Coming soon
       ```
       </details>
 
-    d. `GET /api/v1/users/:token`
+    d. `GET /api/v1/users`
       - Returns user information with the token instead of the ID, and without the user's password digest
-      - Params required: `token`
+
+      ```json
+      request_body = {
+                      "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
+                     }
+      ```
 
       <details>
       <summary>Example response </summary>
@@ -288,9 +293,13 @@ Coming soon
       ```
       </details>
 
-    e. `GET /api/v1/favorite_stations/:token`
+    e. `GET /api/v1/favorite_stations`
       - Returns user's favorite stations
-      - Params required: `token`
+      ```json
+            request_body = {
+                            "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
+                           }
+      ```
 
       <details>
       <summary>Example response </summary>
