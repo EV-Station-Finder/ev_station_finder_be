@@ -243,6 +243,7 @@ Coming soon
 
     c. `GET /api/v1/sessions/:token`
       - Required params: token
+
       <details>
       <summary>Example response </summary>
 
@@ -256,10 +257,10 @@ Coming soon
       ```
       </details>
 
-    d. `GET /api/v1/dashboard/:session_token`
-      - It will search for the 3 nearest stations using the address in the user account
-      - Params required: `session_token`
-
+    d. `GET /api/v1/users/:token`
+      - Returns user information with the token instead of the ID, and without the user's password digest
+      - Params required: `token`
+      
       <details>
       <summary>Example response </summary>
 
@@ -267,78 +268,63 @@ Coming soon
         { 
          "data": {
             "id": null,
-            "type": "dashboard", 
+            "type": "user", 
             "attributes": {
-              "user": {
                 "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
+                "first_name": "Hari",
+                "last_name": "Seldon",
                 "email": "hari.seldon@foundation.com",
                 "street_address": "123 Planet XYZ",
                 "city": "Jupiter",
                 "state": "UN",
                 "zip_code": "12345"
-              },
-              "nearest_stations": [{
-                              "name": "Denver Supercharger",
-                              "api_id": 152087,
-                              "distance": 1.7,
-                              "status": "Open",
-                              "hours": "9-5, M-F",
-                              "ev_network": "Tesla",
-                              "street_address": "1456 Smith Road",
-                              "city": "Denver",
-                              "state": "CO",
-                              "zip_code": "80289"
-                            },
-                            {
-                              "name": "Golden Supercharger",
-                              "api_id": 252687,
-                              "distance": 8.7,
-                              "status": "Open",
-                              "hours": "9-5, M-F",
-                              "ev_network": "Tesla",
-                              "street_address": "1456 Smith Road",
-                              "city": "Golden",
-                              "state": "CO",
-                              "zip_code": "80401"
-                            },
-                            {
-                              "name": "The Best Supercharger",
-                              "api_id": 259787,
-                              "distance": 9.7,
-                              "status": "Open",
-                              "hours": "9-5, M-F",
-                              "ev_network": "Tesla",
-                              "street_address": "1456 John Deer Road",
-                              "city": "Golden",
-                              "state": "CO",
-                              "zip_code": "80401"
-                            }],
-              "favorite_stations": [{
-                              "name": "Denver Supercharger",
-                              "api_id": 152087,
-                              "distance": 1.7,
-                              "status": "Open",
-                              "hours": "9-5, M-F",
-                              "ev_network": "Tesla",
-                              "street_address": "1456 Smith Road",
-                              "city": "Denver",
-                              "state": "CO",
-                              "zip_code": "80289"
-                            },
-                            {
-                              "name": "The Best Supercharger",
-                              "api_id": 259787,
-                              "distance": 9.7,
-                              "status": "Open",
-                              "hours": "9-5, M-F",
-                              "ev_network": "Tesla",
-                              "street_address": "1456 John Deer Road",
-                              "city": "Golden",
-                              "state": "CO",
-                              "zip_code": "80401"
-                            }]
                          }
                       }
+                    }
+      ```
+      </details>
+
+    e. `GET /api/v1/favorite_stations/:token`
+      - Returns user's favorite stations
+      - Params required: `token`
+
+      <details>
+      <summary>Example response </summary>
+
+      ```
+        { 
+         "data": {
+            "id": null, # TODO: consider providing the user token here (is it needed to verify response is for correct user?)
+            "type": "favorite_stations",
+            "attributes": {
+                            [
+                              {
+                                "name": "Denver Supercharger",
+                                "api_id": 152087,
+                                "distance": 1.7,
+                                "status": "Open",
+                                "hours": "9-5, M-F",
+                                "ev_network": "Tesla",
+                                "street_address": "1456 Smith Road",
+                                "city": "Denver",
+                                "state": "CO",
+                                "zip_code": "80289"
+                              },
+                              {
+                                "name": "The Best Supercharger",
+                                "api_id": 259787,
+                                "distance": 9.7,
+                                "status": "Open",
+                                "hours": "9-5, M-F",
+                                "ev_network": "Tesla",
+                                "street_address": "1456 John Deer Road",
+                                "city": "Golden",
+                                "state": "CO",
+                                "zip_code": "80401"
+                              }
+                            ]
+                          }
+                        }
                     }
       ```
       </details>
