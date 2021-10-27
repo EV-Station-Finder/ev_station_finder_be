@@ -241,8 +241,12 @@ Coming soon
       ```
       </details>
 
-    c. `GET /api/v1/sessions/:token`
-      - Required params: token
+    c. `GET /api/v1/authorize`
+      ```json
+      request_body = {
+                      "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"
+                     }
+      ```
 
       <details>
       <summary>Example response </summary>
@@ -260,7 +264,7 @@ Coming soon
     d. `GET /api/v1/users/:token`
       - Returns user information with the token instead of the ID, and without the user's password digest
       - Params required: `token`
-      
+
       <details>
       <summary>Example response </summary>
 
