@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :record_bad_request
-  rescue_from JWT::DecodeError, with: :not_logged_in
+  rescue_from JWT::DecodeError, with: :unauthorized_user
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   def welcome; end
 
@@ -10,8 +10,8 @@ class ApplicationController < ActionController::API
     render json: { errors: exception.message }, status: :bad_request
   end
 
-  def not_logged_in
-    render json: { errors: "Not logged in" }, status: :unauthorized
+  def unauthorized_user
+    render json: { errors: "Unauthorized" }, status: :unauthorized
   end
   
   def record_not_found(exception)
