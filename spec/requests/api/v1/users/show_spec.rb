@@ -43,40 +43,21 @@ RSpec.describe "Show user information" do
   end
 
   describe "Sad Path/Edge Cases" do
-    xit "User does not exist" do #TODO add VCR back , :vcr
-      user2 =  User.create!(first_name: 'Bill',
-                            last_name: 'Seldon',
-                            email: 'email1@example.com',
-                            street_address: "1712 Av Circunvalacion",
-                            city: "Cochabamba",
-                            state: "Bolivia",
-                            zip_code: '11111',
-                            password: 'verysecurepassword')
-      user_station3 = UserStation.create!(user_id: user2.id, station_id: station1.id)
-      user_station4 = UserStation.create!(user_id: user2.id, station_id: station2.id)
-      token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
+    it "User does not exist", :vcr do
+    
+      token2 = JWT.encode({user_id: 899}, 'hasselhoff', 'HS256')
       params2 = {token: token2}
-      get "/api/v1/dashboard", headers: headers, params: params2
-      expect(response).to be_successful
-
+      get "/api/v1/users", headers: headers, params: params2
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+      
       body = JSON.parse(response.body, symbolize_names:true)
-      expect(body).to have_key(:data)
-      expect(body[:data]).to have_key(:id)
-      expect(body[:data]).to have_key(:type)
-      expect(body[:data]).to have_key(:attributes)
-      expect(body[:data][:id]).to eq(nil)
-      expect(body[:data][:type]).to eq("dashboard")
 
-      attributes = body[:data][:attributes]
-
-      expect(attributes).to be_a Hash
-      expect(attributes.size).to eq(3) #
-      expect(attributes).to have_key(:user)
-      expect(attributes).to have_key(:nearest_stations)
-      expect(attributes).to have_key(:favorite_stations)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("User not found")
     end
 
-    xit "Token is invalid", :vcr do
+    it "Token is invalid", :vcr do
       user2 =  User.create!(first_name: 'Bill',
                             last_name: 'Seldon',
                             email: 'email2@example.com',
@@ -89,7 +70,7 @@ RSpec.describe "Show user information" do
       user_station4 = UserStation.create!(user_id: user2.id, station_id: station2.id)
       token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
       params2 = {token: token2}
-      get "/api/v1/dashboard", headers: headers, params: params2
+      get "/api/v1/users", headers: headers, params: params2
       expect(response).to be_successful
 
       body = JSON.parse(response.body, symbolize_names:true)
@@ -98,7 +79,7 @@ RSpec.describe "Show user information" do
       expect(body[:data]).to have_key(:type)
       expect(body[:data]).to have_key(:attributes)
       expect(body[:data][:id]).to eq(nil)
-      expect(body[:data][:type]).to eq("dashboard")
+      expect(body[:data][:type]).to eq("user")
 
       attributes = body[:data][:attributes]
 
@@ -109,7 +90,7 @@ RSpec.describe "Show user information" do
       expect(attributes).to have_key(:favorite_stations)
     end
 
-    xit "Token is empty or not sent", :vcr do
+    it "Token is empty or not sent", :vcr do
       user2 =  User.create!(first_name: 'Bill',
                             last_name: 'Seldon',
                             email: 'email3@example.com',
@@ -121,7 +102,7 @@ RSpec.describe "Show user information" do
       token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
       params2 = {token: token2}
 
-      get "/api/v1/dashboard", headers: headers, params: params2
+      get "/api/v1/users", headers: headers, params: params2
       expect(response).to be_successful
 
       body = JSON.parse(response.body, symbolize_names:true)
@@ -130,7 +111,7 @@ RSpec.describe "Show user information" do
       expect(body[:data]).to have_key(:type)
       expect(body[:data]).to have_key(:attributes)
       expect(body[:data][:id]).to eq(nil)
-      expect(body[:data][:type]).to eq("dashboard")
+      expect(body[:data][:type]).to eq("user")
 
       attributes = body[:data][:attributes]
     end
