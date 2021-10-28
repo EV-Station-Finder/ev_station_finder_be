@@ -58,36 +58,16 @@ RSpec.describe "Show user information" do
     end
 
     it "Token is invalid", :vcr do
-      user2 =  User.create!(first_name: 'Bill',
-                            last_name: 'Seldon',
-                            email: 'email2@example.com',
-                            street_address: "hfjflkdn",
-                            city: "sdhddkndfk",
-                            state: "fnnflasjm",
-                            zip_code: 'nkfnkdnfsd',
-                            password: 'verysecurepassword')
-      user_station3 = UserStation.create!(user_id: user2.id, station_id: station1.id)
-      user_station4 = UserStation.create!(user_id: user2.id, station_id: station2.id)
-      token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
-      params2 = {token: token2}
+      altered_token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY"
+      params2 = {token: altered_token}
       get "/api/v1/users", headers: headers, params: params2
-      expect(response).to be_successful
-
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+      
       body = JSON.parse(response.body, symbolize_names:true)
-      expect(body).to have_key(:data)
-      expect(body[:data]).to have_key(:id)
-      expect(body[:data]).to have_key(:type)
-      expect(body[:data]).to have_key(:attributes)
-      expect(body[:data][:id]).to eq(nil)
-      expect(body[:data][:type]).to eq("user")
 
-      attributes = body[:data][:attributes]
-
-      expect(attributes).to be_a Hash
-      expect(attributes.size).to eq(3) #
-      expect(attributes).to have_key(:user)
-      expect(attributes).to have_key(:nearest_stations)
-      expect(attributes).to have_key(:favorite_stations)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Unauthorized")
     end
 
     it "Token is empty or not sent", :vcr do
@@ -99,21 +79,16 @@ RSpec.describe "Show user information" do
                             state: 'Virginia',
                             zip_code: '23452',
                             password: 'verysecurepassword')
-      token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
-      params2 = {token: token2}
+      params2 = {token: ""}
 
       get "/api/v1/users", headers: headers, params: params2
-      expect(response).to be_successful
-
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+      
       body = JSON.parse(response.body, symbolize_names:true)
-      expect(body).to have_key(:data)
-      expect(body[:data]).to have_key(:id)
-      expect(body[:data]).to have_key(:type)
-      expect(body[:data]).to have_key(:attributes)
-      expect(body[:data][:id]).to eq(nil)
-      expect(body[:data][:type]).to eq("user")
 
-      attributes = body[:data][:attributes]
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Unauthorized")
     end
   end
 end
