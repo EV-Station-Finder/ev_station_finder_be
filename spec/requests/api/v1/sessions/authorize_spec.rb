@@ -52,7 +52,7 @@ RSpec.describe 'User authorization' do
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
-      expect(session_response[:errors]).to eq("Not logged in")
+      expect(session_response[:errors]).to eq("Unauthorized")
     end
     
     it 'Does not authorize user because token is empty string' do
@@ -62,7 +62,7 @@ RSpec.describe 'User authorization' do
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
-      expect(session_response[:errors]).to eq("Not logged in")
+      expect(session_response[:errors]).to eq("Unauthorized")
     end
     
     it 'Does not authorize user because token is not provided' do
@@ -71,7 +71,7 @@ RSpec.describe 'User authorization' do
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
-      expect(session_response[:errors]).to eq("Not logged in")
+      expect(session_response[:errors]).to eq("Unauthorized")
     end
   end
 end
