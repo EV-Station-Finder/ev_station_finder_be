@@ -48,7 +48,7 @@ RSpec.describe "See a user's favorite stations" do
   end
 
   describe "Sad Path/Edge Cases" do
-    xit "User saved address has no nearby stations" do #TODO add VCR back , :vcr
+    it "User does not have favorite stations", :vcr do
       user2 =  User.create!(first_name: 'Bill',
                             last_name: 'Seldon',
                             email: 'email1@example.com',
@@ -57,122 +57,47 @@ RSpec.describe "See a user's favorite stations" do
                             state: "Bolivia",
                             zip_code: '11111',
                             password: 'verysecurepassword')
-      user_station3 = UserStation.create!(user_id: user2.id, station_id: station1.id)
-      user_station4 = UserStation.create!(user_id: user2.id, station_id: station2.id)
       token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
       params2 = {token: token2}
-      get "/api/v1/dashboard", headers: headers, params: params2
-      expect(response).to be_successful
+      get "/api/v1/favorite_stations", headers: headers, params: params2
+
 
       body = JSON.parse(response.body, symbolize_names:true)
-      expect(body).to have_key(:data)
-      expect(body[:data]).to have_key(:id)
-      expect(body[:data]).to have_key(:type)
-      expect(body[:data]).to have_key(:attributes)
-      expect(body[:data][:id]).to eq(nil)
-      expect(body[:data][:type]).to eq("dashboard")
 
-      attributes = body[:data][:attributes]
-
-      expect(attributes).to be_a Hash
-      expect(attributes.size).to eq(3) #
-      expect(attributes).to have_key(:user)
-      expect(attributes).to have_key(:nearest_stations)
-      expect(attributes).to have_key(:favorite_stations)
-
-      user_object = attributes[:user]
-
-      expect(user_object).to be_a Hash
-      expect(user_object).to have_key(:token)
-      expect(user_object).to have_key(:email)
-      expect(user_object).to have_key(:street_address)
-      expect(user_object).to have_key(:city)
-      expect(user_object).to have_key(:state)
-      expect(user_object).to have_key(:zip_code)
-
-      nearest_stations = attributes[:nearest_stations]
-
-      expect(nearest_stations).to eq([])
-
-      favorite_stations = attributes[:favorite_stations]
-
-      expect(favorite_stations).to be_an Array
-      expect(favorite_stations.size).to eq(2)
-      expect(favorite_stations[0]).to have_key(:name)
-      expect(favorite_stations[0]).to have_key(:api_id)
-      expect(favorite_stations[0]).to have_key(:distance)
-      expect(favorite_stations[0]).to have_key(:status)
-      expect(favorite_stations[0]).to have_key(:hours)
-      expect(favorite_stations[0]).to have_key(:ev_network)
-      expect(favorite_stations[0]).to have_key(:street_address)
-      expect(favorite_stations[0]).to have_key(:city)
-      expect(favorite_stations[0]).to have_key(:state)
-      expect(favorite_stations[0]).to have_key(:zip_code)
+      expect(response).to_not be_successful
+      expect(response.status).to eq(422)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("User has no favorite stations")
     end
 
-    xit "User saved address is not valid", :vcr do
-      user2 =  User.create!(first_name: 'Bill',
-                            last_name: 'Seldon',
-                            email: 'email2@example.com',
-                            street_address: "hfjflkdn",
-                            city: "sdhddkndfk",
-                            state: "fnnflasjm",
-                            zip_code: 'nkfnkdnfsd',
-                            password: 'verysecurepassword')
-      user_station3 = UserStation.create!(user_id: user2.id, station_id: station1.id)
-      user_station4 = UserStation.create!(user_id: user2.id, station_id: station2.id)
-      token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
+    it "User does not exist", :vcr do
+
+      token2 = JWT.encode({user_id: 899}, 'hasselhoff', 'HS256')
       params2 = {token: token2}
-      get "/api/v1/dashboard", headers: headers, params: params2
-      expect(response).to be_successful
+      get "/api/v1/favorite_stations", headers: headers, params: params2
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
 
       body = JSON.parse(response.body, symbolize_names:true)
-      expect(body).to have_key(:data)
-      expect(body[:data]).to have_key(:id)
-      expect(body[:data]).to have_key(:type)
-      expect(body[:data]).to have_key(:attributes)
-      expect(body[:data][:id]).to eq(nil)
-      expect(body[:data][:type]).to eq("dashboard")
 
-      attributes = body[:data][:attributes]
-
-      expect(attributes).to be_a Hash
-      expect(attributes.size).to eq(3) #
-      expect(attributes).to have_key(:user)
-      expect(attributes).to have_key(:nearest_stations)
-      expect(attributes).to have_key(:favorite_stations)
-
-      user_object = attributes[:user]
-
-      expect(user_object).to be_a Hash
-      expect(user_object).to have_key(:token)
-      expect(user_object).to have_key(:email)
-      expect(user_object).to have_key(:street_address)
-      expect(user_object).to have_key(:city)
-      expect(user_object).to have_key(:state)
-      expect(user_object).to have_key(:zip_code)
-
-      nearest_stations = attributes[:nearest_stations]
-
-      expect(nearest_stations).to eq([])
-
-      favorite_stations = attributes[:favorite_stations]
-
-      expect(favorite_stations).to be_an Array
-      expect(favorite_stations.size).to eq(2)
-      expect(favorite_stations[0]).to have_key(:name)
-      expect(favorite_stations[0]).to have_key(:api_id)
-      expect(favorite_stations[0]).to have_key(:distance)
-      expect(favorite_stations[0]).to have_key(:status)
-      expect(favorite_stations[0]).to have_key(:hours)
-      expect(favorite_stations[0]).to have_key(:ev_network)
-      expect(favorite_stations[0]).to have_key(:street_address)
-      expect(favorite_stations[0]).to have_key(:city)
-      expect(favorite_stations[0]).to have_key(:state)
-      expect(favorite_stations[0]).to have_key(:zip_code)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("User not found")
     end
 
-    xit "User does not have favorite stations", :vcr do
+    it "Token is invalid", :vcr do
+      altered_token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY"
+      params2 = {token: altered_token}
+      get "/api/v1/favorite_stations", headers: headers, params: params2
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+
+      body = JSON.parse(response.body, symbolize_names:true)
+
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Unauthorized")
+    end
+
+    it "Token is empty or not sent", :vcr do
       user2 =  User.create!(first_name: 'Bill',
                             last_name: 'Seldon',
                             email: 'email3@example.com',
@@ -181,56 +106,16 @@ RSpec.describe "See a user's favorite stations" do
                             state: 'Virginia',
                             zip_code: '23452',
                             password: 'verysecurepassword')
-      token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
-      params2 = {token: token2}
+      params2 = {token: ""}
 
-      get "/api/v1/dashboard", headers: headers, params: params2
-      expect(response).to be_successful
+      get "/api/v1/favorite_stations", headers: headers, params: params2
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
 
       body = JSON.parse(response.body, symbolize_names:true)
-      expect(body).to have_key(:data)
-      expect(body[:data]).to have_key(:id)
-      expect(body[:data]).to have_key(:type)
-      expect(body[:data]).to have_key(:attributes)
-      expect(body[:data][:id]).to eq(nil)
-      expect(body[:data][:type]).to eq("dashboard")
 
-      attributes = body[:data][:attributes]
-
-      expect(attributes).to be_a Hash
-      expect(attributes.size).to eq(3) #
-      expect(attributes).to have_key(:user)
-      expect(attributes).to have_key(:nearest_stations)
-      expect(attributes).to have_key(:favorite_stations)
-
-      user_object = attributes[:user]
-
-      expect(user_object).to be_a Hash
-      expect(user_object).to have_key(:token)
-      expect(user_object).to have_key(:email)
-      expect(user_object).to have_key(:street_address)
-      expect(user_object).to have_key(:city)
-      expect(user_object).to have_key(:state)
-      expect(user_object).to have_key(:zip_code)
-
-      nearest_stations = attributes[:nearest_stations]
-
-      expect(nearest_stations).to be_an Array
-      expect(nearest_stations.size).to eq(3)
-      expect(nearest_stations[0]).to have_key(:name)
-      expect(nearest_stations[0]).to have_key(:api_id)
-      expect(nearest_stations[0]).to have_key(:distance)
-      expect(nearest_stations[0]).to have_key(:status)
-      expect(nearest_stations[0]).to have_key(:hours)
-      expect(nearest_stations[0]).to have_key(:ev_network)
-      expect(nearest_stations[0]).to have_key(:street_address)
-      expect(nearest_stations[0]).to have_key(:city)
-      expect(nearest_stations[0]).to have_key(:state)
-      expect(nearest_stations[0]).to have_key(:zip_code)
-
-      favorite_stations = attributes[:favorite_stations]
-
-      expect(favorite_stations).to eq([])
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Unauthorized")
     end
   end
 end
