@@ -14,14 +14,15 @@ RSpec.describe "Search for stations by location" do
       expect(body[:data][0]).to have_key(:attributes)
       expect(body[:data][0][:id]).to eq(nil)
       expect(body[:data][0][:type]).to be_a String
-      expect(body[:data][0][:type]).to eq("stations")
+      expect(body[:data][0][:type]).to eq("station")
       expect(body[:data][0][:attributes]).to be_a Hash
       expect(body[:data].size).to be < 21
 
       station_1 = body[:data][0][:attributes]
 
       expect(station_1).to be_a Hash
-      expect(station_1.size).to eq(9)
+      expect(station_1.size).to eq(10)
+      expect(station_1).to have_key(:api_id)
       expect(station_1).to have_key(:name)
       expect(station_1).to have_key(:distance)
       expect(station_1).to have_key(:status)
