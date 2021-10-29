@@ -95,11 +95,11 @@ Coming soon
 ## Endpoints
 1. Search for stations
 
-  `GET /api/v1/stations?location=denver,co`
+  `GET /api/v1/stations`
 
   ```json
   request_body = {
-                  "location": "Denver,CO"
+                  "location": "Los Angeles, CA"
                  }
   ```
   **`location` parameter can accept the following:**
@@ -110,41 +110,43 @@ Coming soon
       - city, state
 
   <details>
-  <summary>Example response </summary>
+  <summary>Example response (returns up to 20 stations)</summary>
 
   ```json
-    {
-      "data": {
+  {
+  "data": [
+      {
           "id": null,
-          "type": "stations",
-          "attributes":[{
-                          "name": "Denver Supercharger",
-                          "api_id": 152087,
-                          "distance": 1.7,
-                          "status": "Open",
-                          "hours": "9-5, M-F",
-                          "ev_network": "Tesla",
-                          "street_address": "1456 Smith Road",
-                          "city": "Denver",
-                          "state": "CO",
-                          "zip_code": "80289"
-                        },
-                        {
-                          "name": "Golden Supercharger",
-                          "api_id": 252687,
-                          "distance": 8.7,
-                          "status": "Open",
-                          "hours": "9-5, M-F",
-                          "ev_network": "Tesla",
-                          "street_address": "1456 Smith Road",
-                          "city": "Golden",
-                          "state": "CO",
-                          "zip_code": "80401"
-                        },
-                        ....up to 20 results
-                      ]
-              }
-    }
+          "type": "station",
+          "attributes": {
+              "name": "Aiso Street Parking Garage",
+              "distance": 0.17641,
+              "status": "Available",
+              "hours": "24 hours daily",
+              "ev_network": "eVgo Network",
+              "street_address": "101 Judge John Aiso St",
+              "city": "Los Angeles",
+              "state": "CA",
+              "zip_code": "90012"
+          }
+      },
+      {
+          "id": null,
+          "type": "station",
+          "attributes": {
+              "name": "Nissan of Downtown Los Angeles",
+              "distance": 2.07951,
+              "status": "Available",
+              "hours": "Dealership business hours",
+              "ev_network": "Non-Networked",
+              "street_address": "635 W Washington Blvd",
+              "city": "Los Angeles",
+              "state": "CA",
+              "zip_code": "90015"
+          }
+      }
+  ]
+}
   ```
   </details>
 
