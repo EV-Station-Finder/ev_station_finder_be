@@ -1,5 +1,15 @@
 # EV Station Finder - Backend
-Description/general information coming soon
+API constructed by aggregating two external APIs to provide charging station information including 10-hour forecast.
+This app serves data from [NREL](https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/) and [OpenWeather](https://openweathermap.org/api) external APIs.
+The current endpoints facilitate access for a guest and registered user.
+A user can search nearby stations using various search queries including:
+  - zip code
+  - full address
+  - city and state
+A registered user can save stations to their account.
+Backend also allows user registration, authentication, and registration.
+
+**Note:** This app is currently being worked on and it is also deployed on [Heroku](https://ev-station-finder-backend.herokuapp.com/api/v1/stations?location=los%20angeles,ca).
 
 ### Authors
 - Alexander Brueck | [GitHub](https://github.com/brueck1988) | [LinkedIn](https://www.linkedin.com/in/brueck1988/)
@@ -8,6 +18,7 @@ Description/general information coming soon
 
 ## Table of Contents
   - [Built With](#built-with)
+  - [Front-End Repo](#front-end-repo)
   - [Getting Started](#getting-started)
   - [Usage](#usage)
   - [Running the tests](#running-the-tests)
@@ -17,23 +28,29 @@ Description/general information coming soon
   - [Contributing](#contributing)
   - [Acknowledgements](#acknowledgements)
 
-## Learning Goals
-Coming soon
-
 ## Built With
 
 * [Ruby on Rails](https://rubyonrails.org)
+* [CircleCI](https://github.com/circleci/circleci-docs)
+* [Heroku](https://www.heroku.com)
 
 ### Gems Used
 - [Faraday](https://github.com/lostisland/faraday)
 - [Bcrypt](https://github.com/bcrypt-ruby/bcrypt-ruby)
 - [Figaro](https://github.com/laserlemon/figaro)
-- [Travis](https://github.com/travis-ci/travis.rb)
+- [Fast JSON API](https://github.com/Netflix/fast_jsonapi)
+- [JWT](https://github.com/jwt/ruby-jwt)
+- [RSpec](https://github.com/rspec/rspec-rails)
 - [Webmock](https://github.com/bblimke/webmock)
 - [VCR](https://github.com/vcr/vcr)
 
 
 <!-- ## Service Oriented Architecture Diagram -->
+## Front-End Repo
+
+- You can find more information about the application at [GitHub Repo](https://github.com/EV-Station-Finder/ev_station_finder_fe)
+- Visit the deployed application on [Heroku](https://ev-station-finder-frontend.herokuapp.com/stations?location=denver,co)
+
 ### Prerequisites
 
 To run this application you will need
@@ -97,7 +114,7 @@ Coming soon
 
   `GET /api/v1/stations`
 
-  ```json
+  ```
   request_body = {
                   "location": "Los Angeles, CA"
                  }
@@ -112,7 +129,7 @@ Coming soon
   <details>
   <summary>Example response (returns up to 20 stations)</summary>
 
-  ```json
+  ```
   {
     "data": [
       {
@@ -156,7 +173,7 @@ Coming soon
 2. Station View Page
 
     `GET /api/v1/stations/:id`
-    ```json
+    ```
     request_body = {
                     "api_id": 152283
                    }
@@ -165,42 +182,42 @@ Coming soon
     <details>
     <summary>Example response </summary>
 
-  ```json
-    { 
-     "data": {
-        "id": null,
-        "type": "stations", 
-        "attributes": {
-                       "name": "Some Charger", 
-                       "api_id": 152087,
-                       "status": "Temporary Closed",
-                       "hours": "24hrs",
-                       "ev_connector_types": ["CHADEMO", "J1772COMBO"],
-                       "ev_network": "Tesla",
-                       "street_address": "123 Street Ave",
-                       "city": "Denver",
-                       "state": "CO",
-                       "zip_code": "12345",
-                       "accepted_payments": [
-                                              "apple_pay", "credit"
-                                             ],
-                       "hourly_weather": [{
-                                            "time": "1300",
-                                            "temperature": "75",
-                                            "conditions": "Sunny",
-                                            "icon": "10d"
-                                          }] # ... 10 hour forecasts
-      }
-     }
-    }
-  ```
-  </details>
+      ```
+        { 
+         "data": {
+            "id": null,
+            "type": "stations", 
+            "attributes": {
+                           "name": "Some Charger", 
+                           "api_id": 152087,
+                           "status": "Temporary Closed",
+                           "hours": "24hrs",
+                           "ev_connector_types": ["CHADEMO", "J1772COMBO"],
+                           "ev_network": "Tesla",
+                           "street_address": "123 Street Ave",
+                           "city": "Denver",
+                           "state": "CO",
+                           "zip_code": "12345",
+                           "accepted_payments": [
+                                                  "apple_pay", "credit"
+                                                 ],
+                           "hourly_weather": [{
+                                                "time": "1300",
+                                                "temperature": "75",
+                                                "conditions": "Sunny",
+                                                "icon": "10d"
+                                              }] # ... 10 hour forecasts
+          }
+         }
+        }
+      ```
+    </details>
 
 
 3. Users
 
     a. `POST /api/v1/users`
-      ```json
+      ```
       request_body = {
                       "first_name": "Hari",
                       "last_name": "Seldon",
@@ -215,7 +232,7 @@ Coming soon
       <details>
       <summary>Example response </summary>
 
-      ```json
+      ```
         { 
          "data": {
             "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
@@ -226,7 +243,7 @@ Coming soon
       </details>
 
     b. `POST /api/v1/sessions`
-      ```json
+      ```
       request_body = {
                       "email": "hari.seldon@foundation.com",
                       "password": "verysecurepassword"
@@ -235,7 +252,7 @@ Coming soon
       <details>
       <summary>Example response </summary>
 
-      ```json
+      ```
         { 
           "data": {
               "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
@@ -246,7 +263,7 @@ Coming soon
       </details>
 
     c. `GET /api/v1/authorize`
-      ```json
+      ```
       request_body = {
                       "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"
                      }
@@ -255,7 +272,7 @@ Coming soon
       <details>
       <summary>Example response </summary>
 
-      ```json
+      ```
         { 
           "data": {
               "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
@@ -268,7 +285,7 @@ Coming soon
     d. `GET /api/v1/users`
       - Returns user information with the token instead of the ID, and without the user's password digest
 
-      ```json
+      ```
       request_body = {
                       "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
                      }
@@ -277,7 +294,7 @@ Coming soon
       <details>
       <summary>Example response </summary>
 
-      ```json
+      ```
         { 
          "data": {
             "id": null,
@@ -298,7 +315,7 @@ Coming soon
 
     e. `GET /api/v1/favorite_stations`
       - Returns user's favorite stations
-      ```json
+      ```
             request_body = {
                             "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
                            }
