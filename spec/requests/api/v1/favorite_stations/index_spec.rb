@@ -19,7 +19,7 @@ RSpec.describe "See a user's favorite stations" do
   let(:params1) { {token: token1} }
 
   describe "Happy Path" do
-    it "Endpoint exists and has attributes" do #TODO , :vcr
+    it "Endpoint exists and has attributes", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params1
 
       expect(response).to be_successful
