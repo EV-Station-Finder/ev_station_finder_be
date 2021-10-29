@@ -1,5 +1,15 @@
 # EV Station Finder - Backend
-Description/general information coming soon
+API constructed by aggregating two external APIs to provide charging station information including 10-hour forecast.
+This app serves data from [NREL](https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/) and [OpenWeather](https://openweathermap.org/api) external APIs.
+The current endpoints facilitate access for a guest and registered user.
+A user can search nearby stations using various search queries including:
+  - zip code
+  - full address
+  - city and state
+A registered user can save stations to their account.
+Backend also allows user registration, authentication, and registration.
+
+**Note:** This app is currently being worked on and it is also deployed on [Heroku](https://ev-station-finder-backend.herokuapp.com/api/v1/stations?location=los%20angeles,ca).
 
 ### Authors
 - Alexander Brueck | [GitHub](https://github.com/brueck1988) | [LinkedIn](https://www.linkedin.com/in/brueck1988/)
@@ -8,6 +18,7 @@ Description/general information coming soon
 
 ## Table of Contents
   - [Built With](#built-with)
+  - [Front-End Repo](#front-end-repo)
   - [Getting Started](#getting-started)
   - [Usage](#usage)
   - [Running the tests](#running-the-tests)
@@ -17,9 +28,6 @@ Description/general information coming soon
   - [Contributing](#contributing)
   - [Acknowledgements](#acknowledgements)
 
-## Learning Goals
-Coming soon
-
 ## Built With
 
 * [Ruby on Rails](https://rubyonrails.org)
@@ -28,12 +36,19 @@ Coming soon
 - [Faraday](https://github.com/lostisland/faraday)
 - [Bcrypt](https://github.com/bcrypt-ruby/bcrypt-ruby)
 - [Figaro](https://github.com/laserlemon/figaro)
-- [Travis](https://github.com/travis-ci/travis.rb)
+- [CircleCI](https://github.com/circleci/circleci-docs)
+- [Fast JSON API](https://github.com/Netflix/fast_jsonapi)
+- [JWT](https://github.com/jwt/ruby-jwt)
 - [Webmock](https://github.com/bblimke/webmock)
 - [VCR](https://github.com/vcr/vcr)
 
 
 <!-- ## Service Oriented Architecture Diagram -->
+## Front-End Repo
+
+- You can find more information about the application at [GitHub Repo](https://github.com/EV-Station-Finder/ev_station_finder_fe)
+- Visit the deployed application on [Heroku](https://ev-station-finder-frontend.herokuapp.com/stations?location=denver,co)
+
 ### Prerequisites
 
 To run this application you will need
