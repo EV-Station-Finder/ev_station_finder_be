@@ -103,5 +103,11 @@ RSpec.describe StationBasic do
       new_station = StationBasic.new(@incoming_hash)
       expect(new_station.status).to eq("Status Unavailable")
     end
+
+    it "Account for when ev_network is nil/null" do
+      @incoming_hash[:ev_network] = nil
+      new_station = StationBasic.new(@incoming_hash)
+      expect(new_station.ev_network).to eq("Non-Networked")
+    end
   end
 end

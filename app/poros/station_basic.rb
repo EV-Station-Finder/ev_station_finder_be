@@ -18,7 +18,7 @@ class StationBasic
     @distance       = station_data[:distance]
     @status         = status_finder(station_data[:status_code])
     @hours          = station_data[:access_days_time]
-    @ev_network     = station_data[:ev_network]
+    @ev_network     = set_ev_network(station_data[:ev_network])
     @street_address = station_data[:street_address]
     @city           = station_data[:city]
     @state          = station_data[:state]
