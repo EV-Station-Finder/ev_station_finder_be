@@ -92,7 +92,7 @@ RSpec.describe 'User creation' do
       user_response = JSON.parse(response.body, symbolize_names: true)
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
-      expect(user_response[:errors]).to eq("Validation failed: Password can't be blank, Password can't be blank")
+      expect(user_response[:errors]).to eq("Validation failed: Password can't be blank")
       expect(new_user).to be_nil
     end
 

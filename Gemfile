@@ -41,7 +41,7 @@ gem 'rack-cors'
 group :development, :test do
   gem 'pry'
   gem 'shoulda-matchers'
-  # gem "factory_bot_rails"
+  gem "factory_bot_rails"
   # gem 'travis'
 end
 
@@ -50,12 +50,12 @@ group :development do
   gem 'rubocop-rails'
   gem 'web-console', '>= 3.3.0'
   # gem 'graphiql-rails'
-  # gem 'faker'
+  gem 'faker'
 end
 
 group :test do
   gem 'capybara'
-  # gem 'launchy'
+  gem 'launchy'
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'vcr'

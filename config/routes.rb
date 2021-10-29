@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :stations, only: [:index, :show]
       resources :users, only: [:create]
+      resource :users, only: [:show]
       resources :sessions, only: [:create]
+      resources :dashboard, only: [:index]
+      resources :favorite_stations, only: [:index]
       get '/authorize', to: 'sessions#authorize'
     end
   end

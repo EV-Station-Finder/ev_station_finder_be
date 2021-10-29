@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Station do
+RSpec.describe StationBasic do
   describe "Station Object" do
     before:each do
       @incoming_hash = {:access_code=>"public",
@@ -70,9 +70,9 @@ RSpec.describe Station do
     end
 
     it "exists, has attributes, and Status is available" do
-      new_station = Station.new(@incoming_hash)
+      new_station = StationBasic.new(@incoming_hash)
 
-      expect(new_station).to be_a Station
+      expect(new_station).to be_a StationBasic
       expect(new_station.id).to be_nil
       expect(new_station.api_id).to eq(192187)
       expect(new_station.name).to eq("Ideal Market Capitol Hill")
@@ -88,20 +88,26 @@ RSpec.describe Station do
 
     it "Status is 'Coming Soon'" do
       @incoming_hash[:status_code] = "P"
-      new_station = Station.new(@incoming_hash)
+      new_station = StationBasic.new(@incoming_hash)
       expect(new_station.status).to eq("Coming Soon")
     end
 
     it "Status is 'Temporarily Closed'" do
       @incoming_hash[:status_code] = "T"
-      new_station = Station.new(@incoming_hash)
+      new_station = StationBasic.new(@incoming_hash)
       expect(new_station.status).to eq("Temporarily Closed")
     end
 
     it "Status is 'Status Unavailable'" do
       @incoming_hash[:status_code] = ""
-      new_station = Station.new(@incoming_hash)
+      new_station = StationBasic.new(@incoming_hash)
       expect(new_station.status).to eq("Status Unavailable")
+    end
+
+    it "Account for when ev_network is nil/null" do
+      @incoming_hash[:ev_network] = nil
+      new_station = StationBasic.new(@incoming_hash)
+      expect(new_station.ev_network).to eq("Non-Networked")
     end
   end
 end

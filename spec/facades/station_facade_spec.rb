@@ -7,7 +7,7 @@ RSpec.describe StationFacade do
       result = StationFacade.get_stations(location)
 
       expect(result).to be_a(Array)
-      expect(result[0]).to be_a Station
+      expect(result[0]).to be_a StationBasic
     end
   end
 

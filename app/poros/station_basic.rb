@@ -1,4 +1,4 @@
-class Station
+class StationBasic
   attr_reader :id,
               :api_id,
               :name,
@@ -18,7 +18,7 @@ class Station
     @distance       = station_data[:distance]
     @status         = status_finder(station_data[:status_code])
     @hours          = station_data[:access_days_time]
-    @ev_network     = station_data[:ev_network]
+    @ev_network     = set_ev_network(station_data[:ev_network])
     @street_address = station_data[:street_address]
     @city           = station_data[:city]
     @state          = station_data[:state]
@@ -36,6 +36,14 @@ class Station
       end
     else
       'Status Unavailable'
+    end
+  end
+# TODO: also used in station details, consider refactoring to DRY up code
+  def set_ev_network(ev_network)
+    if ev_network.nil?
+      "Non-Networked"
+    else
+      ev_network
     end
   end
 end

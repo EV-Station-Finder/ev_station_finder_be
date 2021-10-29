@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_26_162408) do
+ActiveRecord::Schema.define(version: 2021_10_22_211845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stations", force: :cascade do |t|
+    t.string "api_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_stations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "station_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["station_id"], name: "index_user_stations_on_station_id"
+    t.index ["user_id"], name: "index_user_stations_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -26,4 +41,6 @@ ActiveRecord::Schema.define(version: 2021_09_26_162408) do
     t.string "password_digest"
   end
 
+  add_foreign_key "user_stations", "stations"
+  add_foreign_key "user_stations", "users"
 end

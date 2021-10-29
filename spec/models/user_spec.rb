@@ -13,4 +13,9 @@ RSpec.describe User do
     it { should validate_presence_of(:zip_code) }
     it { should validate_presence_of(:password) }
   end
+
+  describe 'relationships' do 
+    it { should have_many :user_stations }
+    it { should have_many(:stations).through(:user_stations) }
+  end 
 end
