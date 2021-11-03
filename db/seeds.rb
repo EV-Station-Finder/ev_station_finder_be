@@ -5,9 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-include FactoryBot::Syntax::Methods
 
-User.destroy_all
+# User.destroy_all
 
-bill = create(:user, first_name: 'Bill', last_name: 'Seldon', email: 'email@example.com', street_address: 'st', city: 'c', state: 's', zip_code: 'zc', password: 'verysecurepassword')
+bill = User.create(first_name: 'Bill', last_name: 'Seldon', email: 'email@example.com', street_address: 'st', city: 'c', state: 's', zip_code: 'zc', password: 'verysecurepassword')
+elon = User.create(first_name: 'Elon', last_name: 'Musk', email: 'electric@example.com', street_address: '123 Street', city: 'Los Angeles', state: 'CA', zip_code: '90210', password: 'ultrasecurepassword')
 
+station1 = Station.create(api_id:"152087")
+station2 = Station.create(api_id:"152070")
+
+favorite_station1 = UserStation.create(user_id: bill.id, station_id: station1.id)
+favorite_station2 = UserStation.create(user_id: bill.id, station_id: station2.id)
