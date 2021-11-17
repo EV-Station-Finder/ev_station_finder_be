@@ -256,7 +256,7 @@ Coming soon
         { 
           "data": {
               "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
-              "type": "user", 
+              "type": "user" 
          }
         }
       ```
@@ -276,7 +276,7 @@ Coming soon
         { 
           "data": {
               "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
-              "type": "user", 
+              "type": "user" 
          }
         }
       ```
@@ -360,6 +360,27 @@ Coming soon
               }
             }
         ]
+      }
+      ```
+      </details>
+
+    f. `POST /api/v1/favorite_stations`
+      - Saves a station for the logged in user's account
+      ```
+            request_body = {
+                            "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
+                            "api_id": 152283
+                           }
+      ```
+
+      <details>
+      <summary>Example response </summary>
+
+      ```
+      {
+        "data": {
+            "type": "favorite_station"
+          } 
       }
       ```
       </details>
