@@ -33,6 +33,7 @@ gem 'figaro'
 gem 'rake'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+# gem 'execjs'
 # gem 'graphql'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
