@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'User creation' do
   before do
-    @user_params = {
+    let(:user_params) { {
                     "first_name": "Hari",
                     "last_name": "Seldon",
                     "email": "hari.seldon@foundation.com",
@@ -11,9 +11,9 @@ RSpec.describe 'User creation' do
                     "state": "UN",
                     "zip_code": "12345",
                     "password": "verysecurepassword"
-                   }
-    @headers = {CONTENT_TYPE: "application/json",
-               ACCEPT: "application/json"}
+                      } }
+    let(:headers) { {CONTENT_TYPE: "application/json",
+               ACCEPT: "application/json"} }
   end
 
   describe 'Happy Path' do
