@@ -17,8 +17,24 @@ RSpec.describe "See a user's favorite stations" do
   let(:headers) { {CONTENT_TYPE: "application/json",
                   ACCEPT: "application/json"} }
   let(:params1) { {token: token1} }
+  # SAD PATH/EDGE CASES:
+  let!(:user2) { User.create(first_name: 'Bill',
+                        last_name: 'Seldon',
+                        email: 'email1@example.com',
+                        street_address: "1712 Av Circunvalacion",
+                        city: "Cochabamba",
+                        state: "Bolivia",
+                        zip_code: '11111',
+                        password: 'verysecurepassword') }
+  let(:token2) { JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256') }
+  let(:params2) { {token: token2} }
+  let(:token3) { JWT.encode({user_id: 899}, 'hasselhoff', 'HS256') } # user does not exist
+  let(:params3) { {token: token3} }
+  let(:altered_token) { "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY" }
+  let(:params4) { {token: altered_token} }
+  let(:params5) { {token: ""} }
 
-  describe "Happy Path" do
+  describe "HAPPY PATH" do
     it "Endpoint exists and has attributes", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params1
 
@@ -47,21 +63,9 @@ RSpec.describe "See a user's favorite stations" do
     end
   end
 
-  describe "Sad Path/Edge Cases" do
+  describe "SAD PATH" do
     it "User does not have favorite stations", :vcr do
-      user2 =  User.create!(first_name: 'Bill',
-                            last_name: 'Seldon',
-                            email: 'email1@example.com',
-                            street_address: "1712 Av Circunvalacion",
-                            city: "Cochabamba",
-                            state: "Bolivia",
-                            zip_code: '11111',
-                            password: 'verysecurepassword')
-      token2 = JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256')
-      params2 = {token: token2}
       get "/api/v1/favorite_stations", headers: headers, params: params2
-
-
       body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response).to_not be_successful
@@ -71,49 +75,31 @@ RSpec.describe "See a user's favorite stations" do
     end
 
     it "User does not exist", :vcr do
-
-      token2 = JWT.encode({user_id: 899}, 'hasselhoff', 'HS256')
-      params2 = {token: token2}
-      get "/api/v1/favorite_stations", headers: headers, params: params2
-      expect(response).to_not be_successful
-      expect(response.status).to eq(404)
-
+      get "/api/v1/favorite_stations", headers: headers, params: params3
       body = JSON.parse(response.body, symbolize_names:true)
 
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
       expect(body).to have_key(:errors)
       expect(body[:errors]).to eq("User not found")
     end
 
     it "Token is invalid", :vcr do
-      altered_token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY"
-      params2 = {token: altered_token}
-      get "/api/v1/favorite_stations", headers: headers, params: params2
-      expect(response).to_not be_successful
-      expect(response.status).to eq(401)
-
+      get "/api/v1/favorite_stations", headers: headers, params: params4
       body = JSON.parse(response.body, symbolize_names:true)
 
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
       expect(body).to have_key(:errors)
       expect(body[:errors]).to eq("Unauthorized")
     end
 
     it "Token is empty or not sent", :vcr do
-      user2 =  User.create!(first_name: 'Bill',
-                            last_name: 'Seldon',
-                            email: 'email3@example.com',
-                            street_address: '2954 Virginia Beach Boulevard',
-                            city: 'Virginia Beach',
-                            state: 'Virginia',
-                            zip_code: '23452',
-                            password: 'verysecurepassword')
-      params2 = {token: ""}
-
-      get "/api/v1/favorite_stations", headers: headers, params: params2
-      expect(response).to_not be_successful
-      expect(response.status).to eq(401)
-
+      get "/api/v1/favorite_stations", headers: headers, params: params5
       body = JSON.parse(response.body, symbolize_names:true)
 
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
       expect(body).to have_key(:errors)
       expect(body[:errors]).to eq("Unauthorized")
     end
