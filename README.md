@@ -314,7 +314,7 @@ This will render an index page with the results as a list of stations.
       
       
       
-  #### d. Destroy User 'PATCH /api/v1/users'
+  #### d. Destroy User 'DELETE /api/v1/users'
   - Deletes user and returns 204 HTTP Status
 
 
