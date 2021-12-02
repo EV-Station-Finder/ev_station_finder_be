@@ -7,6 +7,6 @@ class User < ApplicationRecord
   validates :zip_code, presence: true
   validates :password, presence: true
 
-  has_many :user_stations
+  has_many :user_stations, dependent: :destroy
   has_many :stations, through: :user_stations
 end
