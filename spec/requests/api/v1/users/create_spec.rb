@@ -12,7 +12,7 @@ RSpec.describe 'User creation' do
                     "password": "verysecurepassword"
                       } }
     let(:headers) { {CONTENT_TYPE: "application/json",
-               ACCEPT: "application/json"} }
+                     ACCEPT: "application/json"} }
 
 
   describe 'Happy Path' do
@@ -58,7 +58,6 @@ RSpec.describe 'User creation' do
     end
 
     it 'Cannot create new user if email is already registered in database' do
-
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
       user_params2 = {
                       "first_name": "Link",

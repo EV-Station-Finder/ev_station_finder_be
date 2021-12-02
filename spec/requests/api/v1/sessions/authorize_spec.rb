@@ -2,18 +2,18 @@ require 'rails_helper'
 
 RSpec.describe 'User authorization' do
     let(:registration_params) { { 
-                            "first_name": "Hari",
-                            "last_name": "Seldon",
-                            "email": "hari.seldon@foundation.com",
-                            "street_address": "123 Planet XYZ",
-                            "city": "Jupiter",
-                            "state": "UN",
-                            "zip_code": "12345",
-                            "password": "verysecurepassword"
-                           } }
+                                "first_name": "Hari",
+                                "last_name": "Seldon",
+                                "email": "hari.seldon@foundation.com",
+                                "street_address": "123 Planet XYZ",
+                                "city": "Jupiter",
+                                "state": "UN",
+                                "zip_code": "12345",
+                                "password": "verysecurepassword"
+                               } }
 
     let(:headers) { {CONTENT_TYPE: "application/json", 
-               ACCEPT: "application/json"} }
+                     ACCEPT: "application/json"} }
 
     let(:login_params) { { 
                       email: "hari.seldon@foundation.com",
