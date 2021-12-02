@@ -16,7 +16,7 @@ RSpec.describe 'User creation' do
 
 
   describe 'Happy Path' do
-    it 'Creates a new user' do
+    it 'Creates a new user' do #TODO , :vcr
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
       new_user = User.last
