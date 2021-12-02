@@ -14,6 +14,7 @@ RSpec.describe "Destroy user" do
   let(:headers) { {CONTENT_TYPE: "application/json",
                   ACCEPT: "application/json"} }
   let(:params1) { {token: token1} }
+  let(:body) { JSON.parse(response.body, symbolize_names:true) }
 
   describe "Happy Path" do
     it "User is destroyed", :vcr do
@@ -31,8 +32,6 @@ RSpec.describe "Destroy user" do
       
       delete "/api/v1/users", headers: headers, params: JSON.generate(params2)
       
-      body = JSON.parse(response.body, symbolize_names:true)
-      
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
       expect(body).to have_key(:errors)
@@ -44,8 +43,6 @@ RSpec.describe "Destroy user" do
       params2 = {token: altered_token}
       
       delete "/api/v1/users", headers: headers, params: JSON.generate(params2)
-      
-      body = JSON.parse(response.body, symbolize_names:true)
       
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
@@ -65,8 +62,6 @@ RSpec.describe "Destroy user" do
       params2 = {token: ""}
 
       delete "/api/v1/users", headers: headers, params: JSON.generate(params2)
-      
-      body = JSON.parse(response.body, symbolize_names:true)
       
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
