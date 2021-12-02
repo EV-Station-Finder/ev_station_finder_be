@@ -53,7 +53,7 @@ RSpec.describe "Destroy user" do
       expect(body[:errors]).to eq("Unauthorized")
     end
 
-    xit "Token is empty or not sent", :vcr do
+    it "Token is empty or not sent", :vcr do
       user2 =  User.create!(first_name: 'Bill',
                             last_name: 'Seldon',
                             email: 'email3@example.com',
@@ -64,12 +64,12 @@ RSpec.describe "Destroy user" do
                             password: 'verysecurepassword')
       params2 = {token: ""}
 
-      get "/api/v1/users", headers: headers, params: params2
-      expect(response).to_not be_successful
-      expect(response.status).to eq(401)
+      delete "/api/v1/users", headers: headers, params: JSON.generate(params2)
       
       body = JSON.parse(response.body, symbolize_names:true)
-
+      
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
       expect(body).to have_key(:errors)
       expect(body[:errors]).to eq("Unauthorized")
     end
