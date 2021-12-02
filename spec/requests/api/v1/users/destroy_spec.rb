@@ -39,15 +39,16 @@ RSpec.describe "Destroy user" do
       expect(body[:errors]).to eq("User not found")
     end
 
-    xit "Token is invalid", :vcr do
+    it "Token is invalid", :vcr do
       altered_token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY"
       params2 = {token: altered_token}
-      get "/api/v1/users", headers: headers, params: params2
-      expect(response).to_not be_successful
-      expect(response.status).to eq(401)
+      
+      delete "/api/v1/users", headers: headers, params: JSON.generate(params2)
       
       body = JSON.parse(response.body, symbolize_names:true)
-
+      
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
       expect(body).to have_key(:errors)
       expect(body[:errors]).to eq("Unauthorized")
     end
