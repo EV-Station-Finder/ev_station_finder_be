@@ -218,7 +218,7 @@ This will render an index page with the results as a list of stations.
 <details>
 <summary> 2. Users (expand for details)</summary>
 
-    a. `POST /api/v1/users`
+  ####  a. Create User `POST /api/v1/users`
       ```
       request_body = {
                       "first_name": "Hari",
@@ -231,9 +231,8 @@ This will render an index page with the results as a list of stations.
                       "password": "verysecurepassword"
                      }
       ```
-      <details>
-      <summary>Example response </summary>
 
+      **Example response**
       ```
         { 
          "data": {
@@ -242,11 +241,11 @@ This will render an index page with the results as a list of stations.
          }
         }
       ```
-      </details>
+
       
 
 
-    b. `GET /api/v1/users`
+  #### b. Get User `GET /api/v1/users`
       - Returns user information with the token instead of the ID, and without the user's password digest
 
       ```
@@ -255,9 +254,7 @@ This will render an index page with the results as a list of stations.
                      }
       ```
 
-      <details>
-        <summary>Example response </summary>
-
+      **Example response**
         ```
           { 
            "data": {
@@ -275,7 +272,57 @@ This will render an index page with the results as a list of stations.
                         }
                       }
         ```
-      </details>
+
+      
+      
+      
+  #### c. Update User 'PATCH /api/v1/users'
+  - Updates user and returns updated user information
+  - Update all or partial user info (Request body will only contain the attributes that are to be updated)
+
+  ```
+  request_body = {
+                  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
+                  "first_name": "Hari",
+                  "last_name": "Seldon",
+                  "email": "hari.seldon@example.com",
+                  "street_address": "123 Planet ABC",
+                  "city": "Jupiter",
+                  "state": "UN",
+                  "zip_code": "12345"
+                 }
+  ```
+
+    **Example response**
+    ```
+      { 
+       "data": {
+          "id": null,
+          "type": "user", 
+          "attributes": {
+              "first_name": "Hari",
+              "last_name": "Seldon",
+              "email": "hari.seldon@example.com",
+              "street_address": "123 Planet ABC",
+              "city": "Jupiter",
+              "state": "UN",
+              "zip_code": "12345"
+                       }
+                    }
+                  }
+    ```
+      
+      
+      
+  #### d. Destroy User 'PATCH /api/v1/users'
+  - Deletes user and returns 204 HTTP Status
+
+
+  ```
+  request_body = {
+                  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
+                 }
+  ```
 </details>
 
 
@@ -289,18 +336,18 @@ This will render an index page with the results as a list of stations.
                       "password": "verysecurepassword"
                      }
       ```
-  <details>
-  <summary>Example response </summary>
+
+  **Example response**
 
   ```
     { 
       "data": {
-          "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
-          "type": "user" 
-     }
+               "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
+               "type": "user" 
+              }
     }
   ```
-  </details>
+
       
       
     
@@ -311,9 +358,7 @@ This will render an index page with the results as a list of stations.
                    }
     ```
 
-  <details>
-    <summary>Example response </summary>
-
+    **Example response**
     ```
       { 
         "data": {
@@ -322,7 +367,7 @@ This will render an index page with the results as a list of stations.
        }
       }
     ```
-  </details>
+
 
 </details>
 </details>
@@ -341,8 +386,7 @@ This will render an index page with the results as a list of stations.
                    }
     ```
 
-  <details>
-    <summary>Example response </summary>
+    **Example response**
 
     ```
     {
@@ -382,7 +426,6 @@ This will render an index page with the results as a list of stations.
       ]
     }
     ```
-  </details>
 
 
     b. `POST /api/v1/favorite_stations`
@@ -395,8 +438,7 @@ This will render an index page with the results as a list of stations.
                            }
       ```
 
-  <details>
-    <summary>Example response </summary>
+  **Example response**
 
     ```
     {
@@ -405,7 +447,6 @@ This will render an index page with the results as a list of stations.
         } 
     }
     ```
-  </details>
 </details>
 
 ## Contributing
