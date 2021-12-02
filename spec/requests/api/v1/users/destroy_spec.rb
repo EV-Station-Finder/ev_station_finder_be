@@ -16,7 +16,7 @@ RSpec.describe "Destroy user" do
   let(:params1) { {token: token1} }
 
   describe "Happy Path" do
-    it "User is destroyed" do #TODO , :vcr
+    it "User is destroyed", :vcr do
       delete "/api/v1/users", headers: headers, params: JSON.generate(params1)
 
       expect(response).to be_successful
@@ -25,16 +25,16 @@ RSpec.describe "Destroy user" do
   end
 
   describe "Sad Path/Edge Cases" do
-    xit "User does not exist", :vcr do
-    
+    it "User does not exist", :vcr do
       token2 = JWT.encode({user_id: 899}, 'hasselhoff', 'HS256')
       params2 = {token: token2}
-      get "/api/v1/users", headers: headers, params: params2
-      expect(response).to_not be_successful
-      expect(response.status).to eq(404)
+      
+      delete "/api/v1/users", headers: headers, params: JSON.generate(params2)
       
       body = JSON.parse(response.body, symbolize_names:true)
-
+      
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
       expect(body).to have_key(:errors)
       expect(body[:errors]).to eq("User not found")
     end
