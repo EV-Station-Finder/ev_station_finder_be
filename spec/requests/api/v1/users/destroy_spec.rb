@@ -15,13 +15,21 @@ RSpec.describe "Destroy user" do
                   ACCEPT: "application/json"} }
   let(:params1) { {token: token1} }
   let(:body) { JSON.parse(response.body, symbolize_names:true) }
+  
+  
+  let!(:station1) { Station.create!(api_id: "152087") }
+  let!(:station2) { Station.create!(api_id: "152070") }
+  let!(:user_station1) { UserStation.create!(user_id: user1.id, station_id: station1.id) }
+  let!(:user_station2) { UserStation.create!(user_id: user1.id, station_id: station2.id) }
 
   describe "Happy Path" do
-    it "User is destroyed", :vcr do
+    it "User and associated user stations are destroyed", :vcr do
+      expect(UserStation.count).to eq(2)
       delete "/api/v1/users", headers: headers, params: JSON.generate(params1)
 
       expect(response).to be_successful
       expect(response).to have_http_status(204)
+      expect(UserStation.count).to eq(0)
     end
   end
 
