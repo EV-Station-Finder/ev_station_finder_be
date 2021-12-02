@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User session' do
-  before do
-    @registration_params = {
+    let(:registration_params) { {
                             "first_name": "Hari",
                             "last_name": "Seldon",
                             "email": "hari.seldon@foundation.com",
@@ -11,24 +10,24 @@ RSpec.describe 'User session' do
                             "state": "UN",
                             "zip_code": "12345",
                             "password": "verysecurepassword"
-                           }
+                           } }
 
-    @headers = {CONTENT_TYPE: "application/json",
-               ACCEPT: "application/json"}
+    let(:headers) { {CONTENT_TYPE: "application/json",
+                  ACCEPT: "application/json"} }
+                  
+    let(:new_user) { User.last }
 
-    post "/api/v1/users", headers: @headers, params: JSON.generate(@registration_params)
-
-    @new_user = User.last
-
-    @login_params = {
+    let(:login_params) { {
                       email: "hari.seldon@foundation.com",
                       password: "verysecurepassword"
-                    }
-  end
+                        } }
+    before do
+      post "/api/v1/users", headers: headers, params: JSON.generate(registration_params)
+    end
 
   describe 'Happy Path' do
     it 'Logs in a user' do
-      post "/api/v1/sessions", headers: @headers, params: JSON.generate(@login_params)
+      post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
       session_response = JSON.parse(response.body, symbolize_names: true)
 
@@ -44,9 +43,9 @@ RSpec.describe 'User session' do
 
   describe 'Sad Path' do
     it 'Cannot login user if user is not already registered in database' do
-      @login_params[:"email"] = "mouse@gmail.net"
+      login_params[:"email"] = "mouse@gmail.net"
 
-      post "/api/v1/sessions", headers: @headers, params: JSON.generate(@login_params)
+      post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
       session_response = JSON.parse(response.body, symbolize_names: true)
 
@@ -56,8 +55,8 @@ RSpec.describe 'User session' do
     end
 
     it 'Cannot login user if email is invalid' do
-      @login_params[:"email"] = "thisisaninvalidemail"
-      post "/api/v1/sessions", headers: @headers, params: JSON.generate(@login_params)
+      login_params[:"email"] = "thisisaninvalidemail"
+      post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
       session_response = JSON.parse(response.body, symbolize_names: true)
       expect(response).to_not be_successful
@@ -66,9 +65,9 @@ RSpec.describe 'User session' do
     end
 
     it 'Cannot login user if email is not provided' do
-      @login_params[:"email"] = ""
+      login_params[:"email"] = ""
 
-      post "/api/v1/sessions", headers: @headers, params: JSON.generate(@login_params)
+      post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
       session_response = JSON.parse(response.body, symbolize_names: true)
       expect(response).to_not be_successful
@@ -77,8 +76,8 @@ RSpec.describe 'User session' do
     end
 
     it 'Cannot login user with invalid password' do
-      @login_params[:"password"] = "mouse4lyfe"
-      post "/api/v1/sessions", headers: @headers, params: JSON.generate(@login_params)
+      login_params[:"password"] = "mouse4lyfe"
+      post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
       session_response = JSON.parse(response.body, symbolize_names: true)
       expect(response).to_not be_successful
@@ -87,8 +86,8 @@ RSpec.describe 'User session' do
     end
 
     it 'Cannot login user if password is not provided' do
-      @login_params[:"password"] = ""
-      post "/api/v1/sessions", headers: @headers, params: JSON.generate(@login_params)
+      login_params[:"password"] = ""
+      post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
       session_response = JSON.parse(response.body, symbolize_names: true)
       expect(response).to_not be_successful
