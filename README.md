@@ -110,25 +110,30 @@ RSpec testing suite is utilized for testing this application.
 Coming soon
 
 ## Endpoints
-1. Search for stations
 
-  `GET /api/v1/stations`
+<details>
+<summary> 1. Stations (expand for details)</summary>
+
+#### a. Search for stations `GET /api/v1/stations`
+
+This will render an index page with the results as a list of stations.
 
   ```
   request_body = {
                   "location": "Los Angeles, CA"
                  }
   ```
-  **`location` parameter can accept the following:**
-      - street, city, state, postal code
-      - street, city, state
-      - street, postal code
-      - postal code
-      - city, state
+  
+  *The `location` parameter can accept the following:*
 
-  <details>
-  <summary>Example response (returns up to 20 stations)</summary>
+  - street, city, state, postal code
+  - street, city, state
+  - street, postal code
+  - postal code
+  - city, state
 
+  **Example response (returns up to 20 stations)**
+  
   ```
   {
     "data": [
@@ -167,54 +172,51 @@ Coming soon
     ]
   }
   ```
-  </details>
-
-
-2. Station View Page
-
-    `GET /api/v1/stations/:id`
-    ```
-    request_body = {
-                    "api_id": 152283
-                   }
-    ```
-
-    <details>
-    <summary>Example response </summary>
+    
+  #### b. Station View Page `GET /api/v1/stations/:id`
 
       ```
-        { 
-         "data": {
-            "id": null,
-            "type": "stations", 
-            "attributes": {
-                           "name": "Some Charger", 
-                           "api_id": 152087,
-                           "status": "Temporary Closed",
-                           "hours": "24hrs",
-                           "ev_connector_types": ["CHADEMO", "J1772COMBO"],
-                           "ev_network": "Tesla",
-                           "street_address": "123 Street Ave",
-                           "city": "Denver",
-                           "state": "CO",
-                           "zip_code": "12345",
-                           "accepted_payments": [
-                                                  "apple_pay", "credit"
-                                                 ],
-                           "hourly_weather": [{
-                                                "time": "1300",
-                                                "temperature": "75",
-                                                "conditions": "Sunny",
-                                                "icon": "10d"
-                                              }] # ... 10 hour forecasts
+      request_body = {
+                      "api_id": 152283
+                     }
+      ```
+
+      **Example response**
+
+        ```
+          { 
+           "data": {
+              "id": null,
+              "type": "stations", 
+              "attributes": {
+                             "name": "Some Charger", 
+                             "api_id": 152087,
+                             "status": "Temporary Closed",
+                             "hours": "24hrs",
+                             "ev_connector_types": ["CHADEMO", "J1772COMBO"],
+                             "ev_network": "Tesla",
+                             "street_address": "123 Street Ave",
+                             "city": "Denver",
+                             "state": "CO",
+                             "zip_code": "12345",
+                             "accepted_payments": [
+                                                    "apple_pay", "credit"
+                                                   ],
+                             "hourly_weather": [{
+                                                  "time": "1300",
+                                                  "temperature": "75",
+                                                  "conditions": "Sunny",
+                                                  "icon": "10d"
+                                                }] # ... 10 hour forecasts
+            }
+           }
           }
-         }
-        }
-      ```
-    </details>
+        ```
+</details>
 
 
-3. Users
+<details>
+<summary> 2. Users (expand for details)</summary>
 
     a. `POST /api/v1/users`
       ```
@@ -241,48 +243,10 @@ Coming soon
         }
       ```
       </details>
+      
 
-    b. `POST /api/v1/sessions`
-      ```
-      request_body = {
-                      "email": "hari.seldon@foundation.com",
-                      "password": "verysecurepassword"
-                     }
-      ```
-      <details>
-      <summary>Example response </summary>
 
-      ```
-        { 
-          "data": {
-              "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
-              "type": "user" 
-         }
-        }
-      ```
-      </details>
-
-    c. `GET /api/v1/authorize`
-      ```
-      request_body = {
-                      "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"
-                     }
-      ```
-
-      <details>
-      <summary>Example response </summary>
-
-      ```
-        { 
-          "data": {
-              "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
-              "type": "user" 
-         }
-        }
-      ```
-      </details>
-
-    d. `GET /api/v1/users`
+    b. `GET /api/v1/users`
       - Returns user information with the token instead of the ID, and without the user's password digest
 
       ```
@@ -292,79 +256,137 @@ Coming soon
       ```
 
       <details>
-      <summary>Example response </summary>
+        <summary>Example response </summary>
 
-      ```
-        { 
-         "data": {
-            "id": null,
-            "type": "user", 
-            "attributes": {
-                "first_name": "Hari",
-                "last_name": "Seldon",
-                "email": "hari.seldon@foundation.com",
-                "street_address": "123 Planet XYZ",
-                "city": "Jupiter",
-                "state": "UN",
-                "zip_code": "12345"
-                         }
-                      }
-                    }
-      ```
-      </details>
-
-    e. `GET /api/v1/favorite_stations`
-      - Returns user's favorite stations
-      ```
-            request_body = {
-                            "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
+        ```
+          { 
+           "data": {
+              "id": null,
+              "type": "user", 
+              "attributes": {
+                  "first_name": "Hari",
+                  "last_name": "Seldon",
+                  "email": "hari.seldon@foundation.com",
+                  "street_address": "123 Planet XYZ",
+                  "city": "Jupiter",
+                  "state": "UN",
+                  "zip_code": "12345"
                            }
-      ```
-
-      <details>
-      <summary>Example response </summary>
-
-      ```
-      {
-        "data": [
-          {
-            "id": null,
-            "type": "station",
-            "attributes": {
-                "api_id": 57896,
-                "name": "Aiso Street Parking Garage",
-                "distance": 0.17641,
-                "status": "Available",
-                "hours": "24 hours daily",
-                "ev_network": "eVgo Network",
-                "street_address": "101 Judge John Aiso St",
-                "city": "Los Angeles",
-                "state": "CA",
-                "zip_code": "90012"
-              }
-          },
-          {
-            "id": null,
-            "type": "station",
-            "attributes": {
-                "api_id": 578908,
-                "name": "Nissan of Downtown Los Angeles",
-                "distance": 2.07951,
-                "status": "Available",
-                "hours": "Dealership business hours",
-                "ev_network": "Non-Networked",
-                "street_address": "635 W Washington Blvd",
-                "city": "Los Angeles",
-                "state": "CA",
-                "zip_code": "90015"
-              }
-            }
-        ]
-      }
-      ```
+                        }
+                      }
+        ```
       </details>
+</details>
 
-    f. `POST /api/v1/favorite_stations`
+
+
+<details>
+<summary> 3. Sessions (expand for details)</summary>
+  a. `POST /api/v1/sessions`
+      ```
+      request_body = {
+                      "email": "hari.seldon@foundation.com",
+                      "password": "verysecurepassword"
+                     }
+      ```
+  <details>
+  <summary>Example response </summary>
+
+  ```
+    { 
+      "data": {
+          "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
+          "type": "user" 
+     }
+    }
+  ```
+  </details>
+      
+      
+    
+  b. `GET /api/v1/authorize`
+    ```
+    request_body = {
+                    "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"
+                   }
+    ```
+
+  <details>
+    <summary>Example response </summary>
+
+    ```
+      { 
+        "data": {
+            "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
+            "type": "user" 
+       }
+      }
+    ```
+  </details>
+
+</details>
+</details>
+    
+
+
+<details>
+<summary> 4. Favorite Stations (expand for details)</summary>
+
+  a. `GET /api/v1/favorite_stations`
+
+    - Returns user's favorite stations
+    ```
+    request_body = {
+                    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
+                   }
+    ```
+
+  <details>
+    <summary>Example response </summary>
+
+    ```
+    {
+      "data": [
+        {
+          "id": null,
+          "type": "station",
+          "attributes": {
+              "api_id": 57896,
+              "name": "Aiso Street Parking Garage",
+              "distance": 0.17641,
+              "status": "Available",
+              "hours": "24 hours daily",
+              "ev_network": "eVgo Network",
+              "street_address": "101 Judge John Aiso St",
+              "city": "Los Angeles",
+              "state": "CA",
+              "zip_code": "90012"
+            }
+        },
+        {
+          "id": null,
+          "type": "station",
+          "attributes": {
+              "api_id": 578908,
+              "name": "Nissan of Downtown Los Angeles",
+              "distance": 2.07951,
+              "status": "Available",
+              "hours": "Dealership business hours",
+              "ev_network": "Non-Networked",
+              "street_address": "635 W Washington Blvd",
+              "city": "Los Angeles",
+              "state": "CA",
+              "zip_code": "90015"
+            }
+          }
+      ]
+    }
+    ```
+  </details>
+
+
+    b. `POST /api/v1/favorite_stations`
+
       - Saves a station for the logged in user's account
       ```
             request_body = {
@@ -373,17 +395,18 @@ Coming soon
                            }
       ```
 
-      <details>
-      <summary>Example response </summary>
+  <details>
+    <summary>Example response </summary>
 
-      ```
-      {
-        "data": {
-            "type": "favorite_station"
-          } 
-      }
-      ```
-      </details>
+    ```
+    {
+      "data": {
+          "type": "favorite_station"
+        } 
+    }
+    ```
+  </details>
+</details>
 
 ## Contributing
 
