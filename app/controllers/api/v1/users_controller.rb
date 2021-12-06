@@ -19,6 +19,15 @@ class Api::V1::UsersController < ApplicationController
     user_id = decoded_token[0]["user_id"]
     User.destroy(user_id)
   end
+  
+  def update
+    token = params[:token]
+    decoded_token = JWT.decode(token, 'hasselhoff', true, {algorithm: 'HS256'})
+    user_id = decoded_token[0]["user_id"]
+    user = User.find(user_id)
+    user.update!(user_params)
+    render json: UserSerializer.new(user)
+  end
 
   private
 
