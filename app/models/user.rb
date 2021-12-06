@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :city, presence: true
   validates :state, presence: true
   validates :zip_code, presence: true
-  validates :password, presence: true
+  validates :password, presence: true, on: :create
 
   has_many :user_stations, dependent: :destroy
   has_many :stations, through: :user_stations
