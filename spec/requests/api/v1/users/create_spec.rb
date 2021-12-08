@@ -16,7 +16,7 @@ RSpec.describe 'User creation' do
 
 
   describe 'Happy Path' do
-    it 'Creates a new user' do #TODO , :vcr
+    it 'Creates a new user', :vcr do
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
       new_user = User.last
@@ -31,7 +31,7 @@ RSpec.describe 'User creation' do
       expect(user_response[:data][:type]).to eq("user")
     end
 
-    it 'Creates a token for a new user' do
+    it 'Creates a token for a new user', :vcr do
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
       new_user_id = User.last.id
@@ -45,7 +45,7 @@ RSpec.describe 'User creation' do
   end
 
   describe 'Sad Path' do
-    it 'Cannot create new user if email is not provided' do
+    it 'Cannot create new user if email is not provided', :vcr do
       user_params[:"email"] = ""
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
@@ -57,7 +57,7 @@ RSpec.describe 'User creation' do
       expect(new_user).to be_nil
     end
 
-    it 'Cannot create new user if email is already registered in database' do
+    it 'Cannot create new user if email is already registered in database', :vcr do
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
       user_params2 = {
                       "first_name": "Link",
@@ -82,7 +82,7 @@ RSpec.describe 'User creation' do
       expect(user_response[:errors]).to eq("Validation failed: Email has already been taken")
     end
 
-    it 'Cannot create new user if password is not provided' do
+    it 'Cannot create new user if password is not provided', :vcr do
       user_params[:"password"] = ""
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
@@ -94,7 +94,7 @@ RSpec.describe 'User creation' do
       expect(new_user).to be_nil
     end
 
-    it 'Cannot create new user if street address is not provided' do
+    it 'Cannot create new user if street address is not provided', :vcr do
       user_params[:"street_address"] = ""
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
@@ -106,7 +106,7 @@ RSpec.describe 'User creation' do
       expect(new_user).to be_nil
     end
 
-    it 'Cannot create new user if city is not provided' do
+    it 'Cannot create new user if city is not provided', :vcr do
       user_params[:"city"] = ""
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
@@ -118,7 +118,7 @@ RSpec.describe 'User creation' do
       expect(new_user).to be_nil
     end
 
-    it 'Cannot create new user if state is not provided' do
+    it 'Cannot create new user if state is not provided', :vcr do
       user_params[:"state"] = ""
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
@@ -130,7 +130,7 @@ RSpec.describe 'User creation' do
       expect(new_user).to be_nil
     end
 
-    it 'Cannot create new user if zip code is not provided' do
+    it 'Cannot create new user if zip code is not provided', :vcr do
       user_params[:"zip_code"] = ""
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 

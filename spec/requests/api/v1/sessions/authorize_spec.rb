@@ -29,7 +29,7 @@ RSpec.describe 'User authorization' do
     end
 
   describe 'Happy Path' do
-    it 'Authorizes a user' do
+    it 'Authorizes a user', :vcr do
       token_params = {"token": token}
       get api_v1_authorize_path, headers: headers, params: token_params
       session_response = JSON.parse(response.body, symbolize_names: true)
@@ -45,7 +45,7 @@ RSpec.describe 'User authorization' do
   end
 
   describe 'Sad Path' do
-    it 'Does not authorize user because token is incorrect' do
+    it 'Does not authorize user because token is incorrect', :vcr do
       token_params = {"token": "wrJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNDV9.l_pdekbafUTPaz88h1qXUIw_Bg7PJPa_4Eu81AN7yfA"}
       get api_v1_authorize_path, headers: headers, params: token_params
       session_response = JSON.parse(response.body, symbolize_names: true)
@@ -55,7 +55,7 @@ RSpec.describe 'User authorization' do
       expect(session_response[:errors]).to eq("Unauthorized")
     end
     
-    it 'Does not authorize user because token is empty string' do
+    it 'Does not authorize user because token is empty string', :vcr do
       token_params = {"token": ""}
       get api_v1_authorize_path, headers: headers, params: token_params
       session_response = JSON.parse(response.body, symbolize_names: true)
@@ -65,7 +65,7 @@ RSpec.describe 'User authorization' do
       expect(session_response[:errors]).to eq("Unauthorized")
     end
     
-    it 'Does not authorize user because token is not provided' do
+    it 'Does not authorize user because token is not provided', :vcr do
       get api_v1_authorize_path
       session_response = JSON.parse(response.body, symbolize_names: true)
 
