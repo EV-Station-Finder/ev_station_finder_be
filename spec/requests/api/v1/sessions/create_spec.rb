@@ -26,7 +26,7 @@ RSpec.describe 'User session' do
     end
 
   describe 'Happy Path' do
-    it 'Logs in a user' do
+    it 'Logs in a user', :vcr do
       post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
       session_response = JSON.parse(response.body, symbolize_names: true)
@@ -42,7 +42,7 @@ RSpec.describe 'User session' do
   end
 
   describe 'Sad Path' do
-    it 'Cannot login user if user is not already registered in database' do
+    it 'Cannot login user if user is not already registered in database', :vcr do
       login_params[:"email"] = "mouse@gmail.net"
 
       post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
@@ -54,7 +54,7 @@ RSpec.describe 'User session' do
       expect(session_response[:errors]).to eq("Invalid parameters")
     end
 
-    it 'Cannot login user if email is invalid' do
+    it 'Cannot login user if email is invalid', :vcr do
       login_params[:"email"] = "thisisaninvalidemail"
       post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
@@ -64,7 +64,7 @@ RSpec.describe 'User session' do
       expect(session_response[:errors]).to eq("Invalid parameters")
     end
 
-    it 'Cannot login user if email is not provided' do
+    it 'Cannot login user if email is not provided', :vcr do
       login_params[:"email"] = ""
 
       post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
@@ -75,7 +75,7 @@ RSpec.describe 'User session' do
       expect(session_response[:errors]).to eq("Invalid parameters")
     end
 
-    it 'Cannot login user with invalid password' do
+    it 'Cannot login user with invalid password', :vcr do
       login_params[:"password"] = "mouse4lyfe"
       post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
@@ -85,7 +85,7 @@ RSpec.describe 'User session' do
       expect(session_response[:errors]).to eq("Invalid parameters")
     end
 
-    it 'Cannot login user if password is not provided' do
+    it 'Cannot login user if password is not provided', :vcr do
       login_params[:"password"] = ""
       post "/api/v1/sessions", headers: headers, params: JSON.generate(login_params)
 
