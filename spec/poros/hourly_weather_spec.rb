@@ -18,9 +18,9 @@ RSpec.describe StationBasic do
                        :wind_deg=>335,
                        :wind_gust=>7,
                        :weather=>[
-                                   {:id=>802, 
-                                     :main=>"Clouds", 
-                                     :description=>"scattered clouds", 
+                                   {:id=>802,
+                                     :main=>"Clouds",
+                                     :description=>"scattered clouds",
                                      :icon=>"03d"}
                                  ]
                          }
@@ -30,7 +30,7 @@ RSpec.describe StationBasic do
       hourly_weather = HourlyWeather.new(@incoming_hash)
 
       expect(hourly_weather).to be_a HourlyWeather
-      expect(hourly_weather.time).to eq("22:53") ## Time Zone Support
+      expect(hourly_weather.time).to eq("18:53 EDT")
       expect(hourly_weather.temperature).to eq(76.06)
       expect(hourly_weather.conditions).to eq("scattered clouds")
       expect(hourly_weather.icon).to eq("03d")
