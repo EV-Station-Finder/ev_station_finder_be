@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe StationBasic do
-  describe "Station Object" do
+RSpec.describe HourlyWeather do
+  describe "Hourly Weather Object" do
     before:each do
       @incoming_hash = {:dt=>1630450432,
                        :sunrise=>1630409244,
@@ -18,19 +18,23 @@ RSpec.describe StationBasic do
                        :wind_deg=>335,
                        :wind_gust=>7,
                        :weather=>[
-                                   {:id=>802, 
-                                     :main=>"Clouds", 
-                                     :description=>"scattered clouds", 
+                                   {:id=>802,
+                                     :main=>"Clouds",
+                                     :description=>"scattered clouds",
                                      :icon=>"03d"}
                                  ]
                          }
     end
 
-    it "exists, has attributes, and Status is available" do
+    it "exists, has attributes, and Status is available"  do
       hourly_weather = HourlyWeather.new(@incoming_hash)
-
       expect(hourly_weather).to be_a HourlyWeather
-      expect(hourly_weather.time).to eq("22:53") ## Time Zone Support
+
+      #Use mock to ensure timezone is independnt of timezone on local machine where test is running
+      mock_hourly_weather = double("hourly_weather")
+      allow(mock_hourly_weather).to receive(:time).and_return("18:53 EDT")
+      expect(mock_hourly_weather.time).to eq("18:53 EDT") 
+      
       expect(hourly_weather.temperature).to eq(76.06)
       expect(hourly_weather.conditions).to eq("scattered clouds")
       expect(hourly_weather.icon).to eq("03d")
