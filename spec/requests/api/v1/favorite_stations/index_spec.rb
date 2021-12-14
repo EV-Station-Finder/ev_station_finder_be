@@ -17,6 +17,7 @@ RSpec.describe "See a user's favorite stations" do
   let(:headers) { {CONTENT_TYPE: "application/json",
                   ACCEPT: "application/json"} }
   let(:params1) { {token: token1} }
+  let(:body) { JSON.parse(response.body, symbolize_names:true) }
   # SAD PATH/EDGE CASES:
   let!(:user2) { User.create(first_name: 'Bill',
                         last_name: 'Seldon',
@@ -40,7 +41,6 @@ RSpec.describe "See a user's favorite stations" do
 
       expect(response).to be_successful
 
-      body = JSON.parse(response.body, symbolize_names:true)
       expect(body).to have_key(:data)
       expect(body[:data]).to be_an Array
       expect((body[:data]).size).to eq(2)
@@ -66,7 +66,6 @@ RSpec.describe "See a user's favorite stations" do
   describe "SAD PATH" do
     it "User does not have favorite stations", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params2
-      body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response).to_not be_successful
       expect(response.status).to eq(422)
@@ -76,7 +75,6 @@ RSpec.describe "See a user's favorite stations" do
 
     it "User does not exist", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params3
-      body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
@@ -86,7 +84,6 @@ RSpec.describe "See a user's favorite stations" do
 
     it "Token is invalid", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params4
-      body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
@@ -96,7 +93,6 @@ RSpec.describe "See a user's favorite stations" do
 
     it "Token is empty or not sent", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params5
-      body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)

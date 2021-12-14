@@ -19,7 +19,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Fri, 03 Dec 2021 20:34:22 GMT
+      - Tue, 14 Dec 2021 01:51:50 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,7 +33,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '994'
+      - '993'
       X-Frame-Options:
       - ALLOWALL
       X-Xss-Protection:
@@ -55,9 +55,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - d7658d6e701be54a307e51e3a26eb69d
+      - 3c56727007021b1fed2dd0e1afad259a
       X-Runtime:
-      - '0.005662'
+      - '0.004581'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       - max-age=31536000; preload
@@ -70,5 +70,5 @@ http_interactions:
     body:
       encoding: ASCII-8BIT
       string: '{"errors":["Couldn''t find alternative fuel station with ID of 0"]}'
-  recorded_at: Fri, 03 Dec 2021 20:34:22 GMT
+  recorded_at: Tue, 14 Dec 2021 01:51:50 GMT
 recorded_with: VCR 6.0.0

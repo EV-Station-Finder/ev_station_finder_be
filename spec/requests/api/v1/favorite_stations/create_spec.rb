@@ -16,11 +16,11 @@ RSpec.describe 'Create a Favorite Station' do
                   ACCEPT: "application/json"} }
   let(:params1) { {token: token1, api_id: 198643} }
   let(:params2) { {token: token1, api_id: 152087} }
+  let(:body) { JSON.parse(response.body, symbolize_names:true) }
 
   describe 'HAPPY PATH' do
     it 'Endpoint can save station for user', :vcr do
       post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
-      body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response).to be_successful
       expect(body).to have_key(:data)
@@ -32,7 +32,6 @@ RSpec.describe 'Create a Favorite Station' do
 
     it 'favorite station is added successfully if station already exists in the database', :vcr do
       post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params2)
-      body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response).to be_successful
       expect(body).to have_key(:data)
@@ -49,7 +48,6 @@ RSpec.describe 'Create a Favorite Station' do
     it 'does not save a favorite station twice for the same user', :vcr do
       post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
       post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
-      body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response.status).to eq(422)
       expect(body).to have_key(:errors)
@@ -58,7 +56,6 @@ RSpec.describe 'Create a Favorite Station' do
 
     it 'validation fails if an api ID is not provided', :vcr do
       post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params_with_empty_api_id)
-      body = JSON.parse(response.body, symbolize_names:true)
 
       expect(response.status).to eq(400)
       expect(body).to have_key(:errors)
