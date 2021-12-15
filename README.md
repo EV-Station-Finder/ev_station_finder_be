@@ -107,7 +107,8 @@ RSpec testing suite is utilized for testing this application.
  <!-- See the [open issues]() for a list of proposed features (and known issues). -->
 
 ## DB Schema
-Coming soon
+![schema](https://i.ibb.co/tzS8Yfv/Screen-Shot-2021-07-21-at-6-19-28-PM.png)
+
 
 ## Endpoints
 
