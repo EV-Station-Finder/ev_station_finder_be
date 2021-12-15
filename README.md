@@ -461,7 +461,9 @@ This will render an index page with the results as a list of stations.
    5. Open a Pull Request
 
 ## Acknowledgements
-Coming soon
+- [NREL](https://developer.nrel.gov/signup/)  
+- [OpenWeather](https://home.openweathermap.org/users/sign_up)
+- [MapQuest](https://developer.mapquest.com/user/register)
 
 **************************************************************************
 ##### 2021/08/21
