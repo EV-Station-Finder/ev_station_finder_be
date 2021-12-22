@@ -15,15 +15,13 @@ class StationFacade
   end
 
   def self.get_station(id)
-    station_data = StationService.get_station(id)
-    # TODO: Consider refactoring
-    if station_data[:alt_fuel_station].present?
-      latitude = station_data[:alt_fuel_station][:latitude]
-      longitude = station_data[:alt_fuel_station][:longitude]
-      weather_data = WeatherService.get_hourly_weather(latitude, longitude)
-      StationDetails.new(station_data[:alt_fuel_station], weather_data)
+    station_response = StationService.get_station(id)
+    if station_response[:alt_fuel_station].present?
+      station_data = station_response[:alt_fuel_station]
+      weather_data = WeatherService.get_hourly_weather(station_data[:latitude], station_data[:longitude])
+      StationDetails.new(station_data, weather_data)
     else
-      station_data
+      station_response
     end
   end
 end

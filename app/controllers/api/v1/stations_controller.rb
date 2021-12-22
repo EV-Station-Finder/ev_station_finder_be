@@ -15,7 +15,6 @@ class Api::V1::StationsController < ApplicationController
     end
   end
 
-
 private
 
   def station_api_id
