@@ -107,7 +107,8 @@ RSpec testing suite is utilized for testing this application.
  <!-- See the [open issues]() for a list of proposed features (and known issues). -->
 
 ## DB Schema
-Coming soon
+![schema](https://i.ibb.co/tzS8Yfv/Screen-Shot-2021-07-21-at-6-19-28-PM.png)
+
 
 ## Endpoints
 
@@ -460,7 +461,9 @@ This will render an index page with the results as a list of stations.
    5. Open a Pull Request
 
 ## Acknowledgements
-Coming soon
+- [NREL](https://developer.nrel.gov/signup/)  
+- [OpenWeather](https://home.openweathermap.org/users/sign_up)
+- [MapQuest](https://developer.mapquest.com/user/register)
 
 **************************************************************************
 ##### 2021/08/21
