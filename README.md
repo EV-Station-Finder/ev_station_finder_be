@@ -101,9 +101,6 @@ RSpec testing suite is utilized for testing this application.
   bundle exec rspec
   ```
 
-## Roadmap
- Coming soon
-
  <!-- See the [open issues]() for a list of proposed features (and known issues). -->
 
 ## DB Schema
