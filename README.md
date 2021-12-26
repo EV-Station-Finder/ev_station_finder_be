@@ -185,7 +185,7 @@ This will render an index page with the results as a list of stations.
           { 
            "data": {
               "id": null,
-              "type": "stations", 
+              "type": "station", 
               "attributes": {
                              "name": "Some Charger", 
                              "api_id": 152087,
