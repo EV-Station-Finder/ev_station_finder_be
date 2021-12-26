@@ -1,6 +1,6 @@
 class Api::V1::FavoriteStationsController < ApplicationController
   def index
-    user_id = decode_token(params[:token])
+    user_id = decode_token(station_params[:token])
     user = User.find(user_id)
     if user.stations.empty?
       render json: { errors: "User has no favorite stations" }, status: :unprocessable_entity
@@ -11,7 +11,7 @@ class Api::V1::FavoriteStationsController < ApplicationController
   end
 
   def create
-    user_id = decode_token(params[:token])
+    user_id = decode_token(station_params[:token])
     user = User.find(user_id)
     station = Station.where(api_id: station_params[:api_id]).first_or_create!
     if UserStation.exists?(station_id: station.id, user_id: user.id)
