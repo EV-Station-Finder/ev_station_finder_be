@@ -8,11 +8,11 @@ class Api::V1::StationsController < ApplicationController
   end
 
   def show
-    station = StationFacade.get_station(station_api_id[:id)
+    station = StationFacade.get_station(station_api_id[:id])
     if station.class == StationDetails
       render json: StationSerializer.new(station)
     else
-      render json: { errors: "Cannot find station with ID #{station_api_id[:id}" }, status: :bad_request
+      render json: { errors: "Cannot find station with ID #{station_api_id[:id]}" }, status: :bad_request
     end
   end
 
