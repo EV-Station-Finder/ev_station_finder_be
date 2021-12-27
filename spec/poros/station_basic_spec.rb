@@ -69,45 +69,65 @@ RSpec.describe StationBasic do
                        :distance_km=>0.96125}
     end
 
-    it "exists, has attributes, and Status is available" do
-      new_station = StationBasic.new(@incoming_hash)
+    describe "recieves station data but no user_id" do
+      it "exists, has attributes, and Status is available" do
+        new_station = StationBasic.new(@incoming_hash)
 
-      expect(new_station).to be_a StationBasic
-      expect(new_station.id).to be_nil
-      expect(new_station.api_id).to eq(192187)
-      expect(new_station.name).to eq("Ideal Market Capitol Hill")
-      expect(new_station.distance).to eq(0.59729)
-      expect(new_station.status).to eq("Available")
-      expect(new_station.hours).to eq("24 hours daily")
-      expect(new_station.ev_network).to eq("eVgo Network")
-      expect(new_station.street_address).to eq("900 E 11th Ave")
-      expect(new_station.city).to eq("Denver")
-      expect(new_station.state).to eq("CO")
-      expect(new_station.zip_code).to eq("80218")
+        expect(new_station).to be_a StationBasic
+        expect(new_station.id).to be_nil
+        expect(new_station.api_id).to eq(192187)
+        expect(new_station.name).to eq("Ideal Market Capitol Hill")
+        expect(new_station.distance).to eq(0.59729)
+        expect(new_station.status).to eq("Available")
+        expect(new_station.hours).to eq("24 hours daily")
+        expect(new_station.ev_network).to eq("eVgo Network")
+        expect(new_station.street_address).to eq("900 E 11th Ave")
+        expect(new_station.city).to eq("Denver")
+        expect(new_station.state).to eq("CO")
+        expect(new_station.zip_code).to eq("80218")
+      end
+
+      it "Status is 'Coming Soon'" do
+        @incoming_hash[:status_code] = "P"
+        new_station = StationBasic.new(@incoming_hash)
+        expect(new_station.status).to eq("Coming Soon")
+      end
+
+      it "Status is 'Temporarily Closed'" do
+        @incoming_hash[:status_code] = "T"
+        new_station = StationBasic.new(@incoming_hash)
+        expect(new_station.status).to eq("Temporarily Closed")
+      end
+
+      it "Status is 'Status Unavailable'" do
+        @incoming_hash[:status_code] = ""
+        new_station = StationBasic.new(@incoming_hash)
+        expect(new_station.status).to eq("Status Unavailable")
+      end
+
+      it "Account for when ev_network is nil/null" do
+        @incoming_hash[:ev_network] = nil
+        new_station = StationBasic.new(@incoming_hash)
+        expect(new_station.ev_network).to eq("Non-Networked")
+      end
     end
 
-    it "Status is 'Coming Soon'" do
-      @incoming_hash[:status_code] = "P"
-      new_station = StationBasic.new(@incoming_hash)
-      expect(new_station.status).to eq("Coming Soon")
-    end
+    describe "recieves both station data and a user_id" do
+      xit "The station's api_id does not correspond with a station in the database" do
 
-    it "Status is 'Temporarily Closed'" do
-      @incoming_hash[:status_code] = "T"
-      new_station = StationBasic.new(@incoming_hash)
-      expect(new_station.status).to eq("Temporarily Closed")
-    end
+      end
+      
+      xit "The station's api_id corresponds with a station in the database, but not with a user_station" do
 
-    it "Status is 'Status Unavailable'" do
-      @incoming_hash[:status_code] = ""
-      new_station = StationBasic.new(@incoming_hash)
-      expect(new_station.status).to eq("Status Unavailable")
-    end
+      end
+      
+      xit "The station api_id and the user_id correspond with a user_station in the database" do
 
-    it "Account for when ev_network is nil/null" do
-      @incoming_hash[:ev_network] = nil
-      new_station = StationBasic.new(@incoming_hash)
-      expect(new_station.ev_network).to eq("Non-Networked")
+      end
+      
+      xit "The station's api_id corresponds with a station in the database, but the user_id does not correspond to a user" do
+        
+      end      
     end
   end
 end
