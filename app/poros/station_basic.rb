@@ -9,9 +9,10 @@ class StationBasic
               :street_address,
               :city,
               :state,
-              :zip_code
+              :zip_code,
+              :is_favorited
 
-  def initialize(station_data)
+  def initialize(station_data, user_id=nil)
     @id             = nil
     @api_id         = station_data[:id]
     @name           = station_data[:station_name]
@@ -23,8 +24,18 @@ class StationBasic
     @city           = station_data[:city]
     @state          = station_data[:state]
     @zip_code       = station_data[:zip]
+    @is_favorited   = station_favorited?(station_data[:id], user_id)
   end
 
+  def station_favorited?(station_api_id, user_id)
+    return false if user_id.nil? || (station = Station.find_by(api_id: station_api_id)).nil?
+    if station && user_station = UserStation.find_by(station_id: station.id, user_id: user_id)
+      user_station.favorited?
+    else
+      false
+    end
+  end
+  
   def status_finder(code)
     if code.present?
       if code == 'E'
