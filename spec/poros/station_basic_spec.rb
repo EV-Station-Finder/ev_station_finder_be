@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe StationBasic do
   describe "Station Object" do
-    let(:incoming_hash) { {:access_code=>"public",
+    let!(:incoming_hash) { {:access_code=>"public",
                            :access_days_time=>"24 hours daily",
                            :access_detail_code=>nil,
                            :cards_accepted=>nil,
@@ -96,6 +96,7 @@ RSpec.describe StationBasic do
         expect(new_station.city).to eq("Denver")
         expect(new_station.state).to eq("CO")
         expect(new_station.zip_code).to eq("80218")
+        expect(new_station.is_favorited).to eq(false)
       end
 
       it "Status is 'Coming Soon'" do
@@ -127,26 +128,96 @@ RSpec.describe StationBasic do
       it "The station's api_id does not correspond with a station in the database" do
         incoming_hash[:id] = 1
         new_station = StationBasic.new(incoming_hash, user1.id)
+        
+        expect(new_station).to be_a StationBasic
+        expect(new_station.id).to be_nil
+        expect(new_station.api_id).to eq(1)
+        expect(new_station.name).to eq("Ideal Market Capitol Hill")
+        expect(new_station.distance).to eq(0.59729)
+        expect(new_station.status).to eq("Available")
+        expect(new_station.hours).to eq("24 hours daily")
+        expect(new_station.ev_network).to eq("eVgo Network")
+        expect(new_station.street_address).to eq("900 E 11th Ave")
+        expect(new_station.city).to eq("Denver")
+        expect(new_station.state).to eq("CO")
+        expect(new_station.zip_code).to eq("80218")
+        expect(new_station.is_favorited).to eq(false)
       end
-      
-      xit "The station's api_id corresponds with a station in the database, but the user_id does not correspond with a user" do
-        incoming_hash[:id] = station1.id
+  
+      it "The station's api_id corresponds with a station in the database, but the user_id does not correspond with a user" do
+        incoming_hash[:id] = station1.api_id
         user_id = 999999
         new_station = StationBasic.new(incoming_hash, user_id)
+
+        expect(new_station).to be_a StationBasic
+        expect(new_station.id).to be_nil
+        expect(new_station.api_id).to eq(192187)
+        expect(new_station.name).to eq("Ideal Market Capitol Hill")
+        expect(new_station.distance).to eq(0.59729)
+        expect(new_station.status).to eq("Available")
+        expect(new_station.hours).to eq("24 hours daily")
+        expect(new_station.ev_network).to eq("eVgo Network")
+        expect(new_station.street_address).to eq("900 E 11th Ave")
+        expect(new_station.city).to eq("Denver")
+        expect(new_station.state).to eq("CO")
+        expect(new_station.zip_code).to eq("80218")
+        expect(new_station.is_favorited).to eq(false)
       end
       
-      xit "The station api_id and the user_id correspond with a user and station in the database, but there is no corresponding user_station" do
+      it "The station api_id and the user_id correspond with a user and station in the database, but there is no corresponding user_station" do
         new_station = StationBasic.new(incoming_hash, user1.id)
+        
+        expect(new_station).to be_a StationBasic
+        expect(new_station.id).to be_nil
+        expect(new_station.api_id).to eq(192187)
+        expect(new_station.name).to eq("Ideal Market Capitol Hill")
+        expect(new_station.distance).to eq(0.59729)
+        expect(new_station.status).to eq("Available")
+        expect(new_station.hours).to eq("24 hours daily")
+        expect(new_station.ev_network).to eq("eVgo Network")
+        expect(new_station.street_address).to eq("900 E 11th Ave")
+        expect(new_station.city).to eq("Denver")
+        expect(new_station.state).to eq("CO")
+        expect(new_station.zip_code).to eq("80218")
+        expect(new_station.is_favorited).to eq(false)
       end
       
-      xit "The station api_id and the user_id correspond with a user and station in the database, and there is a corresponding user_station" do
+      it "The station api_id and the user_id correspond with a user and station in the database, and there is a corresponding user_station" do
         user_station1 # Create user_station
         new_station = StationBasic.new(incoming_hash, user1.id)
+              
+        expect(new_station).to be_a StationBasic
+        expect(new_station.id).to be_nil
+        expect(new_station.api_id).to eq(192187)
+        expect(new_station.name).to eq("Ideal Market Capitol Hill")
+        expect(new_station.distance).to eq(0.59729)
+        expect(new_station.status).to eq("Available")
+        expect(new_station.hours).to eq("24 hours daily")
+        expect(new_station.ev_network).to eq("eVgo Network")
+        expect(new_station.street_address).to eq("900 E 11th Ave")
+        expect(new_station.city).to eq("Denver")
+        expect(new_station.state).to eq("CO")
+        expect(new_station.zip_code).to eq("80218")
+        expect(new_station.is_favorited).to eq(true)
       end
       
-      xit "The station api_id and the user_id correspond with a user and station in the database, and there is a corresponding user_station, but the user_station attribute 'favorited?' is set to false" do
-        user_station1.favorited = false # Create user_station and set favorited to false
+      it "The station api_id and the user_id correspond with a user and station in the database, and there is a corresponding user_station, but the user_station attribute 'favorited?' is set to false" do
+        user_station1.update!(favorited?: false) # Create user_station and set favorited to false
         new_station = StationBasic.new(incoming_hash, user1.id)
+        
+        expect(new_station).to be_a StationBasic
+        expect(new_station.id).to be_nil
+        expect(new_station.api_id).to eq(192187)
+        expect(new_station.name).to eq("Ideal Market Capitol Hill")
+        expect(new_station.distance).to eq(0.59729)
+        expect(new_station.status).to eq("Available")
+        expect(new_station.hours).to eq("24 hours daily")
+        expect(new_station.ev_network).to eq("eVgo Network")
+        expect(new_station.street_address).to eq("900 E 11th Ave")
+        expect(new_station.city).to eq("Denver")
+        expect(new_station.state).to eq("CO")
+        expect(new_station.zip_code).to eq("80218")
+        expect(new_station.is_favorited).to eq(false)
       end
     end
   end
