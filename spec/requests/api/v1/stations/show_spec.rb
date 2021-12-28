@@ -25,11 +25,13 @@ RSpec.describe "Display a single station" do
       expect(response_body[:data][:type]).to be_a String
       expect(response_body[:data][:attributes]).to be_a Hash
 
+      expect(new_station.size).to eq(12)
       expect(new_station).to have_key(:name)
       expect(new_station).to have_key(:api_id)
       expect(new_station).to have_key(:status)
       expect(new_station).to have_key(:hours)
       expect(new_station).to have_key(:ev_network)
+      expect(new_station).to have_key(:ev_connector_types)
       expect(new_station).to have_key(:street_address)
       expect(new_station).to have_key(:city)
       expect(new_station).to have_key(:state)
