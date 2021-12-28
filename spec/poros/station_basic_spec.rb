@@ -78,7 +78,6 @@ RSpec.describe StationBasic do
   let(:station1) { Station.create!(api_id: "192187") }
   let(:station2) { Station.create!(api_id: "152070") }
   let(:user_station1) { UserStation.create!(user_id: user1.id, station_id: station1.id) }
-  # let!(:user_station2) { UserStation.create!(user_id: user1.id, station_id: station2.id) }
 
     describe "recieves station data but no user_id" do
       it "exists, has attributes, and Status is available" do
