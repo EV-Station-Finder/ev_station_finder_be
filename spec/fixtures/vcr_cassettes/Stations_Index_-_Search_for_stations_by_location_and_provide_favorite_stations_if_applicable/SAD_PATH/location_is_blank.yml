@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=<CHARGER_KEY>&ev_charging_level=dc_fast&fuel_type=ELEC&location=oghkhhohoiho79808707
+    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=<CHARGER_KEY>&ev_charging_level=dc_fast&fuel_type=ELEC&location=%20
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: Unprocessable Entity
     headers:
       Date:
-      - Fri, 26 Nov 2021 18:06:58 GMT
+      - Sun, 26 Dec 2021 21:29:01 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -29,7 +29,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '993'
+      - '986'
       X-Frame-Options:
       - ALLOWALL
       X-Xss-Protection:
@@ -51,9 +51,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 8d48968ba68ed1570cf51bef0602c381
+      - 900bf3d20b43142983e7539ed778ca1e
       X-Runtime:
-      - '0.003431'
+      - '0.002567'
       Vary:
       - Origin
       Strict-Transport-Security:
@@ -67,6 +67,7 @@ http_interactions:
       - MISS
     body:
       encoding: UTF-8
-      string: '{"errors":["The ''location'' parameter could not be located."]}'
-  recorded_at: Fri, 26 Nov 2021 18:06:58 GMT
+      string: '{"errors":["Either the ''location'' or both ''latitude'' and ''longitude''
+        parameters must be given to."]}'
+  recorded_at: Sun, 26 Dec 2021 21:29:01 GMT
 recorded_with: VCR 6.0.0

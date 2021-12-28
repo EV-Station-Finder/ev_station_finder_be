@@ -118,10 +118,11 @@ This will render an index page with the results as a list of stations.
 
   ```
   request_body = {
-                  "location": "Los Angeles, CA"
+                  "location": "Los Angeles, CA",
+                  "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"      (optional)
                  }
   ```
-  
+
   *The `location` parameter can accept the following:*
 
   - street, city, state, postal code
@@ -130,8 +131,10 @@ This will render an index page with the results as a list of stations.
   - postal code
   - city, state
 
+  *The `token` parameter is optional and requires a valid user's token (logged in user):*
+
   **Example response (returns up to 20 stations)**
-  
+
   ```
   {
     "data": [
@@ -148,7 +151,8 @@ This will render an index page with the results as a list of stations.
             "street_address": "101 Judge John Aiso St",
             "city": "Los Angeles",
             "state": "CA",
-            "zip_code": "90012"
+            "zip_code": "90012",
+            "is_favorited": true
           }
       },
       {
@@ -164,18 +168,19 @@ This will render an index page with the results as a list of stations.
             "street_address": "635 W Washington Blvd",
             "city": "Los Angeles",
             "state": "CA",
-            "zip_code": "90015"
+            "zip_code": "90015",
+            "is_favorited": true
           }
         }
     ]
   }
   ```
-    
+
   #### b. Station View Page `GET /api/v1/stations/:id`
 
       ```
       request_body = {
-                      "api_id": 152283
+                      "token": 152283
                      }
       ```
 
@@ -185,7 +190,7 @@ This will render an index page with the results as a list of stations.
           { 
            "data": {
               "id": null,
-              "type": "stations", 
+              "type": "station", 
               "attributes": {
                              "name": "Some Charger", 
                              "api_id": 152087,
@@ -240,7 +245,7 @@ This will render an index page with the results as a list of stations.
         }
       ```
 
-      
+
 
 
   #### b. Get User `GET /api/v1/users`
@@ -271,9 +276,9 @@ This will render an index page with the results as a list of stations.
                       }
         ```
 
-      
-      
-      
+
+
+
   #### c. Update User 'PATCH /api/v1/users'
   - Updates user and returns updated user information
   - Update all or partial user info (Request body will only contain the attributes that are to be updated)
@@ -309,9 +314,9 @@ This will render an index page with the results as a list of stations.
                     }
                   }
     ```
-      
-      
-      
+
+
+
   #### d. Destroy User 'DELETE /api/v1/users'
   - Deletes user and returns 204 HTTP Status
 
@@ -346,9 +351,9 @@ This will render an index page with the results as a list of stations.
     }
   ```
 
-      
-      
-    
+
+
+
   b. `GET /api/v1/authorize`
     ```
     request_body = {
@@ -369,7 +374,7 @@ This will render an index page with the results as a list of stations.
 
 </details>
 </details>
-    
+
 
 
 <details>
