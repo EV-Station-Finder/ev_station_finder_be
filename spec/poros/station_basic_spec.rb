@@ -96,7 +96,7 @@ RSpec.describe StationBasic do
         expect(new_station.city).to eq("Denver")
         expect(new_station.state).to eq("CO")
         expect(new_station.zip_code).to eq("80218")
-        expect(new_station.is_favorited).to eq(false)
+        expect(new_station.is_favorited).to eq("User ID not provided")
       end
 
       it "Status is 'Coming Soon'" do

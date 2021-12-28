@@ -37,6 +37,11 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
                   
   let(:params1) { {location: location, token: token1} }
   let(:params2) { {location: location, token: token2} }
+  let(:token3) { JWT.encode({user_id: 899}, 'hasselhoff', 'HS256') } # user does not exist
+  let(:params3) { {token: token3} }
+  let(:altered_token) { "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY" }
+  let(:params4) { {token: altered_token} }
+  let(:params5) { {token: ""} }
 
   describe "HAPPY PATH" do
     it "GUEST USER - Endpoint exists and has attributes", :vcr do
@@ -157,6 +162,33 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
 
       expect(body).to have_key(:errors)
       expect(body[:errors]).to eq("A valid location must be provided")
+    end
+    
+    it "User does not exist", :vcr do
+      get "/api/v1/favorite_stations", headers: headers, params: params3
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("User not found")
+    end
+
+    it "Token is invalid", :vcr do
+      get "/api/v1/favorite_stations", headers: headers, params: params4
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Unauthorized")
+    end
+
+    it "Token is empty or not sent", :vcr do
+      get "/api/v1/favorite_stations", headers: headers, params: params5
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Unauthorized")
     end
   end
 end
