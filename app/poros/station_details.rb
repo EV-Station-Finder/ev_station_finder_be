@@ -29,20 +29,6 @@ class StationDetails
     @hourly_weather     = create_hourly_weather(weather_data)
   end
 
-  def status_finder(status_code)
-    if status_code.present?
-      if status_code == 'E'
-        'Available'
-      elsif status_code == 'P'
-        'Coming Soon'
-      elsif status_code == 'T'
-        'Temporarily Closed'
-      end
-    else
-      'Status Unavailable'
-    end
-  end
-
   def format_payments(station_data)
     accepted_payments = station_data[:cards_accepted]
     formatted_payments = []
@@ -82,6 +68,20 @@ class StationDetails
       current_and_hourly_weather << HourlyWeather.new(weather)
     end
     current_and_hourly_weather.first(10)
+  end
+  
+  def status_finder(status_code)
+    if status_code.present?
+      if status_code == 'E'
+        'Available'
+      elsif status_code == 'P'
+        'Coming Soon'
+      elsif status_code == 'T'
+        'Temporarily Closed'
+      end
+    else
+      'Status Unavailable'
+    end
   end
 
   def set_ev_network(ev_network)
