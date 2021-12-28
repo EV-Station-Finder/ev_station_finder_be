@@ -29,7 +29,7 @@ class StationBasic
   end
 
   def station_favorited?(station_api_id, user_id)
-    return "User ID not provided" if user_id.nil?
+    return "User token not provided" if user_id.nil?
     return false if (station = Station.find_by(api_id: station_api_id)).nil?
     if station && user_station = UserStation.find_by(station_id: station.id, user_id: user_id)
       user_station.favorited?
