@@ -118,7 +118,8 @@ This will render an index page with the results as a list of stations.
 
   ```
   request_body = {
-                  "location": "Los Angeles, CA"
+                  "location": "Los Angeles, CA",
+                  "token": "dhjdjdhdh"      (optional)
                  }
   ```
   
@@ -175,7 +176,7 @@ This will render an index page with the results as a list of stations.
 
       ```
       request_body = {
-                      "api_id": 152283
+                      "token": 152283
                      }
       ```
 
