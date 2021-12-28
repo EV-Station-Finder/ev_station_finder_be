@@ -1,6 +1,6 @@
 class Api::V1::StationsController < ApplicationController
   def index
-    user_id = decode_token(search_params[:token]) if search_params[:token] != nil
+    user_id = decode_token(search_params[:token]) if search_params[:token].present?
     stations = StationFacade.get_stations(search_params[:location], user_id)
     render json: StationsSerializer.new(stations)
     rescue NoMethodError
