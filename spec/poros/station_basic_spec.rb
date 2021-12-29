@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe StationBasic do
-    let!(:incoming_hash) { {:access_code=>"public",
+    let!(:station_hash) { {:access_code=>"public",
                            :access_days_time=>"24 hours daily",
                            :access_detail_code=>nil,
                            :cards_accepted=>nil,
@@ -81,9 +81,9 @@ RSpec.describe StationBasic do
   let(:user_station1) { UserStation.create!(user_id: user1.id, station_id: station1.id) }
   
   describe "Station Object" do
-    describe "recieves station data but no user_id" do
+    describe "receives station data but no user_id" do
       it "exists, has attributes, and Status is available" do
-        new_station = StationBasic.new(incoming_hash)
+        new_station = StationBasic.new(station_hash)
 
         expect(new_station).to be_a StationBasic
         expect(new_station.id).to be_nil
@@ -101,34 +101,34 @@ RSpec.describe StationBasic do
       end
 
       it "Status is 'Coming Soon'" do
-        incoming_hash[:status_code] = "P"
-        new_station = StationBasic.new(incoming_hash)
+        station_hash[:status_code] = "P"
+        new_station = StationBasic.new(station_hash)
         expect(new_station.status).to eq("Coming Soon")
       end
 
       it "Status is 'Temporarily Closed'" do
-        incoming_hash[:status_code] = "T"
-        new_station = StationBasic.new(incoming_hash)
+        station_hash[:status_code] = "T"
+        new_station = StationBasic.new(station_hash)
         expect(new_station.status).to eq("Temporarily Closed")
       end
 
       it "Status is 'Status Unavailable'" do
-        incoming_hash[:status_code] = ""
-        new_station = StationBasic.new(incoming_hash)
+        station_hash[:status_code] = ""
+        new_station = StationBasic.new(station_hash)
         expect(new_station.status).to eq("Status Unavailable")
       end
 
       it "Account for when ev_network is nil/null" do
-        incoming_hash[:ev_network] = nil
-        new_station = StationBasic.new(incoming_hash)
+        station_hash[:ev_network] = nil
+        new_station = StationBasic.new(station_hash)
         expect(new_station.ev_network).to eq("Non-Networked")
       end
     end
 
-    describe "recieves both station data and a user_id" do
+    describe "receives both station data and a user_id" do
       it "The station's api_id does not correspond with a station in the database" do
-        incoming_hash[:id] = 1
-        new_station = StationBasic.new(incoming_hash, user1.id)
+        station_hash[:id] = 1
+        new_station = StationBasic.new(station_hash, user1.id)
         
         expect(new_station).to be_a StationBasic
         expect(new_station.id).to be_nil
@@ -146,7 +146,7 @@ RSpec.describe StationBasic do
       end
       
       it "The station api_id and the user_id correspond with a user and station in the database, but there is no corresponding user_station" do
-        new_station = StationBasic.new(incoming_hash, user1.id)
+        new_station = StationBasic.new(station_hash, user1.id)
         
         expect(new_station).to be_a StationBasic
         expect(new_station.id).to be_nil
@@ -165,7 +165,7 @@ RSpec.describe StationBasic do
       
       it "The station api_id and the user_id correspond with a user and station in the database, and there is a corresponding user_station" do
         user_station1 # Create user_station
-        new_station = StationBasic.new(incoming_hash, user1.id)
+        new_station = StationBasic.new(station_hash, user1.id)
               
         expect(new_station).to be_a StationBasic
         expect(new_station.id).to be_nil
@@ -184,7 +184,7 @@ RSpec.describe StationBasic do
       
       it "The station api_id and the user_id correspond with a user and station in the database, and there is a corresponding user_station, but the user_station attribute 'favorited?' is set to false" do
         user_station1.update!(favorited?: false) # Create user_station and set favorited to false
-        new_station = StationBasic.new(incoming_hash, user1.id)
+        new_station = StationBasic.new(station_hash, user1.id)
         
         expect(new_station).to be_a StationBasic
         expect(new_station.id).to be_nil
