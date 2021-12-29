@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 22 Dec 2021 00:09:12 GMT
+      - Wed, 29 Dec 2021 19:41:56 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,7 +33,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '971'
+      - '997'
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -57,9 +57,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8dbad5172671060b40c4aa4944ea18c3
+      - 60dbed9bb97fcc02c9960081e3f49c57
       X-Runtime:
-      - '0.004923'
+      - '0.006743'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       - max-age=31536000; preload
@@ -73,7 +73,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: !binary |-
         eyJhbHRfZnVlbF9zdGF0aW9uIjp7ImFjY2Vzc19jb2RlIjoicHVibGljIiwiYWNjZXNzX2RheXNfdGltZSI6IjI0IGhvdXJzIGRhaWx5IiwiYWNjZXNzX2RldGFpbF9jb2RlIjoiQ1JFRElUX0NBUkRfQUxXQVlTIiwiY2FyZHNfYWNjZXB0ZWQiOiJBIEQgTSBWIiwiZGF0ZV9sYXN0X2NvbmZpcm1lZCI6IjIwMjEtMTEtMDQiLCJleHBlY3RlZF9kYXRlIjpudWxsLCJmdWVsX3R5cGVfY29kZSI6IkU4NSIsImdyb3Vwc193aXRoX2FjY2Vzc19jb2RlIjoiUHVibGljIC0gQ3JlZGl0IGNhcmQgYXQgYWxsIHRpbWVzIiwiaWQiOjE1MjA4Nywib3Blbl9kYXRlIjoiMjAyMC0wMS0wMyIsIm93bmVyX3R5cGVfY29kZSI6IlAiLCJzdGF0dXNfY29kZSI6IkUiLCJzdGF0aW9uX25hbWUiOiJDYXNleSdzIEdlbmVyYWwgU3RvcmUiLCJzdGF0aW9uX3Bob25lIjoiNzE1LTgzMi01MDI2IiwidXBkYXRlZF9hdCI6IjIwMjEtMTEtMDRUMTk6NDQ6MDVaIiwiZmFjaWxpdHlfdHlwZSI6IkNPTlZFTklFTkNFX1NUT1JFIiwiZ2VvY29kZV9zdGF0dXMiOiJHUFMiLCJsYXRpdHVkZSI6NDQuNzk1Mjk2ODY0NDQyMzgsImxvbmdpdHVkZSI6LTkxLjQ0ODExNTM0Mzk5NDEyLCJjaXR5IjoiQWx0b29uYSIsImludGVyc2VjdGlvbl9kaXJlY3Rpb25zIjpudWxsLCJwbHVzNCI6bnVsbCwic3RhdGUiOiJXSSIsInN0cmVldF9hZGRyZXNzIjoiMjM3NSBTdCBBbmRyZXdzIERyIiwiemlwIjoiNTQ3MjAiLCJjb3VudHJ5IjoiVVMiLCJiZF9ibGVuZHMiOm51bGwsImNuZ19kaXNwZW5zZXJfbnVtIjpudWxsLCJjbmdfZmlsbF90eXBlX2NvZGUiOm51bGwsImNuZ19wc2kiOm51bGwsImNuZ19yZW5ld2FibGVfc291cmNlIjpudWxsLCJjbmdfdG90YWxfY29tcHJlc3Npb24iOm51bGwsImNuZ190b3RhbF9zdG9yYWdlIjpudWxsLCJjbmdfdmVoaWNsZV9jbGFzcyI6bnVsbCwiZTg1X2JsZW5kZXJfcHVtcCI6ZmFsc2UsImU4NV9vdGhlcl9ldGhhbm9sX2JsZW5kcyI6bnVsbCwiZXZfY29ubmVjdG9yX3R5cGVzIjpudWxsLCJldl9kY19mYXN0X251bSI6bnVsbCwiZXZfbGV2ZWwxX2V2c2VfbnVtIjpudWxsLCJldl9sZXZlbDJfZXZzZV9udW0iOm51bGwsImV2X25ldHdvcmsiOm51bGwsImV2X25ldHdvcmtfd2ViIjpudWxsLCJldl9vdGhlcl9ldnNlIjpudWxsLCJldl9wcmljaW5nIjpudWxsLCJldl9yZW5ld2FibGVfc291cmNlIjpudWxsLCJoeV9pc19yZXRhaWwiOm51bGwsImh5X3ByZXNzdXJlcyI6bnVsbCwiaHlfc3RhbmRhcmRzIjpudWxsLCJoeV9zdGF0dXNfbGluayI6bnVsbCwibG5nX3JlbmV3YWJsZV9zb3VyY2UiOm51bGwsImxuZ192ZWhpY2xlX2NsYXNzIjpudWxsLCJscGdfcHJpbWFyeSI6bnVsbCwibHBnX25venpsZV90eXBlcyI6bnVsbCwibmdfZmlsbF90eXBlX2NvZGUiOm51bGwsIm5nX3BzaSI6bnVsbCwibmdfdmVoaWNsZV9jbGFzcyI6bnVsbCwiYWNjZXNzX2RheXNfdGltZV9mciI6bnVsbCwiaW50ZXJzZWN0aW9uX2RpcmVjdGlvbnNfZnIiOm51bGwsImJkX2JsZW5kc19mciI6bnVsbCwiZ3JvdXBzX3dpdGhfYWNjZXNzX2NvZGVfZnIiOiJQdWJsaWMgLSBDYXJ0ZSBkZSBjcsOpZGl0IGVuIHRvdXQgdGVtcHMiLCJldl9wcmljaW5nX2ZyIjpudWxsfX0=
-  recorded_at: Wed, 22 Dec 2021 00:09:12 GMT
+  recorded_at: Wed, 29 Dec 2021 19:41:56 GMT
 - request:
     method: get
     uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/152070.json?api_key=<CHARGER_KEY>
@@ -93,7 +93,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 22 Dec 2021 00:09:12 GMT
+      - Wed, 29 Dec 2021 19:41:56 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -107,7 +107,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '971'
+      - '997'
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -131,9 +131,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3b69c0d6b5b7f901dc99a769584146fa
+      - aa79b3f838d66a5e5558b7c402865e98
       X-Runtime:
-      - '0.004714'
+      - '0.005072'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       - max-age=31536000; preload
@@ -150,5 +150,5 @@ http_interactions:
         Cash D Debit M V","date_last_confirmed":"2021-08-04","expected_date":null,"fuel_type_code":"E85","groups_with_access_code":"Public","id":152070,"open_date":"2020-01-03","owner_type_code":"P","status_code":"E","station_name":"Murphy
         Express","station_phone":"505-294-8361","updated_at":"2021-08-04T13:11:32Z","facility_type":"GAS_STATION","geocode_status":"200-9","latitude":35.094311,"longitude":-106.550313,"city":"Albuquerque","intersection_directions":null,"plus4":null,"state":"NM","street_address":"1358
         Wyoming Blvd NE","zip":"87112","country":"US","bd_blends":null,"cng_dispenser_num":null,"cng_fill_type_code":null,"cng_psi":null,"cng_renewable_source":null,"cng_total_compression":null,"cng_total_storage":null,"cng_vehicle_class":null,"e85_blender_pump":false,"e85_other_ethanol_blends":null,"ev_connector_types":null,"ev_dc_fast_num":null,"ev_level1_evse_num":null,"ev_level2_evse_num":null,"ev_network":null,"ev_network_web":null,"ev_other_evse":null,"ev_pricing":null,"ev_renewable_source":null,"hy_is_retail":null,"hy_pressures":null,"hy_standards":null,"hy_status_link":null,"lng_renewable_source":null,"lng_vehicle_class":null,"lpg_primary":null,"lpg_nozzle_types":null,"ng_fill_type_code":null,"ng_psi":null,"ng_vehicle_class":null,"access_days_time_fr":null,"intersection_directions_fr":null,"bd_blends_fr":null,"groups_with_access_code_fr":"Public","ev_pricing_fr":null}}'
-  recorded_at: Wed, 22 Dec 2021 00:09:12 GMT
+  recorded_at: Wed, 29 Dec 2021 19:41:56 GMT
 recorded_with: VCR 6.0.0
