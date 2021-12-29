@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/8393939300393.json?api_key=<CHARGER_KEY>
+    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/0.json?api_key=<CHARGER_KEY>
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Wed, 29 Dec 2021 19:41:59 GMT
+      - Wed, 29 Dec 2021 20:33:37 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,7 +33,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '991'
+      - '961'
       X-Frame-Options:
       - ALLOWALL
       X-Xss-Protection:
@@ -55,9 +55,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - b3febfb3906ff2c30c923652acfa43e3
+      - 6890a3a613d962427e9f943284eb94aa
       X-Runtime:
-      - '0.011503'
+      - '0.006838'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       - max-age=31536000; preload
@@ -69,6 +69,6 @@ http_interactions:
       - MISS
     body:
       encoding: ASCII-8BIT
-      string: '{"errors":["Couldn''t find alternative fuel station with ID of 8393939300393"]}'
-  recorded_at: Wed, 29 Dec 2021 19:41:59 GMT
+      string: '{"errors":["Couldn''t find alternative fuel station with ID of 0"]}'
+  recorded_at: Wed, 29 Dec 2021 20:33:37 GMT
 recorded_with: VCR 6.0.0
