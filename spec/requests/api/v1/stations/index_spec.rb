@@ -59,19 +59,19 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
       expect(body[:data][0][:attributes]).to be_a Hash
       expect(body[:data].size).to be < 21
 
-      expect(body[:data][0][:attributes]).to be_a Hash
-      expect(body[:data][0][:attributes].size).to eq(11)
-      expect(body[:data][0][:attributes]).to have_key(:api_id)
-      expect(body[:data][0][:attributes]).to have_key(:name)
-      expect(body[:data][0][:attributes]).to have_key(:distance)
-      expect(body[:data][0][:attributes]).to have_key(:status)
-      expect(body[:data][0][:attributes]).to have_key(:hours)
-      expect(body[:data][0][:attributes]).to have_key(:ev_network)
-      expect(body[:data][0][:attributes]).to have_key(:street_address)
-      expect(body[:data][0][:attributes]).to have_key(:city)
-      expect(body[:data][0][:attributes]).to have_key(:state)
-      expect(body[:data][0][:attributes]).to have_key(:zip_code)
-      expect(body[:data][0][:attributes]).to have_key(:is_favorited)
+      expect(station1).to be_a Hash
+      expect(station1.size).to eq(11)
+      expect(station1).to have_key(:api_id)
+      expect(station1).to have_key(:name)
+      expect(station1).to have_key(:distance)
+      expect(station1).to have_key(:status)
+      expect(station1).to have_key(:hours)
+      expect(station1).to have_key(:ev_network)
+      expect(station1).to have_key(:street_address)
+      expect(station1).to have_key(:city)
+      expect(station1).to have_key(:state)
+      expect(station1).to have_key(:zip_code)
+      expect(station1).to have_key(:is_favorited)
     end
     
     it "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes" do # TODO ADD , :vcr
