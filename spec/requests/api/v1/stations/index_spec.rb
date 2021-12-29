@@ -182,7 +182,7 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
       expect(body[:errors]).to eq("Unauthorized")
     end
 
-    it "Token is empty or not sent", :vcr do
+    it "Token is empty", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params5
 
       expect(response).to_not be_successful
