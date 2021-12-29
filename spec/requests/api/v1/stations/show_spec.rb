@@ -88,7 +88,7 @@ RSpec.describe "Display a single station" do
     end
     
     
-    xit "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes" do # TODO ADD , :vcr
+    it "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes" do # TODO ADD , :vcr
       get "/api/v1/stations/#{api_id}", headers: headers, params: params1
 
       expect(response).to be_successful
@@ -128,7 +128,7 @@ RSpec.describe "Display a single station" do
 
     end
     
-    xit "LOGGED IN USER WITHOUT FAVORITE STATIONS - Endpoint exists and has attributes", :vcr do
+    it "LOGGED IN USER WITHOUT FAVORITE STATIONS - Endpoint exists and has attributes", :vcr do
       get "/api/v1/stations/#{api_id}", headers: headers, params: params2
 
       expect(response).to be_successful
