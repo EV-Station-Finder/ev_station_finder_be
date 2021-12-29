@@ -218,10 +218,11 @@ RSpec.describe "Station Show - Search for a station by api_id" do
     it "User token is empty", :vcr do
       get "/api/v1/stations/#{api_id}", headers: headers, params: params5
 
-      expect(response).to_not be_successful
-      expect(response.status).to eq(401)
-      expect(response_body).to have_key(:errors)
-      expect(response_body[:errors]).to eq("Unauthorized")
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      expect(response_body[:data][:attributes]).to be_a Hash
+      expect(new_station).to have_key(:is_favorited)
+      expect(new_station[:is_favorited]).to eq("User token not provided")
     end
   end
 end
