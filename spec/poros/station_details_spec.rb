@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe StationDetails do
   describe "StationDetails Object" do
-    before:each do
-      @station_hash = {:access_code=>"public",
+      let(:station_hash) { {:access_code=>"public",
                        :access_days_time=>"24 hours daily",
                        :access_detail_code=>nil,
                        :cards_accepted=>nil,
@@ -66,9 +65,9 @@ RSpec.describe StationDetails do
                        :ev_pricing_fr=>nil,
                        :ev_network_ids=>{:station=>["27102"], :posts=>["56139", "56141"]},
                        :distance=>0.59729,
-                       :distance_km=>0.96125}
+                       :distance_km=>0.96125} }
 
-      @weather_hash = {:lat=>44.7953,
+      let(:weather_hash) { {:lat=>44.7953,
                        :lon=>-91.4481,
                        :timezone=>"America/Chicago",
                        :timezone_offset=>-18000,
@@ -537,11 +536,11 @@ RSpec.describe StationDetails do
                           :wind_gust=>8.59,
                           :weather=>[{:id=>802, :main=>"Clouds", :description=>"scattered clouds", :icon=>"03n"}],
                           :pop=>0}
-      ]}
-    end
+      ]} }
+
 
     it "exists, has attributes, and Status is available" do
-      new_station = StationDetails.new(@station_hash, @weather_hash)
+      new_station = StationDetails.new(station_hash, weather_hash)
 
       expect(new_station).to be_a StationDetails
       expect(new_station.id).to be_nil
@@ -561,38 +560,38 @@ RSpec.describe StationDetails do
     end
 
     it "Status is 'Coming Soon'" do
-      @station_hash[:status_code] = "P"
-      new_station = StationDetails.new(@station_hash, @weather_hash)
+      station_hash[:status_code] = "P"
+      new_station = StationDetails.new(station_hash, weather_hash)
       expect(new_station.status).to eq("Coming Soon")
     end
 
     it "Status is 'Temporarily Closed'" do
-      @station_hash[:status_code] = "T"
-      new_station = StationDetails.new(@station_hash, @weather_hash)
+      station_hash[:status_code] = "T"
+      new_station = StationDetails.new(station_hash, weather_hash)
       expect(new_station.status).to eq("Temporarily Closed")
     end
 
     it "Status is 'Status Unavailable'" do
-      @station_hash[:status_code] = ""
-      new_station = StationDetails.new(@station_hash, @weather_hash)
+      station_hash[:status_code] = ""
+      new_station = StationDetails.new(station_hash, weather_hash)
       expect(new_station.status).to eq("Status Unavailable")
     end
 
     it "Payment Method if station is a Tesla Station'" do
-      @station_hash[:ev_network] = "Tesla"
-      new_station = StationDetails.new(@station_hash, @weather_hash)
+      station_hash[:ev_network] = "Tesla"
+      new_station = StationDetails.new(station_hash, weather_hash)
       expect(new_station.accepted_payments).to eq(["Tesla Payment Network"])
     end
 
     it "Only less popular payment methods available and Payment Info is Unavailable'" do
-      @station_hash[:cards_accepted] = "Checks CREDIT ARI"
-      new_station = StationDetails.new(@station_hash, @weather_hash)
+      station_hash[:cards_accepted] = "Checks CREDIT ARI"
+      new_station = StationDetails.new(station_hash, weather_hash)
       expect(new_station.accepted_payments).to eq(["Payment Information Unavailable"])
     end
 
     it "Account for when ev_network is nil/null" do
-      @station_hash[:ev_network] = nil
-      new_station = StationDetails.new(@station_hash, @weather_hash)
+      station_hash[:ev_network] = nil
+      new_station = StationDetails.new(station_hash, weather_hash)
       expect(new_station.ev_network).to eq("Non-Networked")
     end
   end
