@@ -211,7 +211,7 @@ This will render an index page with the results as a list of stations.
                                                   "temperature": "75",
                                                   "conditions": "Sunny",
                                                   "icon": "10d"
-                                                }] # ... 10 hour forecasts
+                                                },  ... 10 total hour forecasts ]
             }
            }
           }
