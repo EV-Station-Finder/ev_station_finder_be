@@ -14,12 +14,12 @@ class StationFacade
     end
   end
 
-  def self.get_station(id)
-    station_response = StationService.get_station(id)
+  def self.get_station(station_id, user_id=nil)
+    station_response = StationService.get_station(station_id)
     if station_response[:alt_fuel_station].present?
       station_data = station_response[:alt_fuel_station]
       weather_data = WeatherService.get_hourly_weather(station_data[:latitude], station_data[:longitude])
-      StationDetails.new(station_data, weather_data)
+      StationDetails.new(station_data, weather_data, user_id)
     else
       station_response
     end

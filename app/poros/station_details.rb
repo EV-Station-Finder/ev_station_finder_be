@@ -10,10 +10,11 @@ class StationDetails
               :city,
               :state,
               :zip_code,
+              :is_favorited,
               :accepted_payments,
               :hourly_weather
 
-  def initialize(station_data, weather_data)
+  def initialize(station_data, weather_data, user_id=nil)
     @id                 = nil
     @api_id             = station_data[:id]
     @name               = station_data[:station_name]
@@ -25,6 +26,7 @@ class StationDetails
     @city               = station_data[:city]
     @state              = station_data[:state]
     @zip_code           = station_data[:zip]
+    @is_favorited       = station_favorited?(station_data[:id], user_id)
     @accepted_payments  = format_payments(station_data)
     @hourly_weather     = create_hourly_weather(weather_data)
   end
@@ -68,6 +70,16 @@ class StationDetails
       current_and_hourly_weather << HourlyWeather.new(weather)
     end
     current_and_hourly_weather.first(10)
+  end
+  
+  def station_favorited?(station_api_id, user_id)
+    return "User token not provided" if user_id.nil?
+    return false if (station = Station.find_by(api_id: station_api_id)).nil?
+    if station && user_station = UserStation.find_by(station_id: station.id, user_id: user_id)
+      user_station.favorited?
+    else
+      false
+    end
   end
   
   def status_finder(status_code)

@@ -51,7 +51,7 @@ class StationBasic
       'Status Unavailable'
     end
   end
-# TODO: also used in station details, consider refactoring to DRY up code
+
   def set_ev_network(ev_network)
     if ev_network.nil?
       "Non-Networked"

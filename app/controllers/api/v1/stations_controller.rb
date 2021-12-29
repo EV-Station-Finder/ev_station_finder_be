@@ -8,7 +8,8 @@ class Api::V1::StationsController < ApplicationController
   end
 
   def show
-    station = StationFacade.get_station(search_params[:id])
+    user_id = decode_token(search_params[:token]) if search_params[:token].present?
+    station = StationFacade.get_station(search_params[:id], user_id)
     if station.class == StationDetails
       render json: StationSerializer.new(station)
     else
