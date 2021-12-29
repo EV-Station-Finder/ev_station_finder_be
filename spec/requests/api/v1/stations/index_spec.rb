@@ -165,7 +165,7 @@ RSpec.describe "Stations Index - Search for stations by location" do
     end
     
     it "User does not exist", :vcr do
-      get "/api/v1/favorite_stations", headers: headers, params: params3
+      get "/api/v1/stations", headers: headers, params: params3
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
@@ -174,7 +174,7 @@ RSpec.describe "Stations Index - Search for stations by location" do
     end
 
     it "User token is invalid", :vcr do
-      get "/api/v1/favorite_stations", headers: headers, params: params4
+      get "/api/v1/stations", headers: headers, params: params4
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
@@ -183,7 +183,7 @@ RSpec.describe "Stations Index - Search for stations by location" do
     end
 
     it "User token is empty", :vcr do
-      get "/api/v1/favorite_stations", headers: headers, params: params5
+      get "/api/v1/stations", headers: headers, params: params5
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
