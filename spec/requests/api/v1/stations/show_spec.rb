@@ -5,17 +5,53 @@ RSpec.describe "Display a single station" do
   let(:api_id_is_zero) { 0 }
   let(:api_id_does_not_exist) { 8393939300393 }
   let(:invalid_api_id) { "dhshdh" }
-  let(:blank_api_id) {  } # used to be api_id = " "
   let(:response_body) { JSON.parse(response.body, symbolize_names: true) }
   let(:new_station) { response_body[:data][:attributes] }
   let(:accepted_payments) { new_station[:accepted_payments] }
   let(:hourly_weather) { new_station[:hourly_weather] }
+  
+  # Create logged in user with favorite stations
+  let!(:user1) { User.create(first_name: 'Bill',
+                              last_name: 'Seldon',
+                              email: 'email@example.com',
+                              street_address: '2954 Virginia Beach Boulevard',
+                              city: 'Virginia Beach',
+                              state: 'Virginia',
+                              zip_code: '23452',
+                              password: 'verysecurepassword') }
+                              
+  let!(:user2) { User.create(first_name: 'Mary',
+                              last_name: 'Seldon',
+                              email: 'mary@example.com',
+                              street_address: '2954 Virginia Beach Boulevard',
+                              city: 'Virginia Beach',
+                              state: 'Virginia',
+                              zip_code: '23452',
+                              password: 'verysecurepassword') }
+                              
+  let(:station1) { body[:data][0][:attributes] }
+  let(:denver_station1) { Station.create!(api_id: "198643") }
+  let(:denver_station2) { Station.create!(api_id: "50066") }
+  let!(:user_station1) { UserStation.create!(user_id: user1.id, station_id: denver_station1.id) }
+  let!(:user_station2) { UserStation.create!(user_id: user1.id, station_id: denver_station2.id) }
+  let(:token1) { JWT.encode({user_id: user1.id}, 'hasselhoff', 'HS256') }
+  let(:token2) { JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256') }
+  let(:headers) { {CONTENT_TYPE: "application/json",
+                  ACCEPT: "application/json"} }
+                  
+  let(:params1) { {token: token1} }
+  let(:params2) { {token: token2} }
+  let(:token3) { JWT.encode({user_id: 899}, 'hasselhoff', 'HS256') } # user does not exist
+  let(:params3) { {token: token3} }
+  let(:altered_token) { "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY" }
+  let(:params4) { {token: altered_token} }
+  let(:params5) { {token: ""} }
 
   describe "HAPPY PATH" do
-    it "Endpoint exists and has attributes", :vcr do
+    it "GUEST USER - Endpoint exists and has attributes", :vcr do
       get "/api/v1/stations/#{api_id}"
 
-      expect(response).to have_http_status(:ok)
+      expect(response).to be_successful
 
       expect(response_body).to have_key(:data)
       expect(response_body[:data]).to have_key(:id)
@@ -23,9 +59,10 @@ RSpec.describe "Display a single station" do
       expect(response_body[:data]).to have_key(:attributes)
       expect(response_body[:data][:id]).to eq(nil)
       expect(response_body[:data][:type]).to be_a String
+      expect(response_body[:data][0][:type]).to eq("station")
       expect(response_body[:data][:attributes]).to be_a Hash
 
-      expect(new_station.size).to eq(12)
+      expect(new_station.size).to eq(13)
       expect(new_station).to have_key(:name)
       expect(new_station).to have_key(:api_id)
       expect(new_station).to have_key(:status)
@@ -38,6 +75,88 @@ RSpec.describe "Display a single station" do
       expect(new_station).to have_key(:zip_code)
       expect(new_station).to have_key(:accepted_payments)
       expect(new_station).to have_key(:hourly_weather)
+      expect(new_station).to have_key(:is_favorited)
+
+      expect(accepted_payments).to be_an Array
+
+      expect(hourly_weather).to be_an Array
+      expect(hourly_weather[0]).to be_an Hash
+      expect(hourly_weather[0]).to have_key(:time)
+      expect(hourly_weather[0]).to have_key(:temperature)
+      expect(hourly_weather[0]).to have_key(:conditions)
+      expect(hourly_weather[0]).to have_key(:icon)
+    end
+    
+    
+    xit "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes" do # TODO ADD , :vcr
+      get "/api/v1/stations/#{api_id}", headers: headers, params: params1
+
+      expect(response).to be_successful
+      
+      expect(body).to have_key(:data)
+      expect(body[:data][0]).to have_key(:id)
+      expect(body[:data][0]).to have_key(:type)
+      expect(body[:data][0]).to have_key(:attributes)
+      expect(body[:data][0][:id]).to eq(nil)
+      expect(body[:data][0][:type]).to be_a String
+      expect(response_body[:data][0][:type]).to eq("station")
+      expect(response_body[:data][:attributes]).to be_a Hash
+
+      expect(new_station.size).to eq(13)
+      expect(new_station).to have_key(:name)
+      expect(new_station).to have_key(:api_id)
+      expect(new_station).to have_key(:status)
+      expect(new_station).to have_key(:hours)
+      expect(new_station).to have_key(:ev_network)
+      expect(new_station).to have_key(:ev_connector_types)
+      expect(new_station).to have_key(:street_address)
+      expect(new_station).to have_key(:city)
+      expect(new_station).to have_key(:state)
+      expect(new_station).to have_key(:zip_code)
+      expect(new_station).to have_key(:accepted_payments)
+      expect(new_station).to have_key(:hourly_weather)
+      expect(new_station).to have_key(:is_favorited)
+
+      expect(accepted_payments).to be_an Array
+
+      expect(hourly_weather).to be_an Array
+      expect(hourly_weather[0]).to be_an Hash
+      expect(hourly_weather[0]).to have_key(:time)
+      expect(hourly_weather[0]).to have_key(:temperature)
+      expect(hourly_weather[0]).to have_key(:conditions)
+      expect(hourly_weather[0]).to have_key(:icon)
+
+    end
+    
+    xit "LOGGED IN USER WITHOUT FAVORITE STATIONS - Endpoint exists and has attributes", :vcr do
+      get "/api/v1/stations/#{api_id}", headers: headers, params: params2
+
+      expect(response).to be_successful
+      
+      expect(body).to have_key(:data)
+      expect(body[:data][0]).to have_key(:id)
+      expect(body[:data][0]).to have_key(:type)
+      expect(body[:data][0]).to have_key(:attributes)
+      expect(body[:data][0][:id]).to eq(nil)
+      expect(body[:data][0][:type]).to be_a String
+      expect(response_body[:data][0][:type]).to eq("station")
+      expect(response_body[:data][:attributes]).to be_a Hash
+
+      expect(new_station.size).to eq(13)
+      expect(new_station).to have_key(:name)
+      expect(new_station).to have_key(:api_id)
+      expect(new_station).to have_key(:status)
+      expect(new_station).to have_key(:hours)
+      expect(new_station).to have_key(:ev_network)
+      expect(new_station).to have_key(:ev_connector_types)
+      expect(new_station).to have_key(:street_address)
+      expect(new_station).to have_key(:city)
+      expect(new_station).to have_key(:state)
+      expect(new_station).to have_key(:zip_code)
+      expect(new_station).to have_key(:accepted_payments)
+      expect(new_station).to have_key(:hourly_weather)
+      expect(new_station).to have_key(:is_favorited)
+      expect(new_station[:is_favorited]).to eq(false)
 
       expect(accepted_payments).to be_an Array
 
@@ -77,19 +196,32 @@ RSpec.describe "Display a single station" do
       expect(response_body[:errors]).to be_a String
       expect(response_body[:errors]).to eq("Cannot find station with ID #{invalid_api_id}")
     end
+    
+    it "User does not exist", :vcr do
+      get "/api/v1/stations/#{api_id}", headers: headers, params: params3
 
-    xit "ID is blank", :vcr do
-      # Used to get this error:
-        # URI::InvalidURIError:
-        # bad URI(is not URI?): http://www.example.com:80/api/v1/stations/
-      # Because we were passing a string, but if we pass a blank field it redirects to the stations index and then
-      # returns an error message that a location must be provided. One thing we can try is reordering the stations routes?
-      get "/api/v1/stations/#{blank_api_id}"
-
-      expect(response).to have_http_status(:bad_request)
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
       expect(body).to have_key(:errors)
-      expect(body[:errors]).to be_a String
-      expect(body[:errors]).to eq("Cannot find station with ID #{api_id}") # Change?: "...without an ID"
+      expect(body[:errors]).to eq("User not found")
+    end
+
+    it "Token is invalid", :vcr do
+      get "/api/v1/stations/#{api_id}", headers: headers, params: params4
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Unauthorized")
+    end
+
+    it "Token is empty", :vcr do
+      get "/api/v1/stations/#{api_id}", headers: headers, params: params5
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(401)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Unauthorized")
     end
   end
 end
