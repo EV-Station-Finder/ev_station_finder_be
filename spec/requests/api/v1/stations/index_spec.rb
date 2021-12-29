@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Stations Index - Search for stations by location and provide favorite stations if applicable" do
+RSpec.describe "Stations Index - Search for stations by location" do
   let(:location) { "Denver, CO" }
   let(:body) { JSON.parse(response.body, symbolize_names:true) }
   let(:blank_location) { " " }
@@ -173,7 +173,7 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
       expect(body[:errors]).to eq("User not found")
     end
 
-    it "Token is invalid", :vcr do
+    it "User token is invalid", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params4
 
       expect(response).to_not be_successful
@@ -182,7 +182,7 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
       expect(body[:errors]).to eq("Unauthorized")
     end
 
-    it "Token is empty", :vcr do
+    it "User token is empty", :vcr do
       get "/api/v1/favorite_stations", headers: headers, params: params5
 
       expect(response).to_not be_successful
