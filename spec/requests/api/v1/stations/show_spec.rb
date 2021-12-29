@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Display a single station" do
+RSpec.describe "Station Show - Search for a station by api_id" do
   let(:api_id) { 152087 }
   let(:api_id_is_zero) { 0 }
   let(:api_id_does_not_exist) { 8393939300393 }
@@ -29,7 +29,7 @@ RSpec.describe "Display a single station" do
                               zip_code: '23452',
                               password: 'verysecurepassword') }
                               
-  let(:station1) { body[:data][0][:attributes] }
+  let(:station1) { body[:data][:attributes] }
   let(:denver_station1) { Station.create!(api_id: "198643") }
   let(:denver_station2) { Station.create!(api_id: "50066") }
   let!(:user_station1) { UserStation.create!(user_id: user1.id, station_id: denver_station1.id) }
@@ -59,7 +59,7 @@ RSpec.describe "Display a single station" do
       expect(response_body[:data]).to have_key(:attributes)
       expect(response_body[:data][:id]).to eq(nil)
       expect(response_body[:data][:type]).to be_a String
-      expect(response_body[:data][0][:type]).to eq("station")
+      expect(response_body[:data][:type]).to eq("station")
       expect(response_body[:data][:attributes]).to be_a Hash
 
       expect(new_station.size).to eq(13)
@@ -89,17 +89,17 @@ RSpec.describe "Display a single station" do
     
     
     it "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes" do # TODO ADD , :vcr
-      get "/api/v1/stations/#{api_id}", headers: headers, params: params1
+      get "/api/v1/stations/#{denver_station1.api_id}", headers: headers, params: params1
 
       expect(response).to be_successful
-      
-      expect(body).to have_key(:data)
-      expect(body[:data][0]).to have_key(:id)
-      expect(body[:data][0]).to have_key(:type)
-      expect(body[:data][0]).to have_key(:attributes)
-      expect(body[:data][0][:id]).to eq(nil)
-      expect(body[:data][0][:type]).to be_a String
-      expect(response_body[:data][0][:type]).to eq("station")
+
+      expect(response_body).to have_key(:data)
+      expect(response_body[:data]).to have_key(:id)
+      expect(response_body[:data]).to have_key(:type)
+      expect(response_body[:data]).to have_key(:attributes)
+      expect(response_body[:data][:id]).to eq(nil)
+      expect(response_body[:data][:type]).to be_a String
+      expect(response_body[:data][:type]).to eq("station")
       expect(response_body[:data][:attributes]).to be_a Hash
 
       expect(new_station.size).to eq(13)
@@ -129,17 +129,17 @@ RSpec.describe "Display a single station" do
     end
     
     it "LOGGED IN USER WITHOUT FAVORITE STATIONS - Endpoint exists and has attributes", :vcr do
-      get "/api/v1/stations/#{api_id}", headers: headers, params: params2
+      get "/api/v1/stations/#{denver_station2.api_id}", headers: headers, params: params2
 
       expect(response).to be_successful
       
-      expect(body).to have_key(:data)
-      expect(body[:data][0]).to have_key(:id)
-      expect(body[:data][0]).to have_key(:type)
-      expect(body[:data][0]).to have_key(:attributes)
-      expect(body[:data][0][:id]).to eq(nil)
-      expect(body[:data][0][:type]).to be_a String
-      expect(response_body[:data][0][:type]).to eq("station")
+      expect(response_body).to have_key(:data)
+      expect(response_body[:data]).to have_key(:id)
+      expect(response_body[:data]).to have_key(:type)
+      expect(response_body[:data]).to have_key(:attributes)
+      expect(response_body[:data][:id]).to eq(nil)
+      expect(response_body[:data][:type]).to be_a String
+      expect(response_body[:data][:type]).to eq("station")
       expect(response_body[:data][:attributes]).to be_a Hash
 
       expect(new_station.size).to eq(13)
@@ -202,26 +202,26 @@ RSpec.describe "Display a single station" do
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
-      expect(body).to have_key(:errors)
-      expect(body[:errors]).to eq("User not found")
+      expect(response_body).to have_key(:errors)
+      expect(response_body[:errors]).to eq("User not found")
     end
 
-    it "Token is invalid", :vcr do
+    it "User token is invalid", :vcr do
       get "/api/v1/stations/#{api_id}", headers: headers, params: params4
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
-      expect(body).to have_key(:errors)
-      expect(body[:errors]).to eq("Unauthorized")
+      expect(response_body).to have_key(:errors)
+      expect(response_body[:errors]).to eq("Unauthorized")
     end
 
-    it "Token is empty", :vcr do
+    it "User token is empty", :vcr do
       get "/api/v1/stations/#{api_id}", headers: headers, params: params5
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
-      expect(body).to have_key(:errors)
-      expect(body[:errors]).to eq("Unauthorized")
+      expect(response_body).to have_key(:errors)
+      expect(response_body[:errors]).to eq("Unauthorized")
     end
   end
 end
