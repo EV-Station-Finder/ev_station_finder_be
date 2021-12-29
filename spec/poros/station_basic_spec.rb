@@ -86,6 +86,7 @@ RSpec.describe StationBasic do
         new_station = StationBasic.new(station_hash)
 
         expect(new_station).to be_a StationBasic
+        expect(new_station.instance_variables.count).to eq(12)
         expect(new_station.id).to be_nil
         expect(new_station.api_id).to eq(192187)
         expect(new_station.name).to eq("Ideal Market Capitol Hill")
