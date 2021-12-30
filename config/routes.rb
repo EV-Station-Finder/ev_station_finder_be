@@ -12,4 +12,5 @@ Rails.application.routes.draw do
       get '/authorize', to: 'sessions#authorize'
     end
   end
+  get '*path' => redirect('/')
 end
