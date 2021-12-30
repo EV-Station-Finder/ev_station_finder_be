@@ -2,7 +2,6 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :record_bad_request
   rescue_from JWT::DecodeError, with: :unauthorized_user
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  def welcome; end
   
   def decode_token(token)
     decoded_token = JWT.decode(token, 'hasselhoff', true, {algorithm: 'HS256'})
