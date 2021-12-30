@@ -1,9 +1,12 @@
 class StationFacade
   def self.get_stations(location, user_id=nil)
     stations_data = StationService.get_stations(location)
-    stations = stations_data[:fuel_stations]
-    stations.map do |station|
-      StationBasic.new(station, user_id)
+    if (stations = stations_data[:fuel_stations]).nil?
+      stations_data
+    else
+      stations.map do |station|
+        StationBasic.new(station, user_id)
+      end
     end
   end
 
