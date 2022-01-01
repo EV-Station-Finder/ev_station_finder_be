@@ -1,4 +1,8 @@
+require "./app/models/application.rb"
+
 class StationDetails
+  include Stationable
+  
   attr_reader :id,
               :api_id,
               :name,
@@ -10,10 +14,11 @@ class StationDetails
               :city,
               :state,
               :zip_code,
+              :is_favorited,
               :accepted_payments,
               :hourly_weather
 
-  def initialize(station_data, weather_data)
+  def initialize(station_data, weather_data, user_id=nil)
     @id                 = nil
     @api_id             = station_data[:id]
     @name               = station_data[:station_name]
@@ -25,6 +30,7 @@ class StationDetails
     @city               = station_data[:city]
     @state              = station_data[:state]
     @zip_code           = station_data[:zip]
+    @is_favorited       = station_favorited?(station_data[:id], user_id)
     @accepted_payments  = format_payments(station_data)
     @hourly_weather     = create_hourly_weather(weather_data)
   end
@@ -68,27 +74,5 @@ class StationDetails
       current_and_hourly_weather << HourlyWeather.new(weather)
     end
     current_and_hourly_weather.first(10)
-  end
-  
-  def status_finder(status_code)
-    if status_code.present?
-      if status_code == 'E'
-        'Available'
-      elsif status_code == 'P'
-        'Coming Soon'
-      elsif status_code == 'T'
-        'Temporarily Closed'
-      end
-    else
-      'Status Unavailable'
-    end
-  end
-
-  def set_ev_network(ev_network)
-    if ev_network.nil?
-      "Non-Networked"
-    else
-      ev_network
-    end
   end
 end

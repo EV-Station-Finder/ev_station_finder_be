@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/8393939300393.json?api_key=<CHARGER_KEY>
+    uri: https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=<CHARGER_KEY>&ev_charging_level=dc_fast&fuel_type=ELEC&location=oghkhhohoiho79808707
     body:
       encoding: US-ASCII
       string: ''
@@ -15,25 +15,21 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 404
-      message: Not Found
+      code: 422
+      message: Unprocessable Entity
     headers:
       Date:
-      - Wed, 22 Dec 2021 00:09:15 GMT
+      - Wed, 29 Dec 2021 20:33:34 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Vary:
-      - Accept-Encoding
-      - Accept-Encoding
-      - Origin
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '963'
+      - '965'
       X-Frame-Options:
       - ALLOWALL
       X-Xss-Protection:
@@ -55,9 +51,11 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 9f5f8e6e6c56f75a75d9c1e4e1c6d35c
+      - 635d8963fc276887e7a78fcad6b52a7f
       X-Runtime:
-      - '0.004441'
+      - '0.242893'
+      Vary:
+      - Origin
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       - max-age=31536000; preload
@@ -68,7 +66,7 @@ http_interactions:
       X-Cache:
       - MISS
     body:
-      encoding: ASCII-8BIT
-      string: '{"errors":["Couldn''t find alternative fuel station with ID of 8393939300393"]}'
-  recorded_at: Wed, 22 Dec 2021 00:09:15 GMT
+      encoding: UTF-8
+      string: '{"errors":["The ''location'' parameter could not be located."]}'
+  recorded_at: Wed, 29 Dec 2021 20:33:34 GMT
 recorded_with: VCR 6.0.0

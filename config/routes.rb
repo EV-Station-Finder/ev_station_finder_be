@@ -12,4 +12,5 @@ Rails.application.routes.draw do
       get '/authorize', to: 'sessions#authorize'
     end
   end
+  match '*path', to: ->(env) { [404, {}, ['Not Found']] }, via: :all
 end

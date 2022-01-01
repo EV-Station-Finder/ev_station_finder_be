@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Stations Index - Search for stations by location and provide favorite stations if applicable" do
+RSpec.describe "Stations Index - Search for stations by location" do
   let(:location) { "Denver, CO" }
   let(:body) { JSON.parse(response.body, symbolize_names:true) }
   let(:blank_location) { " " }
@@ -59,19 +59,19 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
       expect(body[:data][0][:attributes]).to be_a Hash
       expect(body[:data].size).to be < 21
 
-      expect(body[:data][0][:attributes]).to be_a Hash
-      expect(body[:data][0][:attributes].size).to eq(11)
-      expect(body[:data][0][:attributes]).to have_key(:api_id)
-      expect(body[:data][0][:attributes]).to have_key(:name)
-      expect(body[:data][0][:attributes]).to have_key(:distance)
-      expect(body[:data][0][:attributes]).to have_key(:status)
-      expect(body[:data][0][:attributes]).to have_key(:hours)
-      expect(body[:data][0][:attributes]).to have_key(:ev_network)
-      expect(body[:data][0][:attributes]).to have_key(:street_address)
-      expect(body[:data][0][:attributes]).to have_key(:city)
-      expect(body[:data][0][:attributes]).to have_key(:state)
-      expect(body[:data][0][:attributes]).to have_key(:zip_code)
-      expect(body[:data][0][:attributes]).to have_key(:is_favorited)
+      expect(station1).to be_a Hash
+      expect(station1.size).to eq(11)
+      expect(station1).to have_key(:api_id)
+      expect(station1).to have_key(:name)
+      expect(station1).to have_key(:distance)
+      expect(station1).to have_key(:status)
+      expect(station1).to have_key(:hours)
+      expect(station1).to have_key(:ev_network)
+      expect(station1).to have_key(:street_address)
+      expect(station1).to have_key(:city)
+      expect(station1).to have_key(:state)
+      expect(station1).to have_key(:zip_code)
+      expect(station1).to have_key(:is_favorited)
     end
     
     it "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes" do # TODO ADD , :vcr
@@ -164,8 +164,8 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
       expect(body[:errors]).to eq("A valid location must be provided")
     end
     
-    it "User does not exist", :vcr do
-      get "/api/v1/favorite_stations", headers: headers, params: params3
+    it "User does not exist, but location is valid", :vcr do
+      get "/api/v1/stations?location=#{location}", headers: headers, params: params3
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
@@ -173,8 +173,8 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
       expect(body[:errors]).to eq("User not found")
     end
 
-    it "Token is invalid", :vcr do
-      get "/api/v1/favorite_stations", headers: headers, params: params4
+    it "User token is invalid, but location is valid", :vcr do
+      get "/api/v1/stations?location=#{location}", headers: headers, params: params4
 
       expect(response).to_not be_successful
       expect(response.status).to eq(401)
@@ -182,13 +182,14 @@ RSpec.describe "Stations Index - Search for stations by location and provide fav
       expect(body[:errors]).to eq("Unauthorized")
     end
 
-    it "Token is empty or not sent", :vcr do
-      get "/api/v1/favorite_stations", headers: headers, params: params5
-
-      expect(response).to_not be_successful
-      expect(response.status).to eq(401)
-      expect(body).to have_key(:errors)
-      expect(body[:errors]).to eq("Unauthorized")
+    it "User token is empty, but location is valid", :vcr do
+      get "/api/v1/stations?location=#{location}", headers: headers, params: params5
+ 
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      expect(body[:data][0][:attributes]).to be_a Hash
+      expect(station1).to have_key(:is_favorited)
+      expect(station1[:is_favorited]).to eq("User token not provided")
     end
   end
 end

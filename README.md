@@ -180,7 +180,7 @@ This will render an index page with the results as a list of stations.
 
       ```
       request_body = {
-                      "token": 152283
+                      "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"      (optional)
                      }
       ```
 
@@ -194,7 +194,7 @@ This will render an index page with the results as a list of stations.
               "attributes": {
                              "name": "Some Charger", 
                              "api_id": 152087,
-                             "status": "Temporary Closed",
+                             "status": "Temporarily Closed",
                              "hours": "24hrs",
                              "ev_connector_types": ["CHADEMO", "J1772COMBO"],
                              "ev_network": "Tesla",
@@ -202,15 +202,16 @@ This will render an index page with the results as a list of stations.
                              "city": "Denver",
                              "state": "CO",
                              "zip_code": "12345",
+                             "is_favorited": true,
                              "accepted_payments": [
-                                                    "apple_pay", "credit"
-                                                   ],
+                                                   "apple_pay", "credit"
+                                                  ],
                              "hourly_weather": [{
                                                   "time": "1300",
                                                   "temperature": "75",
                                                   "conditions": "Sunny",
                                                   "icon": "10d"
-                                                }] # ... 10 hour forecasts
+                                                },  ... 10 total hour forecasts ]
             }
            }
           }

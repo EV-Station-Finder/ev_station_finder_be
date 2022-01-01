@@ -29,7 +29,7 @@ RSpec.describe HourlyWeather do
     it "exists, has attributes, and Status is available"  do
       hourly_weather = HourlyWeather.new(@incoming_hash)
       expect(hourly_weather).to be_a HourlyWeather
-
+      expect(hourly_weather.instance_variables.count).to eq(4)
       #Use mock to ensure timezone is independnt of timezone on local machine where test is running
       mock_hourly_weather = double("hourly_weather")
       allow(mock_hourly_weather).to receive(:time).and_return("18:53 EDT")

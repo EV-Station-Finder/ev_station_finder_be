@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 29 Dec 2021 19:42:00 GMT
+      - Wed, 29 Dec 2021 22:27:33 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -33,7 +33,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '989'
+      - '972'
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
@@ -53,13 +53,13 @@ http_interactions:
       Access-Control-Max-Age:
       - '86400'
       Last-Modified:
-      - Wed, 29 Dec 2021 19:42:00 GMT
+      - Wed, 29 Dec 2021 22:27:33 GMT
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - adbde280b3e5c67c9a574da4ab87ddf3
+      - 63b94a02939da71df597bf2dd9418f54
       X-Runtime:
-      - '0.018211'
+      - '0.022688'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       - max-age=31536000; preload
@@ -129,5 +129,5 @@ http_interactions:
         Square","station_phone":"877-455-3833","updated_at":"2021-12-29T01:19:53Z","facility_type":null,"geocode_status":"GPS","latitude":39.6995089,"longitude":-104.9126306,"city":"Denver","intersection_directions":null,"plus4":null,"state":"CO","street_address":"942
         S Monaco Pkwy","zip":"80224","country":"US","bd_blends":null,"cng_dispenser_num":null,"cng_fill_type_code":null,"cng_psi":null,"cng_renewable_source":null,"cng_total_compression":null,"cng_total_storage":null,"cng_vehicle_class":null,"e85_blender_pump":null,"e85_other_ethanol_blends":null,"ev_connector_types":["CHADEMO","J1772COMBO"],"ev_dc_fast_num":4,"ev_level1_evse_num":null,"ev_level2_evse_num":null,"ev_network":"eVgo
         Network","ev_network_web":"https://www.evgo.com/","ev_other_evse":null,"ev_pricing":null,"ev_renewable_source":null,"hy_is_retail":null,"hy_pressures":null,"hy_standards":null,"hy_status_link":null,"lng_renewable_source":null,"lng_vehicle_class":null,"lpg_primary":null,"lpg_nozzle_types":null,"ng_fill_type_code":null,"ng_psi":null,"ng_vehicle_class":null,"access_days_time_fr":null,"intersection_directions_fr":null,"bd_blends_fr":null,"groups_with_access_code_fr":"Public","ev_pricing_fr":null,"ev_network_ids":{"station":["23822"],"posts":["48435","48438","48440","48442"]},"distance":4.69307,"distance_km":7.55276}]}'
-  recorded_at: Wed, 29 Dec 2021 19:42:00 GMT
+  recorded_at: Wed, 29 Dec 2021 22:27:33 GMT
 recorded_with: VCR 6.0.0
