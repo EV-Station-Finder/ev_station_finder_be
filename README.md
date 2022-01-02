@@ -451,6 +451,17 @@ This will render an index page with the results as a list of stations.
         } 
     }
     ```
+    
+    d. Destroy Favorite Station 'DELETE /api/v1/favorite_stations'
+    - Deletes favorite_station and returns 204 HTTP Status
+
+
+    ```
+    request_body = {
+                    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
+                    "api_id": 152283
+                   }
+    ```
 </details>
 
 ## Contributing
