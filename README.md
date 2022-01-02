@@ -452,7 +452,7 @@ This will render an index page with the results as a list of stations.
     }
     ```
     
-    d. Destroy Favorite Station 'DELETE /api/v1/favorite_stations'
+    c. Destroy Favorite Station 'DELETE /api/v1/favorite_stations'
     - Deletes favorite_station and returns 204 HTTP Status
 
 
