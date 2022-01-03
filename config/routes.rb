@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
       resources :dashboard, only: [:index]
       resources :favorite_stations, only: [:index, :create]
+      resource :favorite_stations, only: [:destroy]
       get '/authorize', to: 'sessions#authorize'
     end
   end

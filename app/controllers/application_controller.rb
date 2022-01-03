@@ -19,6 +19,10 @@ class ApplicationController < ActionController::API
   end
   
   def record_not_found(exception)
-    render json: { errors: "User not found" }, status: :not_found
+    if exception.model == "UserStation"
+      render json: { errors: "FavoriteStation not found" }, status: :not_found
+    else
+      render json: { errors: "#{exception.model} not found" }, status: :not_found
+    end
   end
 end

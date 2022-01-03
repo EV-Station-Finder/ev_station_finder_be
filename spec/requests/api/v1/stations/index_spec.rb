@@ -74,7 +74,7 @@ RSpec.describe "Stations Index - Search for stations by location" do
       expect(station1).to have_key(:is_favorited)
     end
     
-    it "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes" do # TODO ADD , :vcr
+    it "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes", :vcr do
       get "/api/v1/stations", headers: headers, params: params1
 
       expect(response).to be_successful
