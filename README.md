@@ -434,7 +434,7 @@ This will render an index page with the results as a list of stations.
 
     b. `POST /api/v1/favorite_stations`
 
-      - Saves a station for the logged in user's account
+      - Saves a favorite_station for a user
       ```
             request_body = {
                             "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
@@ -452,8 +452,8 @@ This will render an index page with the results as a list of stations.
     }
     ```
     
-    c. Destroy Favorite Station 'DELETE /api/v1/favorite_stations'
-    - Deletes favorite_station and returns 204 HTTP Status
+    c. 'DELETE /api/v1/favorite_stations'
+    - Deletes a favorite_station for a user and returns 204 HTTP Status
 
 
     ```
