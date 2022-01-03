@@ -37,11 +37,15 @@ RSpec.describe 'Destroy a Favorite Station' do
 
   describe 'HAPPY PATH' do
     it 'Endpoint can save station for user', :vcr do
+      user_station = UserStation.find_by(station_id: station1.id, user_id: user1.id)
+      expect(user_station.favorited?).to eq(true)
+      
       delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
-    
+
+      user_station = UserStation.find_by(station_id: station1.id, user_id: user1.id)
       expect(response).to be_successful
       expect(response).to have_http_status(204)
-      expect(UserStation.count).to eq(0)
+      expect(user_station.favorited?).to eq(false)
     end
 
     # it 'favorite station is added successfully if station already exists in the database', :vcr do

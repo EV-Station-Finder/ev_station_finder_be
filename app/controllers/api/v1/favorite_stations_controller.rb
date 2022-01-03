@@ -21,6 +21,13 @@ class Api::V1::FavoriteStationsController < ApplicationController
       render json: { data: { type: 'favorite_station' } }, status: 201
     end
   end
+  
+  def destroy
+    user_id = decode_token(station_params[:token])
+    station = Station.find_by(api_id: station_params[:api_id])
+    user_station = UserStation.find_by(station_id: station.id, user_id: user_id)
+    user_station.update!(favorited?: false)
+  end
 
   private
 
