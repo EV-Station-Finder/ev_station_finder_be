@@ -18,27 +18,18 @@ RSpec.describe 'Destroy a Favorite Station' do
                   ACCEPT: "application/json"} }
   let(:params1) { {token: token1, api_id: station1.api_id} }
   let(:body) { JSON.parse(response.body, symbolize_names:true) }
+  
   # # SAD PATH/EDGE CASES:
-  # let!(:user2) { User.create(first_name: 'Bill',
-  #                       last_name: 'Seldon',
-  #                       email: 'email1@example.com',
-  #                       street_address: "1712 Av Circunvalacion",
-  #                       city: "Cochabamba",
-  #                       state: "Bolivia",
-  #                       zip_code: '11111',
-  #                       password: 'verysecurepassword') }
-  # let(:token2) { JWT.encode({user_id: user2.id}, 'hasselhoff', 'HS256') }
-  # let(:params2) { {token: token2} }
   # let(:token3) { JWT.encode({user_id: 899}, 'hasselhoff', 'HS256') } # user does not exist
   # let(:params3) { {token: token3} }
   # let(:altered_token) { "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY" }
   # let(:params4) { {token: altered_token} }
   # let(:params5) { {token: ""} }
+  # let(:params_with_empty_api_id) { {token: token1, api_id: ''} }
 
   describe 'HAPPY PATH' do
-    it 'Endpoint can save station for user', :vcr do
-      user_station = UserStation.find_by(station_id: station1.id, user_id: user1.id)
-      expect(user_station.favorited?).to eq(true)
+    it 'Favorite station is removed successfully for a user', :vcr do
+      expect(user_station1.favorited?).to eq(true)
       
       delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
 
@@ -47,23 +38,39 @@ RSpec.describe 'Destroy a Favorite Station' do
       expect(response).to have_http_status(204)
       expect(user_station.favorited?).to eq(false)
     end
-
-    # it 'favorite station is added successfully if station already exists in the database', :vcr do
-    #   delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params2)
-    # 
-    #   expect(response).to be_successful
-    #   expect(body).to have_key(:data)
-    #   expect(body[:data]).to be_a Hash
-    #   expect((body[:data]).size).to eq(1)
-    #   expect(body[:data]).to have_key(:type)
-    #   expect(body[:data][:type]).to eq("favorite_station")
-    # end
   end
 
-  # describe 'SAD PATH' do
-  #   # let(:params_with_empty_api_id) { {token: token1, api_id: ''} }
-  #   # 
-  #   # it 'does not save a favorite station twice for the same user', :vcr do
+  describe 'SAD PATH' do
+  it 'User has already unfavorited station', :vcr do
+    user_station2.update!(favorited?: false)
+    user_station = UserStation.find_by(user_id: user1.id, station_id: station2.id)
+    expect(user_station.favorited?).to eq(false)
+    params = {token: token1, api_id: station2.api_id}
+    
+    delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params)
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(404)
+    expect(body).to have_key(:errors)
+    expect(body[:errors]).to eq("Favorite station not found")
+  end
+  
+  it 'User token is not provided', :vcr do
+  end
+  
+  it 'User token is not valid', :vcr do
+  end
+  
+  it 'API ID is not provided', :vcr do
+  end
+  
+  it 'API ID is not valid', :vcr do
+  end
+  
+  it 'Favorited station does not exist for user', :vcr do
+  end
+
+    # it 'User has already unfavorited station', :vcr do
   #   #   post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
   #   #   post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
   #   # 
@@ -72,12 +79,12 @@ RSpec.describe 'Destroy a Favorite Station' do
   #   #   expect(body[:errors]).to eq("User has already favorited station with api ID: #{params1[:api_id]}")
   #   # end
   #   # 
-  #   # it 'validation fails if an api ID is not provided', :vcr do
+    # it 'validation fails if an api ID is not provided', :vcr do
   #   #   post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params_with_empty_api_id)
   #   # 
   #   #   expect(response.status).to eq(400)
   #   #   expect(body).to have_key(:errors)
   #   #   expect(body[:errors]).to eq("Validation failed: Api can't be blank")
   #   # end
-  # end
+  end
 end
