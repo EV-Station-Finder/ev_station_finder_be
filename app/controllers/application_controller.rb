@@ -18,7 +18,7 @@ class ApplicationController < ActionController::API
     render json: { errors: "Unauthorized" }, status: :unauthorized
   end
   
-  def record_not_found(exception)
+  def record_not_found
     render json: { errors: "User not found" }, status: :not_found
   end
 end
