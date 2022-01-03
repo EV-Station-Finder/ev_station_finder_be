@@ -25,11 +25,11 @@ class Api::V1::FavoriteStationsController < ApplicationController
   def destroy
     user_id = decode_token(station_params[:token])
     station = Station.find_by(api_id: station_params[:api_id])
-    user_station = UserStation.find_by(user_id: user_id, station_id: station.id)
+    user_station = UserStation.find_by!(user_id: user_id, station_id: station.id)
     if user_station.favorited?
       user_station.update(favorited?: false)
     else
-      render json: { errors: "Favorite station not found" }, status: :not_found
+      render json: { errors: "UserStation not found" }, status: :not_found
     end
   end
 
