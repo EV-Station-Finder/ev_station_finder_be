@@ -11,6 +11,7 @@ RSpec.describe 'Destroy a Favorite Station' do
                               password: 'verysecurepassword') }
   let(:station1) { Station.create!(api_id: "152087") }
   let(:station2) { Station.create!(api_id: "152070") }
+  let(:station3) { Station.create!(api_id: "152077") }
   let!(:user_station1) { UserStation.create!(user_id: user1.id, station_id: station1.id) }
   let!(:user_station2) { UserStation.create!(user_id: user1.id, station_id: station2.id) }
   let(:token1) { JWT.encode({user_id: user1.id}, 'hasselhoff', 'HS256') }
@@ -25,6 +26,9 @@ RSpec.describe 'Destroy a Favorite Station' do
   let(:params3) { {token: altered_token, api_id: station1.api_id} }
   let(:token4) { JWT.encode({user_id: 899}, 'hasselhoff', 'HS256') } # user does not exist
   let(:params4) { {token: token4, api_id: station1.api_id} }
+  let(:params5) { {token: token1, api_id: ""} }
+  let(:params6) { {token: token1, api_id: "1"} }
+  let(:params7) { {token: token1, api_id: station3.api_id} }
 
   describe 'HAPPY PATH' do
     it 'Favorite station is removed successfully for a user', :vcr do
@@ -51,7 +55,7 @@ RSpec.describe 'Destroy a Favorite Station' do
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
       expect(body).to have_key(:errors)
-      expect(body[:errors]).to eq("Favorite station not found")
+      expect(body[:errors]).to eq("FavoriteStation not found")
     end
     
     it 'User token is not provided', :vcr do
@@ -75,16 +79,31 @@ RSpec.describe 'Destroy a Favorite Station' do
 
       expect(response.status).to eq(404)
       expect(body).to have_key(:errors)
-      expect(body[:errors]).to eq("UserStation not found")
+      expect(body[:errors]).to eq("FavoriteStation not found")
     end
     
     it 'API ID is not provided', :vcr do
+      delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params5)
+
+      expect(response.status).to eq(404)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Station not found")
     end
     
     it 'API ID is not valid', :vcr do
+      delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params6)
+
+      expect(response.status).to eq(404)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("Station not found")
     end
     
     it 'Favorited station does not exist for user', :vcr do
+      delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params7)
+      
+      expect(response.status).to eq(404)
+      expect(body).to have_key(:errors)
+      expect(body[:errors]).to eq("FavoriteStation not found")
     end
   end
 end
