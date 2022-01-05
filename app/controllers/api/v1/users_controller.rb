@@ -11,18 +11,18 @@ class Api::V1::UsersController < ApplicationController
     render json: UserSerializer.new(user)
   end
   
-  def destroy
-    user_id = decode_token(params[:token])
-    User.destroy(user_id)
-  end
-  
   def update
     user_id = decode_token(params[:token])
     user = User.find(user_id)
     user.update!(user_params)
     render json: UserSerializer.new(user)
   end
-
+  
+  def destroy
+    user_id = decode_token(params[:token])
+    User.destroy(user_id)
+  end
+  
   private
 
   def user_params

@@ -14,8 +14,13 @@ class Api::V1::FavoriteStationsController < ApplicationController
     user_id = decode_token(station_params[:token])
     user = User.find(user_id)
     station = Station.where(api_id: station_params[:api_id]).first_or_create!
-    if UserStation.exists?(user_id: user.id, station_id: station.id)
-      render json: { errors: "User has already favorited station with api ID: #{station_params[:api_id]}" }, status: :unprocessable_entity
+    if (user_station = UserStation.find_by(user_id: user.id, station_id: station.id))
+      if user_station.favorited?
+        render json: { errors: "User has already favorited station with api ID: #{station_params[:api_id]}" }, status: :unprocessable_entity
+      else
+        user_station.update(favorited?: true)
+        render json: { data: { type: 'favorite_station' } }, status: 201
+      end
     else
       favorite_station = UserStation.create!(station_id: station.id, user_id: user.id)
       render json: { data: { type: 'favorite_station' } }, status: 201
