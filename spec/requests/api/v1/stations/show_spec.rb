@@ -89,7 +89,7 @@ RSpec.describe "Station Show - Search for a station by api_id" do
     end
     
     
-    it "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes" do # TODO ADD , :vcr
+    it "LOGGED IN USER WITH FAVORITE STATIONS - Endpoint exists and has attributes", :vcr do
       get "/api/v1/stations/#{denver_station1.api_id}", headers: headers, params: params1
 
       expect(response).to be_successful
