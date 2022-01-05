@@ -42,6 +42,7 @@ RSpec.describe "Stations Index - Search for stations by location" do
   let(:altered_token) { "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY" }
   let(:params4) { {token: altered_token} }
   let(:params5) { {token: ""} }
+  let(:params6) { {token: nil} }
 
   describe "HAPPY PATH" do
     it "GUEST USER - Endpoint exists and has attributes", :vcr do
@@ -190,6 +191,35 @@ RSpec.describe "Stations Index - Search for stations by location" do
       expect(body[:data][0][:attributes]).to be_a Hash
       expect(station1).to have_key(:is_favorited)
       expect(station1[:is_favorited]).to eq("User token not provided")
+    end
+
+    it "User token is nil, but location is valid", :vcr do
+      get "/api/v1/stations?location=#{location}", headers: headers, params: params6
+   
+      expect(response).to be_successful
+      
+      expect(body).to have_key(:data)
+      expect(body[:data][0]).to have_key(:id)
+      expect(body[:data][0]).to have_key(:type)
+      expect(body[:data][0]).to have_key(:attributes)
+      expect(body[:data][0][:id]).to eq(nil)
+      expect(body[:data][0][:type]).to be_a String
+      expect(body[:data][0][:type]).to eq("station")
+      expect(body[:data].size).to be < 21
+
+      expect(station1).to be_a Hash
+      expect(station1.size).to eq(11)
+      expect(station1).to have_key(:api_id)
+      expect(station1).to have_key(:name)
+      expect(station1).to have_key(:distance)
+      expect(station1).to have_key(:status)
+      expect(station1).to have_key(:hours)
+      expect(station1).to have_key(:ev_network)
+      expect(station1).to have_key(:street_address)
+      expect(station1).to have_key(:city)
+      expect(station1).to have_key(:state)
+      expect(station1).to have_key(:zip_code)
+      expect(station1).to have_key(:is_favorited)
     end
   end
 end

@@ -46,6 +46,7 @@ RSpec.describe "Station Show - Search for a station by api_id" do
   let(:altered_token) { "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1fQ.dU5lpMZtX69nehQPn0j23AApFaC8LW-dNuPSw9hH4cY" }
   let(:params4) { {token: altered_token} }
   let(:params5) { {token: ""} }
+  let(:params6) { {token: nil} }
 
   describe "HAPPY PATH" do
     it "GUEST USER - Endpoint exists and has attributes", :vcr do
@@ -223,6 +224,16 @@ RSpec.describe "Station Show - Search for a station by api_id" do
       expect(response_body[:data][:attributes]).to be_a Hash
       expect(new_station).to have_key(:is_favorited)
       expect(new_station[:is_favorited]).to eq("User token not provided")
+    end
+
+    it "User token is nil", :vcr do
+      get "/api/v1/stations/#{api_id}", headers: headers, params: params6
+      
+      expect(response).to be_successful
+      expect(response_body).to have_key(:data)
+      expect(response_body[:data]).to have_key(:id)
+      expect(response_body[:data]).to have_key(:type)
+      expect(response_body[:data]).to have_key(:attributes)
     end
   end
 end
