@@ -183,7 +183,8 @@ This will render an index page with the results as a list of stations.
                       "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"      (optional)
                      }
       ```
-
+  *The `token` parameter is optional and requires a valid user's token (logged in user):*
+  
       **Example response**
 
         ```
