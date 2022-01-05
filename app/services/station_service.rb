@@ -1,15 +1,15 @@
 class StationService
+  def self.get_station(id)
+    response = conn.get("api/alt-fuel-stations/v1/#{id}.json")
+    parse_json(response)
+  end
+  
   def self.get_stations(location)
     response = conn.get("api/alt-fuel-stations/v1/nearest.json") do |faraday|
       faraday.params['fuel_type'] = 'ELEC'
       faraday.params['location'] = location
       faraday.params['ev_charging_level'] = 'dc_fast'
     end
-    parse_json(response)
-  end
-
-  def self.get_station(id)
-    response = conn.get("api/alt-fuel-stations/v1/#{id}.json")
     parse_json(response)
   end
 
