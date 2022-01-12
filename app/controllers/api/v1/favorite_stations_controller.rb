@@ -2,11 +2,12 @@ class Api::V1::FavoriteStationsController < ApplicationController
   def index
     user_id = decode_token(station_params[:token])
     user = User.find(user_id)
-    if user.stations.empty?
+    favorite_stations = Station.find_favorite_stations(user)
+    if favorite_stations.empty?
       render json: { errors: "User has no favorite stations" }, status: :unprocessable_entity
     else
-      favorite_stations = StationFacade.get_favorite_stations(user.stations)
-      render json: StationsSerializer.new(favorite_stations)
+      favorite_stations_data = StationFacade.get_favorite_stations(favorite_stations, user_id)
+      render json: StationsSerializer.new(favorite_stations_data)
     end
   end
 
