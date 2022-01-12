@@ -184,7 +184,7 @@ RSpec.describe StationBasic do
       end
       
       it "The station api_id and the user_id correspond with a user and station in the database, and there is a corresponding user_station, but the user_station attribute 'favorited?' is set to false" do
-        user_station1.update!(favorited?: false) # Create user_station and set favorited to false
+        user_station1.update!(is_favorited: false) # Create user_station and set favorited to false
         new_station = StationBasic.new(station_hash, user1.id)
         
         expect(new_station).to be_a StationBasic

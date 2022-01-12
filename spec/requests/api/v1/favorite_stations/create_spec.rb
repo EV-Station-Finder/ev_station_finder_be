@@ -23,7 +23,7 @@ RSpec.describe 'Create a Favorite Station' do
       post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
       station = Station.find_by!(api_id: 198643)
       user_station = UserStation.find_by!(user_id: user1.id, station_id: station.id)
-      expect(user_station.favorited?).to eq(true)
+      expect(user_station.is_favorited).to eq(true)
 
       expect(response).to be_successful
       expect(body).to have_key(:data)
@@ -36,7 +36,7 @@ RSpec.describe 'Create a Favorite Station' do
     it 'favorite station is added successfully if station already exists in the database', :vcr do
       post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params2)
       user_station = UserStation.find_by!(user_id: user1.id, station_id: station1.id)
-      expect(user_station.favorited?).to eq(true)
+      expect(user_station.is_favorited).to eq(true)
 
       expect(response).to be_successful
       expect(body).to have_key(:data)
@@ -48,14 +48,14 @@ RSpec.describe 'Create a Favorite Station' do
 
     it 'favorite station is added successfully if user_station already exists in the database, but has favorited set to false', :vcr do
       user_station1 = UserStation.create!(user_id: user1.id, station_id: station1.id)
-      expect(user_station1.favorited?).to eq(true)
+      expect(user_station1.is_favorited).to eq(true)
       
       delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params2)
       user_station = UserStation.find_by!(user_id: user1.id, station_id: station1.id)
-      expect(user_station.favorited?).to eq(false)
+      expect(user_station.is_favorited).to eq(false)
       post "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params2)
       user_station = UserStation.find_by!(user_id: user1.id, station_id: station1.id)
-      expect(user_station.favorited?).to eq(true)
+      expect(user_station.is_favorited).to eq(true)
       
       expect(response).to be_successful
       expect(body).to have_key(:data)
