@@ -21,10 +21,10 @@ class StationFacade
     end
   end
 
-  def self.get_favorite_stations(favorite_stations)
+  def self.get_favorite_stations(favorite_stations, user_id=nil)
     stations = favorite_stations.map do |station|
       station_data = StationService.get_station(station.api_id)
-      StationBasic.new(station_data[:alt_fuel_station])
+      StationBasic.new(station_data[:alt_fuel_station], user_id)
     end
   end
 end
