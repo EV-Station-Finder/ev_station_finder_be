@@ -32,22 +32,22 @@ RSpec.describe 'Destroy a Favorite Station' do
 
   describe 'HAPPY PATH' do
     it 'Favorite station is removed successfully for a user', :vcr do
-      expect(user_station1.favorited?).to eq(true)
+      expect(user_station1.is_favorited).to eq(true)
       
       delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params1)
 
       user_station = UserStation.find_by(station_id: station1.id, user_id: user1.id)
       expect(response).to be_successful
       expect(response).to have_http_status(204)
-      expect(user_station.favorited?).to eq(false)
+      expect(user_station.is_favorited).to eq(false)
     end
   end
 
   describe 'SAD PATH' do
     it 'User has already unfavorited station', :vcr do
-      user_station2.update!(favorited?: false)
+      user_station2.update!(is_favorited: false)
       user_station = UserStation.find_by(user_id: user1.id, station_id: station2.id)
-      expect(user_station.favorited?).to eq(false)
+      expect(user_station.is_favorited).to eq(false)
       params = {token: token1, api_id: station2.api_id}
       
       delete "/api/v1/favorite_stations", headers: headers, params: JSON.generate(params)

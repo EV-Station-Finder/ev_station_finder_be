@@ -4,7 +4,7 @@ module  Stationable
     User.find(user_id) # Check for users that do not exist to raise exception
     return false if (station = Station.find_by(api_id: station_api_id)).nil?
     if station && user_station = UserStation.find_by(station_id: station.id, user_id: user_id)
-      user_station.favorited?
+      user_station.is_favorited
     else
       false
     end
