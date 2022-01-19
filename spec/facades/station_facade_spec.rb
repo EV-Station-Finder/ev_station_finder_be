@@ -80,7 +80,8 @@ RSpec.describe StationFacade do
         it "should return an array of station objects", :vcr do
           result = StationFacade.get_favorite_stations(invalid_station_hash, user1.id)
 
-          expect(result[0]).to be_a StationBasic
+          expect(result[0]).to eq("Station with api_id '192187' cannot be found")
+          expect(result[1]).to be_a StationBasic
         end
       end
     end
