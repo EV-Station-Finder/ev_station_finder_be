@@ -19,7 +19,7 @@ http_interactions:
       message: Unprocessable Entity
     headers:
       Date:
-      - Wed, 05 Jan 2022 20:34:24 GMT
+      - Wed, 19 Jan 2022 19:33:05 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -29,7 +29,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '982'
+      - '990'
       X-Frame-Options:
       - ALLOWALL
       X-Xss-Protection:
@@ -51,9 +51,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 74c8394bf8045ecb0607ab8938c2569b
+      - a1ba7da129dc1c76066f107e449dcde7
       X-Runtime:
-      - '0.002964'
+      - '0.003586'
       Vary:
       - Origin
       Strict-Transport-Security:
@@ -69,5 +69,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"errors":["Either the ''location'' or both ''latitude'' and ''longitude''
         parameters must be given to."]}'
-  recorded_at: Wed, 05 Jan 2022 20:34:23 GMT
+  recorded_at: Wed, 19 Jan 2022 19:33:05 GMT
 recorded_with: VCR 6.0.0

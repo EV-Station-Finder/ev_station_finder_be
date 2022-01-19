@@ -409,7 +409,8 @@ This will render an index page with the results as a list of stations.
               "street_address": "101 Judge John Aiso St",
               "city": "Los Angeles",
               "state": "CA",
-              "zip_code": "90012"
+              "zip_code": "90012",
+              "is_favorited": true
             }
         },
         {
@@ -425,7 +426,8 @@ This will render an index page with the results as a list of stations.
               "street_address": "635 W Washington Blvd",
               "city": "Los Angeles",
               "state": "CA",
-              "zip_code": "90015"
+              "zip_code": "90015",
+              "is_favorited": true
             }
           }
       ]

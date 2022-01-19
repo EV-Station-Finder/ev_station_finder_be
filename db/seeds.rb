@@ -3,6 +3,8 @@ mariah = User.create!(first_name: 'Mariah', last_name: 'Carey', email: 'alliwant
 
 station1 = Station.create!(api_id:"152087")
 station2 = Station.create!(api_id:"152070")
+station3 = Station.create!(api_id:"182990")
 
 favorite_station1 = UserStation.create!(user_id: harry.id, station_id: station1.id)
-favorite_station2 = UserStation.create!(user_id: harry.id, station_id: station2.id)
+favorite_station2 = UserStation.create!(user_id: harry.id, station_id: station2.id, is_favorited: true)
+favorite_station2 = UserStation.create!(user_id: harry.id, station_id: station3.id, is_favorited: false)
