@@ -13,7 +13,9 @@ RSpec.describe StationFacade do
   let(:id) {152087}
   let(:station1) { Station.create!(api_id: "152087") }
   let(:station2) { Station.create!(api_id: "152070") }
+  let(:invalid_station) { Station.create!(api_id: "192187") }
   let(:station_hash) { [station1, station2] }
+  let(:invalid_station_hash) { [invalid_station, station1, station2] }
                               
   describe "::get_stations" do
     describe "provided with location but without user_id input" do
@@ -54,19 +56,32 @@ RSpec.describe StationFacade do
   end
 
   describe "::get_favorite_stations" do
-    describe "provided with station api_id but without user_id input" do
-      it "should return an array of station objects", :vcr do
-        result = StationFacade.get_favorite_stations(station_hash)
+    describe "HAPPY PATH" do
+      describe "provided with station api_id but without user_id input" do
+        it "should return an array of station objects", :vcr do
+          result = StationFacade.get_favorite_stations(station_hash)
 
-        expect(result[0]).to be_a StationBasic
+          expect(result[0]).to be_a StationBasic
+        end
+      end
+
+    
+      describe "provided with station api_id and user_id input" do
+        it "should return an array of station objects", :vcr do
+          result = StationFacade.get_favorite_stations(station_hash, user1.id)
+
+          expect(result[0]).to be_a StationBasic
+        end
       end
     end
     
-    describe "provided with station api_id and user_id input" do
-      it "should return an array of station objects", :vcr do
-        result = StationFacade.get_favorite_stations(station_hash, user1.id)
+    describe "SAD PATH" do
+      describe "provided with invalid station api_id and user_id input" do
+        it "should return an array of station objects", :vcr do
+          result = StationFacade.get_favorite_stations(invalid_station_hash, user1.id)
 
-        expect(result[0]).to be_a StationBasic
+          expect(result[0]).to be_a StationBasic
+        end
       end
     end
   end
