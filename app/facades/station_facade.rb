@@ -24,7 +24,11 @@ class StationFacade
   def self.get_favorite_stations(favorite_stations, user_id=nil)
     stations = favorite_stations.map do |station|
       station_data = StationService.get_station(station.api_id)
-      StationBasic.new(station_data[:alt_fuel_station], user_id)
+      if station_data[:errors].present?
+        "Station with api_id '#{station.api_id}' cannot be found"
+      else
+        StationBasic.new(station_data[:alt_fuel_station], user_id) 
+      end
     end
   end
 end
