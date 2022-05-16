@@ -6,8 +6,9 @@ A user can search nearby stations using various search queries including:
   - zip code
   - full address
   - city and state
+
 A registered user can save stations to their account.
-Backend also allows user registration, authentication, and registration.
+Backend also allows user registration and authentication.
 
 **Note:** This app is currently being worked on and it is also deployed on [Heroku](https://ev-station-finder-backend.herokuapp.com/api/v1/stations?location=los%20angeles,ca).
 
@@ -22,10 +23,8 @@ Backend also allows user registration, authentication, and registration.
   - [Getting Started](#getting-started)
   - [Usage](#usage)
   - [Running the tests](#running-the-tests)
-  - [Roadmap](#roadmap)
   - [DB Schema](#db-schema)
   - [Endpoints](#endpoints)
-  - [Contributing](#contributing)
   - [Acknowledgements](#acknowledgements)
 
 ## Built With
@@ -58,7 +57,7 @@ To run this application you will need
 * Sign up for an API key at:
   - [NREL](https://developer.nrel.gov/signup/)  
   - [OpenWeather](https://home.openweathermap.org/users/sign_up)
-  - [MapQuest](https://developer.mapquest.com/user/register)
+<!--   - [MapQuest](https://developer.mapquest.com/user/register) when feature to provide directions is added -->
 
 ## Getting Started
 
@@ -80,10 +79,10 @@ To get a local copy up and running follow these simple steps:
    ```ruby
    CHARGER_KEY: <your_api_key>
    WEATHER_KEY: <your_api_key>
-   MAPS_KEY: <your_api_key>
    ```
 
 ## Usage
+
    1. Create rails database and migrate
        ```sh
         rails db:{create,migrate}
@@ -178,16 +177,17 @@ This will render an index page with the results as a list of stations.
 
   #### b. Station View Page `GET /api/v1/stations/:id`
 
-      ```
-      request_body = {
-                      "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"      (optional)
-                     }
-      ```
-  *The `token` parameter is optional and requires a valid user's token (logged in user):*
+```
+  request_body = {
+                  "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"      (optional)
+                 }
+```
   
-      **Example response**
+*The `token` parameter is optional and requires a valid user's token (logged in user):*
+  
+**Example response**
 
-        ```
+```
           { 
            "data": {
               "id": null,
@@ -216,15 +216,17 @@ This will render an index page with the results as a list of stations.
             }
            }
           }
-        ```
+```
 </details>
 
 
 <details>
+  
 <summary> 2. Users (expand for details)</summary>
 
   ####  a. Create User `POST /api/v1/users`
-      ```
+  
+  ```
       request_body = {
                       "first_name": "Hari",
                       "last_name": "Seldon",
@@ -235,57 +237,58 @@ This will render an index page with the results as a list of stations.
                       "zip_code": "12345",
                       "password": "verysecurepassword"
                      }
-      ```
+   ```
 
-      **Example response**
-      ```
-        { 
-         "data": {
-            "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
-            "type": "user", 
-         }
-        }
-      ```
-
-
-
-
-  #### b. Get User `GET /api/v1/users`
-      - Returns user information with the token instead of the ID, and without the user's password digest
-
-      ```
-      request_body = {
-                      "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
-                     }
-      ```
-
-      **Example response**
-        ```
-          { 
-           "data": {
-              "id": null,
-              "type": "user", 
-              "attributes": {
-                  "first_name": "Hari",
-                  "last_name": "Seldon",
-                  "email": "hari.seldon@foundation.com",
-                  "street_address": "123 Planet XYZ",
-                  "city": "Jupiter",
-                  "state": "UN",
-                  "zip_code": "12345"
-                           }
-                        }
-                      }
-        ```
+**Example response**
+  
+```
+     { 
+      "data": {
+         "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
+         "type": "user", 
+      }
+     }
+```
 
 
 
 
-  #### c. Update User 'PATCH /api/v1/users'
+#### b. Get User `GET /api/v1/users`
+  
+- Returns user information with the token instead of the ID, and without the user's password digest
+
+```
+ request_body = {
+                 "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
+                }
+```
+
+**Example response**
+  
+```
+      { 
+       "data": {
+          "id": null,
+          "type": "user", 
+          "attributes": {
+              "first_name": "Hari",
+              "last_name": "Seldon",
+              "email": "hari.seldon@foundation.com",
+              "street_address": "123 Planet XYZ",
+              "city": "Jupiter",
+              "state": "UN",
+              "zip_code": "12345"
+                       }
+                    }
+                  }
+  ```
+
+ #### c. Update User `PATCH /api/v1/users`
+  
   - Updates user and returns updated user information
   - Update all or partial user info (Request body will only contain the attributes that are to be updated)
 
-  ```
+```
   request_body = {
                   "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
                   "first_name": "Hari",
@@ -296,10 +299,11 @@ This will render an index page with the results as a list of stations.
                   "state": "UN",
                   "zip_code": "12345"
                  }
-  ```
+```
 
-    **Example response**
-    ```
+**Example response**
+  
+```
       { 
        "data": {
           "id": null,
@@ -315,11 +319,10 @@ This will render an index page with the results as a list of stations.
                        }
                     }
                   }
-    ```
+```
 
-
-
-  #### d. Destroy User 'DELETE /api/v1/users'
+  #### d. Destroy User `DELETE /api/v1/users`
+  
   - Deletes user and returns 204 HTTP Status
 
 
@@ -331,18 +334,19 @@ This will render an index page with the results as a list of stations.
 </details>
 
 
-
 <details>
 <summary> 3. Sessions (expand for details)</summary>
-  a. `POST /api/v1/sessions`
-      ```
-      request_body = {
-                      "email": "hari.seldon@foundation.com",
-                      "password": "verysecurepassword"
-                     }
-      ```
+  
+#### a. `POST /api/v1/sessions`
+  
+  ```
+   request_body = {
+                   "email": "hari.seldon@foundation.com",
+                   "password": "verysecurepassword"
+                  }
+   ```
 
-  **Example response**
+ **Example response**
 
   ```
     { 
@@ -353,47 +357,43 @@ This will render an index page with the results as a list of stations.
     }
   ```
 
+#### b. `GET /api/v1/authorize`
+  
+  ```
+  request_body = {
+                  "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"
+                 }
+  ```
 
-
-
-  b. `GET /api/v1/authorize`
-    ```
-    request_body = {
-                    "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI"
-                   }
-    ```
-
-    **Example response**
-    ```
-      { 
-        "data": {
-            "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
-            "type": "user" 
-       }
-      }
-    ```
-
-
+**Example response**
+  
+  ```
+    { 
+      "data": {
+          "token": "eyJhbGciOiJIUzI1N/J9.eyJ1c5VyX2lkIjo5N30.Dbrd03NdQJu2Ko_vF8hONHP2Yk-LLJuDc5M2znBa4dI",
+          "type": "user" 
+     }
+    }
+  ```
 </details>
-</details>
-
 
 
 <details>
 <summary> 4. Favorite Stations (expand for details)</summary>
 
-  a. `GET /api/v1/favorite_stations`
-
-    - Returns user's favorite stations
-    ```
+#### a. `GET /api/v1/favorite_stations`
+  
+  - Returns user's favorite stations
+  
+```
     request_body = {
                     "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE"
                    }
-    ```
+```
 
-    **Example response**
+**Example response**
 
-    ```
+```
     {
       "data": [
         {
@@ -432,42 +432,44 @@ This will render an index page with the results as a list of stations.
           }
       ]
     }
-    ```
+```
 
 
-    b. `POST /api/v1/favorite_stations`
+#### b. `POST /api/v1/favorite_stations`
 
-      - Saves a favorite_station for a user
-      ```
-            request_body = {
-                            "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
-                            "api_id": 152283
-                           }
-      ```
+- Saves a favorite_station for a user
+  
+```
+         request_body = {
+                         "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
+                         "api_id": 152283
+                        }
+```
 
-  **Example response**
+**Example response**
 
-    ```
+```
     {
       "data": {
           "type": "favorite_station"
         } 
     }
-    ```
+```
     
-    c. 'DELETE /api/v1/favorite_stations'
-    - Deletes a favorite_station for a user and returns 204 HTTP Status
+#### c. `DELETE /api/v1/favorite_stations`
+  
+- Deletes a favorite_station for a user and returns 204 HTTP Status
 
 
-    ```
-    request_body = {
-                    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
-                    "api_id": 152283
-                   }
-    ```
+```
+ request_body = {
+                 "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyNDd9.hSjNPgNbJdVtlIwtOkKqz1OKLxdmND1rvVbL5iZ7cxE",
+                 "api_id": 152283
+                }
+```
 </details>
 
-## Contributing
+<!-- ## Contributing
 
    Contributions are welcome! And they are **sincerely appreciated**.
 
@@ -475,12 +477,12 @@ This will render an index page with the results as a list of stations.
    2. Create your Feature Branch (`git checkout -b feature/<your feature name>`)
    3. Commit your Changes (`git commit -m 'Add some SweetFeature'`)
    4. Push to the Branch (`git push origin feature/<your feature name>`)
-   5. Open a Pull Request
+   5. Open a Pull Request -->
 
 ## Acknowledgements
 - [NREL](https://developer.nrel.gov/signup/)  
 - [OpenWeather](https://home.openweathermap.org/users/sign_up)
-- [MapQuest](https://developer.mapquest.com/user/register)
+<!-- - [MapQuest](https://developer.mapquest.com/user/register) -->
 
 **************************************************************************
 ##### 2021/08/21
